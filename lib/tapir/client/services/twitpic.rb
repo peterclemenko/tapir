@@ -79,7 +79,7 @@ module TwitPic
     def initialize(link, do_download=true)
           # grab the image & store locally
           @remote_path = link
-          @local_path = "/#{Tapir::TEMP_DIRECTORY}/twitpic_file_#{rand(1000000)}"
+          @local_path = "/#{Tapir::PUBLIC_DIRECTORY}/twitpic_file_#{rand(1000000)}"
           download_remote_file if do_download
     end
 

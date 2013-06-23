@@ -49,6 +49,6 @@ puts "[+] We be sniffin!"
   h = Tapir::Entities::Host.create(:ip_address => packet.ip_daddr)
 
   h.run_task("dns_reverse_lookup", {})
-  h.run_task("geolocate_host", {})
+  #h.run_task("geolocate_host", {})
 
 end
