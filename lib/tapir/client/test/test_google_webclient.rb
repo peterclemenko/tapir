@@ -1,20 +1,17 @@
 # Rails Environment
-$:.unshift(File.join( File.expand_path(File.dirname(__FILE__)), "..", "..", "..", "config"))
-
 require 'environment'
 require 'test/unit'
-
 
 class TestGoogleWebClient < Test::Unit::TestCase
 
   def test_valid_account
     x = Tapir::Client::Google::WebClient.new
-    assert x.check_account_exists "jrcran"
+    assert(x.check_account_exists("jrcran"), "hmm, valid account didn't exist")
   end
 
   def test_invalid_account
     x = Tapir::Client::Google::WebClient.new
-    assert !(x.check_account_exists "thiscouldnotpossiblyexist#{rand(10000)}")
+    assert(!(x.check_account_exists "thiscouldnotpossiblyexist#{rand(10000000)}"), "Weird, invalid account appears to exist")
   end
 
 end

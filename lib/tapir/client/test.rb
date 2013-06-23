@@ -1,4 +1,5 @@
 $:.unshift(File.dirname(__FILE__))
+$:.unshift(File.join(File.expand_path(File.dirname(__FILE__)), "..", "..", "..", "config"))
 
 #
 # Individual tests

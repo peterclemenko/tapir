@@ -48,7 +48,7 @@ module Corpwatch
     end
 
     def get_service_endpoint(company_name)
-      return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}&key=#{Tapir::ApiKeys.instance.keys['corpwatch_api_key']}"
+      return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}" #"&key=#{Tapir::ApiKeys.instance.keys['corpwatch_api_key']}"
     end
   end
 
