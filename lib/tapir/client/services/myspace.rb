@@ -8,15 +8,15 @@ module Myspace
 
     def initialize
       @service_name = "myspace"
-      @account_missing_strings =["Your home page is undergoing routine maintenance."]
+      @account_missing_strings =["we can't find the page you're looking for."]
     end
     
     def web_account_uri_for(account_name)
-      "http://www.myspace.com/#{account_name}"
+      "https://myspace.com/#{account_name}"
     end
     
     def check_account_uri_for(account_name)
-      "http://www.myspace.com/#{account_name}"
+      "https://myspace.com/#{account_name}"
     end
   
   end

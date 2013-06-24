@@ -12,11 +12,11 @@ module YFrog
     end
     
     def web_account_uri_for(account_name)    
-      "http://yfrog.com/user/#{account_name}/profile"
+      "https://yfrog.com/user/#{account_name}/profile"
     end
     
     def check_account_uri_for(account_name)    
-      "http://yfrog.com/user/#{account_name}/profile"
+      "https://yfrog.com/user/#{account_name}/profile"
     end
     
   end
