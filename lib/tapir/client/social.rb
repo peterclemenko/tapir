@@ -11,7 +11,7 @@ def check_account_exists(account_name)
     #
     # Request the uri specified as holding the account
     #
-    doc = Nokogiri::HTML(open(self.check_account_uri_for(account_name), "User-Agent" => Tapir::USER_AGENT_STRING)) 
+    doc = Nokogiri::HTML(open(self.check_account_uri_for(account_name)))
     #TapirLogger.instance.log "Got doc: #{doc}"
     #
     # Check for each string that may indicate we didn't find the account
@@ -32,8 +32,6 @@ def check_account_exists(account_name)
   rescue RuntimeError => e
     TapirLogger.instance.log "Redirection? #{e}"
     return false
-    # TODO - retry on the redirection url
-    #check_account_exists
   end
 
 #

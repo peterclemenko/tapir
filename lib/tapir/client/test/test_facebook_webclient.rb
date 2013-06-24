@@ -11,7 +11,8 @@ class TestFacebookWebClient < Test::Unit::TestCase
 
   def test_invalid_account
     x = Tapir::Client::Facebook::WebClient.new
-    assert !(x.check_account_exists "thiscouldnotpossiblyexist#{rand(100000000)}"), "Weird, invalid account appears to exist"
+    assert(!(x.check_account_exists "thiscouldnotpossiblyexist#{rand(100000000)}"),
+           "Weird, invalid account appears to exist")
   end
 
 end
