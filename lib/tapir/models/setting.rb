@@ -2,11 +2,10 @@ module Tapir
 class Setting
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Multitenancy::Document
 
-  tenant(:tenant)
+  include TenantScoped
 
-  has_one :user
+  belongs_to :user
 
   field :name, type: String
   field :value, type: String

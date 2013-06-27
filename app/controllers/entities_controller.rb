@@ -3,6 +3,9 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
+    #require 'pry'
+    #binding.pry
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: EntitiesDatatable.new(view_context) }
@@ -53,7 +56,10 @@ class EntitiesController < ApplicationController
     # TODO - there has to be a better way to do this
     render action: "new", notice: "invalid entity type." unless @entity_types.include?(type)
 
-    @entity = eval("Tapir::Entities::#{type}").new
+    @entity = eval("Tapir::Entities::#{type}").create
+
+    #require 'pry'
+    #binding.pry
 
     respond_to do |format|
       if @entity.save(:validate => false)
@@ -70,6 +76,10 @@ class EntitiesController < ApplicationController
   # PUT /tapir/entities/1.json
   def update
     type = params[:type]
+
+    #require 'pry'
+    #binding.pry
+
     @entity = eval("#{type}").find(params[:oid])
 
     respond_to do |format|

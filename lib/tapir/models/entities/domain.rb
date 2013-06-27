@@ -1,6 +1,8 @@
 module Tapir
   module Entities
     class Domain < Base      
+      include TenantAndProjectScoped
+
       field :record_created_on, type: Time
       field :record_updated_on, type: Time
       field :record_expires_on, type: Time
@@ -16,8 +18,6 @@ module Tapir
       validates_uniqueness_of :name
 
       belongs_to :host
-
-      tenant(:tenant)
 
     end
   end
