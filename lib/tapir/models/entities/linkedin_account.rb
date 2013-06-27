@@ -1,8 +1,7 @@
 module Tapir
   module Entities
     class LinkedinAccount < Base 
-
-      tenant(:tenant)
+      include TenantAndProjectScoped
 
     end
   end

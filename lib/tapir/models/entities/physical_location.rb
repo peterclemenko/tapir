@@ -1,6 +1,8 @@
 module Tapir
   module Entities
     class PhysicalLocation < Base
+      include TenantAndProjectScoped
+
       field :address, type: String
       field :city, type: String
       field :state, type: String
@@ -9,8 +11,6 @@ module Tapir
       field :latitude, type: String
       field :longitude, type: String
       
-      tenant(:tenant)
-
       def to_s
          super << " #{latitude}/#{longitude}"
       end

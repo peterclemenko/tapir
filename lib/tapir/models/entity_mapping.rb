@@ -2,9 +2,8 @@ module Tapir
 class EntityMapping
   include Mongoid::Document
   include Mongoid::Timestamps
-  include Mongoid::Multitenancy::Document
-
-  tenant(:tenant)
+      
+  include TenantAndProjectScoped
 
   belongs_to :task_run
 

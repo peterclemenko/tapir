@@ -1,10 +1,10 @@
 module Tapir
   module Entities
     class Host < Base
+      include TenantAndProjectScoped
+
       field :ip_address, type: String
       
-      tenant(:tenant)
-
       has_many :net_svcs
       has_many :domains
 
