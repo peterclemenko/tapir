@@ -4,8 +4,13 @@
 </p>
 
 <p>
-  <b>Task entity:</b>
+  <b>Task run ID:</b>
   <%= @task_run.task_entity_id %>
+</p>
+
+<p>
+  <b>Parent:</b>
+   <%= link_to @task_run.entity_mappings.first.get_parent %>
 </p>
 
 <p>
@@ -27,7 +32,7 @@
   <b>Associated Objects :</b>
   <ul>
     <% @task_run.entity_mappings.each {|o|%>
-      <li><%= link_to o, o %></li>
+      <li><%= link_to o.get_child %></li>
     <% } %>
   </ul>
 </p>
