@@ -13,7 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::User]
+  [Tapir::Entities::Person]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -31,27 +31,31 @@ def run
 
   # TODO - check for dictionary terms?
 
+  ##
+  ## John Effing Doe
+  ##
+
   #johndoe
-  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}.#{@entity.last_name}"}
   
   # john.doe
-  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}.#{@entity.last_name}"}
 
   # john_doe 
-  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}_#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}_#{@entity.last_name}"}
   
   # jdoe
-  create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name.split("").first}#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name.split("").first}#{@entity.last_name}"}
 
   # doe
-  create_entity Tapir::Entities::Username, {:name => "#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.last_name}"}
   
   if @entity.middle_name
     #johneffingdoe
-    create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"}
+    create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"}
 
     #jedoe
-    create_entity Tapir::Entities::Username, {:name => "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"}
+    create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"}
   end
 
 

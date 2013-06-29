@@ -18,7 +18,7 @@ def allowed_types
     Tapir::Entities::Organization, 
     Tapir::Entities::Domain, 
     Tapir::Entities::Host,
-    Tapir::Entities::User, 
+    Tapir::Entities::Person, 
     Tapir::Entities::Username, 
     Tapir::Entities::Account]
 end

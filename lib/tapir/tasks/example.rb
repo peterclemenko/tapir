@@ -17,7 +17,7 @@ def allowed_types
     Tapir::Entities::Host, 
     Tapir::Entities::Organization, 
     Tapir::Entities::SearchString, 
-    Tapir::Entities::User]
+    Tapir::Entities::Person]
 end
 
 ## Returns an array of valid options and their description/type for this task

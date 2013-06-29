@@ -14,7 +14,7 @@ end
 ## Returns an array of types that are allowed to call this task
 def allowed_types
   [ Tapir::Entities::SearchString,
-    Tapir::Entities::User,
+    Tapir::Entities::Person,
     Tapir::Entities::Username]
 end
 
