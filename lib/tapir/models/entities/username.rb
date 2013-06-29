@@ -3,6 +3,8 @@ module Tapir
     class Username < Base
       include TenantAndProjectScoped
 
+      belongs_to :person
+
     end
   end
 end

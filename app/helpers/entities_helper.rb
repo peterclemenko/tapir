@@ -58,7 +58,7 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
-  def tapir_entities_user_path(id=nil, whatever=nil)
+  def tapir_entities_person_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
 
