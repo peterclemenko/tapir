@@ -19,11 +19,13 @@ class ApplicationController < ActionController::Base
     # Grab the project name
     @current_project = Tapir::Project.current = Tapir::Project.where(:name => request.cookies['project']).first
 
-    # Create a project record if none exists
+    # Create a project cookie if none exists
     unless @current_project
+
       @current_project = Tapir::Project.current = Tapir::Project.create(:name => "default")
       cookies[:project] = {
         :value => Tapir::Project.current.name,
+        :domain => request.host,
         :expires => 1.year.from_now
       }
     end
