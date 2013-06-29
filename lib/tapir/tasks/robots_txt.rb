@@ -13,7 +13,9 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::WebApp]
+  [ Tapir::Entities::Host, 
+    Tapir::Entities::Domain, 
+    Tapir::Entities::WebApplication]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -37,7 +39,8 @@ def setup(entity, options={})
     contents = open("#{url}").read.force_encoding('UTF-8')
 
     # TODO - parse & use the lines as seed paths
-    
+    create_entity Tapir::Entities::Finding, { :name => "Robots.txt File", :content => "#{url}" , :details => contents }
+
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"
   rescue Net::HTTPBadResponse => e

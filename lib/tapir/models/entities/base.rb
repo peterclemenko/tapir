@@ -12,6 +12,8 @@ module Tapir
       field :name, type: String
       field :status, type: String
       field :confidence, type: Integer
+
+      validates_uniqueness_of :name, :scope => [:tenant_id,:project_id]
       
       def to_s
         "#{entity_type.capitalize}: #{name}"

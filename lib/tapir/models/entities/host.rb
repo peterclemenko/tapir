@@ -8,7 +8,7 @@ module Tapir
       has_many :net_svcs
       has_many :domains
 
-      validates_uniqueness_of :ip_address
+      validates_uniqueness_of :ip_addres, :scope => [:tenant_id,:project_id]
 
       #
       # This method is highly questionable, but folks generally refer to a host
