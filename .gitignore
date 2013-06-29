@@ -27,3 +27,6 @@ tmp
 
 # Ignore public files
 public/images/*
+
+# Ignore secret token
+.secret
