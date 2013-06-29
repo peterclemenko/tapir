@@ -52,7 +52,9 @@ def run
   safe_system("nmap #{to_scan} #{nmap_options} -oX #{rand_file_path}")
   
   # Gather the XML and parse
+  @task_logger.log "Raw Result:\n #{File.open(rand_file_path).read}"
   @task_logger.log "Parsing #{rand_file_path}"
+
   parser = Nmap::Parser.parsefile(rand_file_path)
 
   # Create entitys for each discovered service
@@ -84,4 +86,5 @@ end
 
 def cleanup
   super
+  File.delete(rand_file_path)
 end
