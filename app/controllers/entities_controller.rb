@@ -58,9 +58,6 @@ class EntitiesController < ApplicationController
 
     @entity = eval("Tapir::Entities::#{type}").create
 
-    #require 'pry'
-    #binding.pry
-
     respond_to do |format|
       if @entity.save(:validate => false)
         format.html { render action: "edit", notice: 'entity was successfully created.' }
@@ -76,9 +73,6 @@ class EntitiesController < ApplicationController
   # PUT /tapir/entities/1.json
   def update
     type = params[:type]
-
-    #require 'pry'
-    #binding.pry
 
     @entity = eval("#{type}").find(params[:oid])
 
