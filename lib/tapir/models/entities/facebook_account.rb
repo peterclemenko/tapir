@@ -1,6 +1,6 @@
 module Tapir
   module Entities
-    class LinkedinAccount < Base 
+    class FacebookAccount < Base 
       include TenantAndProjectScoped
 
         field :uri, type: String
