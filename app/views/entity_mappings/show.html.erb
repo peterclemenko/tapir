@@ -2,17 +2,17 @@
 
 <p>
   <b>Parent:</b>
-  <%= link_to @entity_mapping.get_parent.class, @entity_mapping.get_parent %>
+  <%= link_to @entity_mapping.get_parent, @entity_mapping.get_parent %>
 </p>
 
 <p>
   <b>Child:</b>
-  <%= link_to @entity_mapping.get_child.class, @entity_mapping.get_child %>
+  <%= link_to @entity_mapping.get_child, @entity_mapping.get_child %>
 </p>
 
 <p>
   <b>Task run:</b>
-  <%= link_to TaskRun, TaskRun.find_by_id(@entity_mapping.task_run_id) %>
+  <%= link_to Tapir::TaskRun.where(:id => @entity_mapping.task_run_id).first %>
 </p>
 
 
