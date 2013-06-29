@@ -139,15 +139,14 @@ class Task
       @task_logger.log_good "Created new entity: #{new_entity}"
     else
       @task_logger.log "Could not save entity, are you sure it's valid & doesn't already exist?"
-      new_entity = find_entity type, params
-    end
+      new_entity = find_entity(type, params)
     
+      raise RuntimeError, "Unable to find a valid entity: #{type}, #{params}" unless new_entity
+    end
+
     #
     # If we have a new entity, then we should keep track of the information
     # that created this entity
-    #
-    # TODO - this currently prevents entities from being mapped as children twice (with different task runs)
-    # this should not be desired behavior in most cases
     #
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
@@ -180,12 +179,15 @@ class Task
     if type == Tapir::Entities::Host
       return Tapir::Entities::Host.where({
         :ip_address => params[:ip_address]}).first
+
     elsif type == Tapir::Entities::NetBlock
       return Tapir::Entities::NetBlock.where({
         :range => params[:range]}).first
+
     elsif type == Tapir::Entities::ParsableFile
       return Tapir::Entities::ParsableFile.where({
         :path => params[:path]}).first
+
     elsif type == Tapir::Entities::PhysicalLocation
       return Tapir::Entities::PhysicalLocation.where({
         :latitude => params[:latitude], 
