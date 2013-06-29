@@ -1,6 +1,6 @@
 module Tapir
   module Entities
-    class TwitterAccount < Base
+    class KloutAccount < Base 
       include TenantAndProjectScoped
     end
   end
