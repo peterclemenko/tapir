@@ -34,6 +34,10 @@ module Tapir
       entities
       end
 
+      def task_runs
+        Tapir::TaskRun.where(:task_entity_id => id).all
+      end
+
       def model_name
         self.model_name
       end
