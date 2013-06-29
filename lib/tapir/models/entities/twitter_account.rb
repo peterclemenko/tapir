@@ -3,6 +3,8 @@ module Tapir
     class TwitterAccount < Base
       include TenantAndProjectScoped
 
+        field :uri, type: String
+
     end
   end
 end
