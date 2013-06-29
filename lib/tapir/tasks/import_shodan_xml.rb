@@ -1,3 +1,5 @@
+require 'open-uri'
+
 def name
   "import_shodan_xml"
 end
@@ -33,7 +35,7 @@ def run
   xml = Tapir::Import::ShodanXml.new
   parser = Nokogiri::XML::SAX::Parser.new(xml)
   # Send some XML to the parser
-  parser.parse(File.read(@entity.path))
+  parser.parse(open(@entity.uri).read)
   
   xml.shodan_hosts.each do |shodan_host|
     #

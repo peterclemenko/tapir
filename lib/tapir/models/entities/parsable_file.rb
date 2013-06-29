@@ -4,8 +4,7 @@ module Tapir
       
       include TenantAndProjectScoped
 
-      field :path, type: String
-      field :type, type: String
+      field :uri, type: String
 
     end
   end
