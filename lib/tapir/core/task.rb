@@ -105,10 +105,9 @@ class Task
   end
 
   #
-  # Convenience Method - do not override
+  # Convenience Method to execute a system command safely
   #
   def safe_system(command)
-    @task_logger.log_error "UNSAFE SYSTEM CALL. NOT COOL."
   
     if command =~ /(\||\;)/
       raise "Illegal character"
