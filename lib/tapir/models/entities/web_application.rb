@@ -3,9 +3,10 @@ module Tapir
     class WebApplication < Base
       include TenantAndProjectScoped
 
-      field :uri, type: String
-      field :fingerprint, type: String
       field :description, type: String
+      
+      belongs_to :netsvc, :class_name => "Tapir::Entities::NetSvc"
+      belongs_to :host
 
     end
   end

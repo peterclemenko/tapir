@@ -14,10 +14,6 @@ namespace :setup  do
     puts "Getting Geolitecity database..."
     `#{Rails.root}/data/get_latest.sh` unless File.exists? "#{Rails.root}/data/latest.dat"
 
-    # Copy api_keys.yml
-    puts "Copying api_keys.yml into place..."
-    FileUtils.cp("#{Rails.root}/config/api_keys.yml.sample", "#{Rails.root}/config/")    
-
     # rake db:migrate
     Rake::Task["db:drop"].invoke
     Rake::Task["db:create"].invoke

@@ -28,8 +28,11 @@ def setup(entity, options={})
 
   if @entity.kind_of? Tapir::Entities::Host
     url = "http://#{@entity.ip_address}/robots.txt"
-  else
+  elsif @entity.kind_of? Tapir::Entities::Domain
     url = "http://#{@entity.name}/robots.txt"
+  else 
+    # Web application's name is already a URI
+    url = "#{@entity.name}/robots.txt"
   end
   
   begin

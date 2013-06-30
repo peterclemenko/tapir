@@ -8,13 +8,14 @@ end
 
 ## Returns a string which describes what this task does
 def description
-  "This task grabs the www record and determines technologies"
+  "This task determines platform and technologies of the target"
 end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
   [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host]
+    Tapir::Entities::Host, 
+    Tapir::Entities::WebApplication]
 end
 
 def setup(entity, options={})
@@ -22,8 +23,10 @@ def setup(entity, options={})
 
   if @entity.kind_of? Tapir::Entities::Host
     url = "http://#{@entity.ip_address}"
-  else
+  elsif @entity.kind_of? Tapir::Entities::Domain
     url = "http://#{@entity.name}"
+  else
+    url = "#{@entity.name}"
   end
 
   @task_logger.log "Connecting to #{url} for #{@entity}" 
@@ -35,7 +38,6 @@ def setup(entity, options={})
       contents = open("#{url}", :allow_redirections => :safe).read #.force_encoding('UTF-8')
 
       contents.encode!('UTF-8', 'UTF-8', :invalid => :replace)
-
 
       target_strings = [
 

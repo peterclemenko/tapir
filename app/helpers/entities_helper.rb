@@ -70,7 +70,11 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
-  def tapir_entities_web_app_path(id=nil, whatever=nil)
+  def tapir_entities_web_application_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
+  def tapir_entities_web_page_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
 

@@ -43,19 +43,19 @@ def run
     raise ArgumentError, "Unknown entity type"
   end
   
-  rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
+  @rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
   
   # shell out to nmap and run the scan
-  @task_logger.log "scanning #{to_scan} and storing in #{rand_file_path}"
+  @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  safe_system("nmap #{to_scan} #{nmap_options} -oX #{rand_file_path}")
+  safe_system("nmap #{to_scan} #{nmap_options} -oX #{@rand_file_path}")
   
   # Gather the XML and parse
-  @task_logger.log "Raw Result:\n #{File.open(rand_file_path).read}"
-  @task_logger.log "Parsing #{rand_file_path}"
+  @task_logger.log "Raw Result:\n #{File.open(@rand_file_path).read}"
+  @task_logger.log "Parsing #{@rand_file_path}"
 
-  parser = Nmap::Parser.parsefile(rand_file_path)
+  parser = Nmap::Parser.parsefile(@rand_file_path)
 
   # Create entitys for each discovered service
   parser.hosts("up") do |host|
@@ -72,6 +72,7 @@ def run
       host.getports(proto_type, "open") do |port|
       @task_logger.log "Creating Service: #{port}"
       create_entity(Tapir::Entities::NetSvc, {
+        :name => "#{@entity.name}:#{port.num}/#{port.proto}",
         :host_id => @entity.id,
         :port_num => port.num,
         :proto => port.proto,
@@ -86,5 +87,5 @@ end
 
 def cleanup
   super
-  File.delete(rand_file_path)
+  File.delete(@rand_file_path)
 end

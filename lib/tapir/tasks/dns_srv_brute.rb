@@ -77,9 +77,9 @@ def run
 
         @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
 
-        # If we resolved, create the right entitys
+        # If we resolved, create the right entities
         if resolved_address
-          @task_logger.log_good "Creating domain and host entitys..."
+          @task_logger.log_good "Creating domain and host entities..."
 
           # Create a domain. pass down the organization if we have it.
           d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
@@ -88,7 +88,7 @@ def run
           h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
           
           # Create a service, and also associate that with our host.
-          create_entity(NetSvc, {:type => "tcp", :port => port, :host => h})
+          create_entity(Tapir::Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})
 
         end
 

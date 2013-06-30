@@ -32,7 +32,7 @@ private
     # Fetch the correct objects
 
     if params[:sSearch].present?
-      entities = Tapir::Entities::Base.where( :name => /#{params[:sSearch]}/i )
+      entities = Tapir::Entities::Base.where( :name => /#{params[:sSearch]}/i ).order_by("#{sort_column} #{sort_direction}")
     else
       entities = Tapir::Entities::Base.order_by("#{sort_column} #{sort_direction}")
     end
@@ -52,7 +52,7 @@ private
   end
 
   def sort_column
-    columns = %w[name]
+    columns = %w[ name ]
     columns[params[:iSortCol_0].to_i]
   end
 
