@@ -68,6 +68,9 @@ gem 'pry'
 gem 'pry-rails'
 gem 'pry-nav'
 
+# Network Spider
+gem 'anemone'
+
 # Scraping
 gem 'mechanize'
 gem 'nokogiri'

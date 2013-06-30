@@ -5,15 +5,6 @@
 <%= render 'task_runner' %>
 
 <p>
-<b>Task Runs:</b>
-  <ul>
-  <% @entity.task_runs.each {|r|%>
-    <li><%= link_to r, tapir_task_run_path(r)  %></li>
-  <% } %>
-  </ul>
-</p>
-
-<p>
 <b>Parents:</b>
   <ul>
   <% @entity.parents.each {|p|%>
@@ -30,6 +21,16 @@
   <% } %>
   </ul>
 </p>
+
+<p>
+<b>Task Runs:</b>
+  <ul>
+  <% @entity.task_runs.each {|r|%>
+    <li><%= link_to r, tapir_task_run_path(r)  %></li>
+  <% } %>
+  </ul>
+</p>
+
 
 <%= link_to "Destroy", tapir_entity_path(@entity, :type => @entity._type), :confirm => 'Are you sure?', :method => :delete %>| 
 <%= link_to 'Edit', edit_tapir_entity_path(@entity, :type => @entity._type) %> |

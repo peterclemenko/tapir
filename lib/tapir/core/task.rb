@@ -126,6 +126,7 @@ class Task
   #  new_entity keeps track of the new entity
   #
   def create_entity(type, params, current_entity=@entity)
+
     #
     # Call the create method for this type
     #

@@ -3,9 +3,11 @@ module Tapir
     class WebForm < Base
       include TenantAndProjectScoped
 
-      field :url, type: String
+      field :uri, type: String
       field :action, type: String
       field :fields, type: String
+
+      belongs_to :web_application
 
     end
   end
