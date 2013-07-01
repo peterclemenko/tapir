@@ -48,21 +48,29 @@ module Google
         Capybara.default_selector = :xpath
         Capybara.current_driver = :selenium
 
+
         # Uncomment to capybara-webkit scraping
+        # Capybara.current_driver = :selenium -> 
         # Capybara.current_driver = :webkit
 
-        Capybara.app_host = "http://www.google.com/"
+        Capybara.app_host = "http://www.google.com"
       end
     
       def search(term)
+
         uris = []
-        visit('/')
-        fill_in "q", :with => term  
-        click_button "gbqfb"
+        
+        #begin 
+          visit('/')
+          fill_in "q", :with => term  
+          click_button "gbqfb"
+          results = all("//li/div/h3/a")
+          results.each { |r| uris << r[:href]}
+        #rescue Capybara::DriverNotFoundError
+          # TODO - should we raise an error here? 
+        #  uris << "ERROR: Unable to Scrape"
+        #end
 
-        results = all("//li/div/h3/a")
-
-        results.each { |r| uris << r[:href]}
       uris
       end
   end

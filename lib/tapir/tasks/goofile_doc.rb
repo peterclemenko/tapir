@@ -29,7 +29,7 @@ def run
   super
 
   # Attach to the google service & search
-  results = Tapir::Client::Google::SearchScraper.new.search("filetype:doc inurl:#{@entity.name}")
+  results = Tapir::Client::Google::SearchScraper.new.search("filetype:doc site:#{@entity.name}")
 
   results.each do |result|
     create_entity Tapir::Entities::DocFile, :name => result
