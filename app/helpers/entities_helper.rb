@@ -6,6 +6,10 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
+  def tapir_entities_doc_file_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
   def tapir_entities_domain_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
@@ -46,6 +50,10 @@ module EntitiesHelper
     "/tapir/entities/#{id}"  
   end
 
+  def tapir_entities_pdf_file_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
   def tapir_entities_physical_location_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
@@ -81,5 +89,10 @@ module EntitiesHelper
   def tapir_entities_web_form_path(id=nil, whatever=nil)
     "/tapir/entities/#{id}"  
   end
+
+  def tapir_entities_xls_file_path(id=nil, whatever=nil)
+    "/tapir/entities/#{id}"  
+  end
+
 
 end

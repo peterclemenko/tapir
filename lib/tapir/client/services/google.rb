@@ -60,9 +60,6 @@ module Google
         fill_in "q", :with => term  
         click_button "gbqfb"
 
-        require 'pry'
-        binding.pry
-
         results = all("//li/div/h3/a")
 
         results.each { |r| uris << r[:href]}
