@@ -86,10 +86,21 @@ gem 'fog'
 
 group :pain do
   
-  # Requires QTwebkit
+  # 
+  # Capybara-Webkit requires QT-webkit
+  #
+  # The reason this gem is useful is for simple scraping of google. Several tasks 
+  # use it to hit google. 
+  #
   # https://github.com/thoughtbot/capybara-webkit#readme
-  # If you're on ubuntu, you'll need to run: apt-get install libqt4-dev
-  #gem 'capybara-webkit'
+  #
+  # If you're on ubuntu, you'll need to run: 
+  #   apt-get install libqt4-dev
+  # Assuming you're on homebrew: 
+  #   brew update
+  #   brew install qt
+
+  gem 'capybara-webkit'
 end
 
 group :test do

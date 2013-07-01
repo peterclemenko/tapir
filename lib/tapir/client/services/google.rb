@@ -58,8 +58,13 @@ module Google
         uris = []
         visit('/')
         fill_in "q", :with => term  
-        click_button "Google Search"
-        results = all("//li[@class='g']/h3/a")
+        click_button "gbqfb"
+
+        require 'pry'
+        binding.pry
+
+        results = all("//li/div/h3/a")
+
         results.each { |r| uris << r[:href]}
       uris
       end
