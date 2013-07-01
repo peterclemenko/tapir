@@ -9,7 +9,7 @@ end
 
 # Returns a string which describes this task.
 def description
-  "This task hits the Google API and finds related domains."
+  "This task hits the Google API and finds related content. Discovered domains are created."
 end
 
 # Returns an array of valid types for this task
@@ -32,7 +32,7 @@ end
 def run
   super
 
-  # Attach to the corpwatch service & search
+  # Attach to the google service & search
   results = Tapir::Client::Google::SearchService.new.search(@entity.name)
 
   results.each do |result|
