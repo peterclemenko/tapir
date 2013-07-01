@@ -140,9 +140,11 @@ class Task
       @task_logger.log_good "Created new entity: #{new_entity}"
     else
       @task_logger.log "Could not save entity, are you sure it's valid & doesn't already exist?"
+      
+      # Attempt to find the entity
       new_entity = find_entity(type, params)
     
-      raise RuntimeError, "Unable to find a valid entity: #{type}, #{params}" unless new_entity
+      raise RuntimeError, "Unable to find a supposedly valid entity: #{type}, #{params}" unless new_entity
     end
 
     #

@@ -13,7 +13,7 @@ module Tapir
       field :status, type: String
       field :confidence, type: Integer
 
-      validates_uniqueness_of :name, :scope => [:tenant_id,:project_id]
+      validates_uniqueness_of :name, :scope => [:tenant_id,:project_id,:_type]
       
       def to_s
         "#{entity_type.capitalize}: #{name}"
