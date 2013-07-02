@@ -57,6 +57,7 @@ GEM
       robotex (>= 1.0.0)
     ansi (1.4.3)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.4.2)
     builder (3.0.4)
     capybara (2.1.0)
@@ -79,6 +80,11 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     colored (1.2)
+    devise (2.2.4)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     diff-lcs (1.2.4)
     dnsruby (1.54)
     domain_name (0.5.12)
@@ -161,6 +167,7 @@ GEM
     oauth (0.4.7)
     open_uri_redirections (0.1.1)
     origin (1.1.0)
+    orm_adapter (0.4.0)
     packetfu (1.1.8)
     pcaprub (0.11.3)
     polyglot (0.3.3)
@@ -245,6 +252,8 @@ GEM
     unf (0.1.1)
       unf_ext
     unf_ext (0.0.6)
+    warden (1.2.1)
+      rack (>= 1.0)
     webrobots (0.1.1)
     websocket (1.0.7)
     whois (3.2.0)
@@ -262,6 +271,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   coffee-rails (~> 3.2.1)
+  devise
   dnsruby
   exifr
   fastercsv
