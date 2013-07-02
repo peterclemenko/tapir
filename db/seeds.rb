@@ -20,11 +20,11 @@ setting_keys.each do |key|
   Tapir::Setting.create(key)
 end
 
-puts 'SETTING UP DEFAULT USER LOGIN'
-user = Tapir::User.create!( 
-  :tenant_id => Tapir::Tenant.first,
-  :name => 'Tapir', 
-  :email => 'tapir@tapir.com', 
-  :password => 'tapir123', 
-  :password_confirmation => 'tapir123')
-puts 'New user created: ' << user.name
+#puts 'SETTING UP DEFAULT USER LOGIN'
+#user = Tapir::User.create!( 
+#  :tenant_id => Tapir::Tenant.first,
+#  :name => 'Tapir', 
+#  :email => 'tapir@tapir.com', 
+#  :password => 'tapir123', 
+#  :password_confirmation => 'tapir123')
+#puts 'New user created: ' << user.name
