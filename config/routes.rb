@@ -7,7 +7,8 @@ Tapir::Application.routes.draw do
     resources :entity_mappings
     resources :entities
     resources :settings
-    
+    resources :users  
+
     ###
     ### Welcome page
     ###
@@ -31,7 +32,11 @@ Tapir::Application.routes.draw do
 
   match "/" => "tapir/welcome#index"
   
-  root :to => redirect("/")
+  #root :to => redirect("/")
+  root :to => "welcome#index"
+  
+  # Configure Devise
+  devise_for :users, :class_name => "Tapir::User"
 
 
   # The priority is based upon order of creation:
