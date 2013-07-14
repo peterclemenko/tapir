@@ -20,6 +20,48 @@ setting_keys.each do |key|
   Tapir::Setting.create(key)
 end
 
+puts "Seeding 'Findings Report'"
+Tapir::ReportTemplate.create( 
+:name => "Findings Report",
+:content => <<-EOS
+<p>
+<b>Findings:</b>
+  <ul>
+  <% @entities.each do |t| %>
+    <li><%= link_to t, tapir_entity_path(t.id.to_s) %></li>
+  <% end %>
+  </ul>
+</p>
+EOS
+)
+
+puts "Seeding 'Organization Report'"
+Tapir::ReportTemplate.create( 
+:name => "Organization Report",
+:content => <<-EOS
+<p>
+<b>Organizations:</b>
+  <p>
+  <ul>
+  <% @entities.each do |org| %>  
+    <li><%= link_to org, tapir_entity_path(org.id.to_s) %></li>
+    <ul>
+    <% org.children.each do |child| %>
+     <li><%= link_to child, tapir_entity_path(child.id.to_s) %></li>
+      <ul>
+      <% child.children.each do |grandchild| %>
+       <li><%= link_to grandchild, tapir_entity_path(grandchild.id.to_s) %></li>
+      <% end %>
+      </ul>
+    <% end %>
+    </ul>
+  <% end %>
+  </ul>
+  </p>
+</p>
+EOS
+)
+
 #puts 'SETTING UP DEFAULT USER LOGIN'
 #user = Tapir::User.create!( 
 #  :tenant_id => Tapir::Tenant.first,
