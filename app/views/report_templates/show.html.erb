@@ -1,0 +1,7 @@
+<p id="notice"><%= notice %></p>
+
+<%= render :layout => "/reports/#{@report_template.template}", :locals => {:title => 'report title'} do %>
+  <p>Here is some content</p>
+<% end %>
+
+<%= link_to 'Report Listing', tapir_report_templates_path %>
