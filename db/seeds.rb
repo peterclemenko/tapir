@@ -20,47 +20,26 @@ setting_keys.each do |key|
   Tapir::Setting.create(key)
 end
 
-puts "Seeding 'Findings Report'"
-Tapir::ReportTemplate.create( 
-:name => "Findings Report",
-:content => <<-EOS
-<p>
-<b>Findings:</b>
-  <ul>
-  <% @entities.each do |t| %>
-    <li><%= link_to t, tapir_entity_path(t.id.to_s) %></li>
-  <% end %>
-  </ul>
-</p>
-EOS
-)
+puts "Removing Reports"
+Tapir::ReportTemplate.all.each {|x| x.destroy }
 
-puts "Seeding 'Organization Report'"
-Tapir::ReportTemplate.create( 
-:name => "Organization Report",
-:content => <<-EOS
-<p>
-<b>Organizations:</b>
-  <p>
-  <ul>
-  <% @entities.each do |org| %>  
-    <li><%= link_to org, tapir_entity_path(org.id.to_s) %></li>
-    <ul>
-    <% org.children.each do |child| %>
-     <li><%= link_to child, tapir_entity_path(child.id.to_s) %></li>
-      <ul>
-      <% child.children.each do |grandchild| %>
-       <li><%= link_to grandchild, tapir_entity_path(grandchild.id.to_s) %></li>
-      <% end %>
-      </ul>
-    <% end %>
-    </ul>
-  <% end %>
-  </ul>
-  </p>
-</p>
-EOS
-)
+puts "Seeding Reports"
+Tapir::ReportTemplate.create( :name => "organizations", :template => "list",
+  :setup => "@entities = Tapir::Entities::Organization.all")
+Tapir::ReportTemplate.create( :name => "hosts", :template => "list",
+  :setup => "@entities = Tapir::Entities::Host.all")
+Tapir::ReportTemplate.create( :name => "findings", :template => "list",
+  :setup => "@entities = Tapir::Entities::Finding.all")
+
+Tapir::ReportTemplate.create( :name => "children_by_organization", :template => "show_children",
+  :setup => "@entities = Tapir::Entities::Organization.all")
+Tapir::ReportTemplate.create( :name => "children_by_host", :template => "show_children",
+  :setup => "@entities = Tapir::Entities::Host.all")
+Tapir::ReportTemplate.create( :name => "children_by_findings", :template => "show_children",
+  :setup => "@entities = Tapir::Entities::Finding.all")
+
+Tapir::ReportTemplate.create( :name => "peeping_tom", :template => "peeping_tom",
+  :setup => "@entities = Tapir::Entities::Image.all")
 
 #puts 'SETTING UP DEFAULT USER LOGIN'
 #user = Tapir::User.create!( 
