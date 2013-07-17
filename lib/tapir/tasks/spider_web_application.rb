@@ -31,13 +31,13 @@ end
 def run
   super
 
-  Anemone.crawl(@entity.name) do |anemone|
+  Anemone.crawl(@entity.name, {:obey_robots => false, :depth_limit => 1} ) do |anemone|
     anemone.on_every_page do |page|
       create_entity(Tapir::Entities::WebPage, {
         :name => page.url,
         :web_application => @entity,
-        :uri => page.url, #
-        :content => page.body #
+        :uri => page.url.to_s.encode!('UTF-8', 'UTF-8', :invalid => :replace), #
+        :content => page.body.to_s.encode!('UTF-8', 'UTF-8', :invalid => :replace)
       })
     end
   end
