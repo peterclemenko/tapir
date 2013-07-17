@@ -36,7 +36,8 @@ def run
     
     if loc
       @task_logger.log "adding location for #{@entity.ip_address}"
-      create_entity(Tapir::Entities::PhysicalLocation, { 
+      create_entity(Tapir::Entities::PhysicalLocation, {
+        :name => "#{loc.latitude} #{loc.longitude}",
         :zip => loc.postal_code.encode('UTF-8', :invalid => :replace),
         :city => loc.city_name.encode('UTF-8', :invalid => :replace),
         :state => loc.region_name.encode('UTF-8', :invalid => :replace),
