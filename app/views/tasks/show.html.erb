@@ -23,6 +23,7 @@ function check(field) {
 <p>
   <b>Available Entities:</b><br/>
   <form name="task_runner" id="run_task" action="/tapir/run_task" method="POST"> 
+  <%=token_tag form_authenticity_token %>
   <input type="hidden" name="task_name" id="task_name" value="<%=@task.name%>"><br/>
   <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.task_runner)"><br/>
   <% @task.candidates.each do |entity| %>

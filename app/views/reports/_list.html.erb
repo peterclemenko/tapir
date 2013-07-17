@@ -1,7 +1,7 @@
 <p>
-<b>Findings:</b>
+<b>Entities:</b>
   <ul>
-  <% @entities.each do |t| %>
+  <% @entities.each do |t|%>
     <li><%= link_to t, tapir_entity_path(t.id.to_s) %></li>
   <% end %>
   </ul>

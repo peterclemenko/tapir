@@ -57,12 +57,11 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
-      [    :entities_tab              ,    'Entities'              ,    tapir_entities_path                                     ,    true        ,    true        ],
-      [    :tasks_tab                 ,    'Tasks'                 ,    tapir_tasks_path                                        ,    true        ,    true        ],
-      [    :task_runs_tab             ,    'Completed Tasks'       ,    tapir_task_runs_path                                    ,    true        ,    true        ],
-      [    :reports_tab               ,    'Reports'               ,    tapir_reports_path                                      ,    true        ,    true        ],
-      [    :settings_tab              ,    'Settings'              ,   tapir_settings_path                                      ,    true        ,    true        ],
-
+      [    :entities_tab              ,    'Entities'              ,    tapir_entities_path                                      ,    true        ,    true        ],
+      [    :tasks_tab                 ,    'Tasks'                 ,    tapir_tasks_path                                         ,    true        ,    true        ],
+      [    :task_runs_tab             ,    'Completed Tasks'       ,    tapir_task_runs_path                                     ,    true        ,    true        ],
+      [    :reports_tab               ,    'Reports'               ,    tapir_report_templates_path                              ,    true        ,    true        ],
+      [    :settings_tab              ,    'Settings'              ,    tapir_settings_path                                      ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -91,7 +90,7 @@ Tabulous.setup do |config|
       [    :entitys               ,    :all_actions    ,    :entitys_tab               ],
       [    :tasks                 ,    :all_actions    ,    :tasks_tab                 ],
       [    :task_runs             ,    :all_actions    ,    :task_runs_tab             ],
-      [    :reports               ,    :all_actions    ,    :reports_tab               ],
+      [    :report_templates      ,    :all_actions    ,    :reports_tab               ],
       [    :settings              ,    :all_actions    ,    :settings_tab              ],
       #--------------------------------------------------------------------------------#
       #    CONTROLLER             |    ACTION          |    TAB                        #

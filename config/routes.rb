@@ -7,6 +7,8 @@ Tapir::Application.routes.draw do
     resources :entity_mappings
     resources :entities
     resources :settings
+    resources :users  
+    resources :report_templates
     
     ###
     ### Welcome page
@@ -16,12 +18,12 @@ Tapir::Application.routes.draw do
     ###
     ### Reports
     ###
-    match "/reports" => "reports#index"
-    match "/reports/google_default" => "reports#google_default"
-    match "/reports/findings" => "reports#findings"
-    match "/reports/list_all" => "reports#list_all"
-    match "/reports/organization_report" => "reports#organization_report"    
-    match "/reports/peeping_tom" => "reports#peeping_tom"
+    #match "/reports" => "reports#index"
+    #match "/reports/google_default" => "reports#google_default"
+    #match "/reports/findings" => "reports#findings"
+    #match "/reports/list_all" => "reports#list_all"
+    #match "/reports/organization_report" => "reports#organization_report"    
+    #match "/reports/peeping_tom" => "reports#peeping_tom"
 
     ###
     ### Task Runner
@@ -31,7 +33,11 @@ Tapir::Application.routes.draw do
 
   match "/" => "tapir/welcome#index"
   
-  root :to => redirect("/")
+  #root :to => redirect("/")
+  root :to => "welcome#index"
+  
+  # Configure Devise
+  devise_for :users, :class_name => "Tapir::User"
 
 
   # The priority is based upon order of creation:
