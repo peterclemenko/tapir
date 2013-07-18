@@ -5,6 +5,7 @@ module ApplicationHelper
   end
   
   def render_children(item,result)
+    result << "<ul>"
     result << print_result(item)
     return result + "</ul>" if item.children.empty?
 
@@ -20,7 +21,7 @@ module ApplicationHelper
 
   def render_parents(item,result)
     result << "<ul>"
-    result << print_result(x)
+    result << print_result(item)
     return result + "</ul>" if item.parents.empty?
         
     # Print all the parents
