@@ -5,32 +5,32 @@ module ApplicationHelper
   end
   
   def render_children(item,result)
-    result << "<ul>"
-    result << print_result(item)
-    return result + "</ul>" if item.children.empty?
-
-    result << "<ul>" 
-    item.children.each do |x| 
-      result << print_result(x)
-      render_children(x,result)
+    result << "<ul>"        
+    if item.children.empty?
+      return ""
+    else
+      # Print all the parents
+      item.children.each do |x|
+        result << print_result(x)
+        render_children(x,result)
+        result << "</ul>"
+      end
     end
-    result << "</ul>"
-  
   result
   end
 
   def render_parents(item,result)
-    result << "<ul>"
-    result << print_result(item)
-    return result + "</ul>" if item.parents.empty?
-        
-    # Print all the parents
-    item.parents.each do |x|
-      result << print_result(x)
-      render_parents(x,result)
+    result << "<ul>"        
+    if item.parents.empty?
+      return ""
+    else
+      # Print all the parents
+      item.parents.each do |x|
+        result << print_result(x)
+        render_parents(x,result)
+        result << "</ul>"
+      end
     end
-
-    result << "</ul>"
   result
   end
 
