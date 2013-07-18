@@ -145,6 +145,7 @@ def run
       #
       #
       create_entity Tapir::Entities::NetBlock, {
+        :name => "#{start_address}-#{end_address}",
         :range => "#{start_address}-#{end_address}",
         :handle => handle, 
         :description => org_ref
