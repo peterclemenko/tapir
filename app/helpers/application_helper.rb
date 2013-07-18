@@ -7,12 +7,12 @@ module ApplicationHelper
   def render_children(item,result)
     result << "<ul>"        
     if item.children.empty?
-      result << "</ul>"
+      result = ""
     else
       # Print all the parents
       item.children.each do |x|
         result << print_result(x)
-        render_children(x,result)
+        result << render_children(x,"")
         result << "</ul>"
       end
     end
@@ -22,12 +22,12 @@ module ApplicationHelper
   def render_parents(item,result)
     result << "<ul>"        
     if item.parents.empty?
-      result << "</ul>"
+      result = ""
     else
       # Print all the parents
       item.parents.each do |x|
         result << print_result(x)
-        render_parents(x,result)
+        result << render_parents(x,"")
         result << "</ul>"
       end
     end
