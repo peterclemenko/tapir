@@ -24,6 +24,13 @@ puts "Removing Reports"
 Tapir::ReportTemplate.all.each {|x| x.destroy }
 
 puts "Seeding Reports"
+
+Tapir::ReportTemplate.create( 
+  :name => "all", 
+  :pretty_name => "All Entities List",
+  :template => "list",
+  :setup => "@entities = Tapir::Entities::Base.all")
+
 Tapir::ReportTemplate.create( 
   :name => "organizations", 
   :pretty_name => "Organization List",
@@ -71,6 +78,13 @@ Tapir::ReportTemplate.create(
   :pretty_name => "Children by Physical Location", 
   :template => "show_children",
   :setup => "@entities = Tapir::Entities::PhysicalLocation.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "children_by_person", 
+  :pretty_name => "Children by Person",
+  :template => "show_children",
+  :setup => "@entities = Tapir::Entities::Person.all")
+
 
 Tapir::ReportTemplate.create( 
   :name => "parents_by_physical_locations",
