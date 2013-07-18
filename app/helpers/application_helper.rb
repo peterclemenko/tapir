@@ -5,7 +5,8 @@ module ApplicationHelper
   end
   
   def render_children(item,result)
-    return "" if item.children.empty?
+    result << print_result(item)
+    return result + "</ul>" if item.children.empty?
 
     result << "<ul>" 
     item.children.each do |x| 
@@ -18,10 +19,10 @@ module ApplicationHelper
   end
 
   def render_parents(item,result)
-    # Base case
-    return "" if item.parents.empty?
-        
     result << "<ul>"
+    result << print_result(x)
+    return result + "</ul>" if item.parents.empty?
+        
     # Print all the parents
     item.parents.each do |x|
       result << print_result(x)
