@@ -3,7 +3,7 @@
   <!-- Iterate through fields here --> 
   <table>
   <% @entity.fields.each do |field,value|
-      next if field =~ /_type|_id|created_at|updated_at|status/ %>
+      next if field =~ /_id|created_at|updated_at|status/ %>
     <tr>
       <td><%= value.name %>:</td>
       <td><%= eval("@entity.#{value.name}")%></td>

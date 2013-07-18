@@ -1,0 +1,8 @@
+<p>
+<b>Entities:</b>
+  <p>
+    <% @entities.each do |parent| %>
+      <%= simple_format render_parents(parent,"") %>
+    <% end %>
+  </p>
+</p>
