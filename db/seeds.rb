@@ -67,6 +67,42 @@ Tapir::ReportTemplate.create(
   :setup => "@entities = Tapir::Entities::Finding.all")
 
 Tapir::ReportTemplate.create( 
+  :name => "children_by_physical_locations",
+  :pretty_name => "Children by Physical Location", 
+  :template => "show_children",
+  :setup => "@entities = Tapir::Entities::PhysicalLocation.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "parents_by_physical_locations",
+  :pretty_name => "Parents by Physical Location", 
+  :template => "show_parents",
+  :setup => "@entities = Tapir::Entities::PhysicalLocation.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "parents_by_domain",
+  :pretty_name => "Parents by Domain", 
+  :template => "show_parents",
+  :setup => "@entities = Tapir::Entities::Domain.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "parents_by_host",
+  :pretty_name => "Parents by Host", 
+  :template => "show_parents",
+  :setup => "@entities = Tapir::Entities::Host.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "parents_by_web_application",
+  :pretty_name => "Parents by Web Application", 
+  :template => "show_parents",
+  :setup => "@entities = Tapir::Entities::WebApplication.all")
+
+Tapir::ReportTemplate.create( 
+  :name => "parents_by_web_page",
+  :pretty_name => "Parents by Web Page", 
+  :template => "show_parents",
+  :setup => "@entities = Tapir::Entities::WebPage.all")
+
+Tapir::ReportTemplate.create( 
   :name => "peeping_tom", 
   :pretty_name => "Peeping Tom", 
   :template => "peeping_tom",

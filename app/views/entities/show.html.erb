@@ -6,20 +6,12 @@
 
 <p>
 <b>Parents:</b>
-  <ul>
-  <% @entity.parents.each {|p|%>
-    <li><%= link_to p, p.id.to_s  %></li>
-  <% } %>
-  </ul>
+  <%= simple_format render_parents(@entity,"") %>
 </p>  
 
 <p>
 <b>Children:</b>
-  <ul>
-  <% @entity.children.each {|c|%>
-    <li><%= link_to(c, c.id.to_s) %></li>
-  <% } %>
-  </ul>
+  <%= simple_format render_children(@entity,"") %>
 </p>
 
 <p>
