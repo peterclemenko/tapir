@@ -167,8 +167,6 @@ GEM
     open_uri_redirections (0.1.1)
     origin (1.1.0)
     orm_adapter (0.4.0)
-    packetfu (1.1.8)
-    pcaprub (0.11.3)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
@@ -295,8 +293,6 @@ DEPENDENCIES
   nmap-parser
   nokogiri
   open_uri_redirections
-  packetfu
-  pcaprub
   pry
   pry-nav
   pry-rails
