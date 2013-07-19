@@ -95,7 +95,7 @@ def run
         if answer.technical_contact
           @task_logger.log "Creating user from technical contact"
           fname,lname = answer.technical_contact.name.split(" ")
-          create_entity(User, {:first_name => fname, :last_name => lname})
+          #create_entity(User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab technical contact" 
@@ -108,7 +108,7 @@ def run
         if answer.admin_contact
           @task_logger.log "Creating user from admin contact"
           fname,lname = answer.admin_contact.name.split(" ")
-          create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
+          #create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab admin contact" 
