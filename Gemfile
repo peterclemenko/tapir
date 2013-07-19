@@ -33,8 +33,9 @@ gem 'will_paginate'
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use unicorn as the web server
-# gem 'unicorn'
-gem 'thin'
+gem 'unicorn'
+gem 'guard'
+#gem 'thin'
 
 # Use devise for authentication
 gem 'devise'
