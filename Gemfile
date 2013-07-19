@@ -60,8 +60,8 @@ gem 'exifr'
 gem 'dnsruby'
 gem 'geoip'
 gem 'whois'
-gem 'packetfu'
-gem 'pcaprub'
+#gem 'packetfu'
+#gem 'pcaprub'
 
 # Web Services
 gem 'linkedin'
