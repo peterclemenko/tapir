@@ -31,4 +31,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  respond_to do |format|
+    format.html { render :template => "error_404", :layout => "errors", :status => 404 }
+    format.all { render :nothing => true, :status => 404 }
+  end
+
 end
