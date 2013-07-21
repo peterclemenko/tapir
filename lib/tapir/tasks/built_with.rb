@@ -84,8 +84,10 @@ def setup(entity, options={})
       end
     end
 
-  rescue Timeout::Error
+  rescue Timeout::Error => e
     @task_logger.log "Timeout!"
+  rescue OpenSSL::SSL::SSLError => e
+    @task_logger.log "Unable to connect: #{e}"
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"
   rescue Net::HTTPBadResponse => e
