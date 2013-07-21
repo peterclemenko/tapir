@@ -42,7 +42,7 @@ def run
     # Create the host / loc / domain entity for each host we know about
     #
     domain = create_entity(Tapir::Entities::Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
-    host = create_entity(Tapir::Entities::Host, {:ip_address => shodan_host.ip_address })
+    host = create_entity(Tapir::Entities::Host, {:name => shodan_host.ip_address })
     loc = create_entity(Tapir::Entities::PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
 
     shodan_host.services.each do |shodan_service|

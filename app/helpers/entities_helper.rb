@@ -30,6 +30,10 @@ module EntitiesHelper
     "/entities/#{id}"  
   end
 
+  def tapir_entities_email_address_path(id=nil)
+    "/entities/#{id}"  
+  end
+
   def tapir_entities_finding_path(id=nil)
     "/entities/#{id}"  
   end

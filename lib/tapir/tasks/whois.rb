@@ -48,6 +48,11 @@ def run
   #
   if answer
     
+    # Log the full text of the answer
+    @task_logger.log "== Full Text: =="
+    @task_logger.log answer.parts.first.body
+    @task_logger.log "================"
+
     #
     # if it was a domain, we've got a whole lot of shit we can scoop
     #
@@ -61,7 +66,7 @@ def run
           # If it's an ip address, let's create a host record
           #
           if nameserver.to_s =~ /\d\.\d\.\d\.\d/
-            new_entity = create_entity Tapir::Entities::Host , :ip_address => nameserver.to_s
+            new_entity = create_entity Tapir::Entities::Host , :name => nameserver.to_s
           else
             #
             # Otherwise it's another domain, and we can't do much but add it
@@ -70,11 +75,12 @@ def run
           end
         end
       end
+
       #
       # Set the record properties
       #
       @entity.disclaimer = answer.disclaimer
-#      @entity.domain = answer.domain
+      #@entity.domain = answer.domain
       #@entity.referral_whois = answer.referral_whois
       @entity.status = answer.status
       @entity.registered = answer.registered?
@@ -88,14 +94,15 @@ def run
       @entity.record_updated_on = answer.updated_on
       @entity.record_expires_on = answer.expires_on
       
+      @entity.full_text = answer.parts.first.body
+
       #
       # Create a user from the technical contact
       #
       begin
         if answer.technical_contact
           @task_logger.log "Creating user from technical contact"
-          fname,lname = answer.technical_contact.name.split(" ")
-          #create_entity(User, {:first_name => fname, :last_name => lname})
+          create_entity(Tapir::Entities::Person, {:name => answer.technical_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab technical contact" 
@@ -107,8 +114,7 @@ def run
       begin
         if answer.admin_contact
           @task_logger.log "Creating user from admin contact"
-          fname,lname = answer.admin_contact.name.split(" ")
-          #create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
+          create_entity(Tapir::Entities::Person, {:name => answer.admin_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab admin contact" 
@@ -120,8 +126,7 @@ def run
       begin
         if answer.registrant_contact
           @task_logger.log "Creating user from registrant contact"
-          fname,lname = answer.registrant_contact.name.split(" ")
-          create_entity(Tapir::Entities::User, {:first_name => fname, :last_name => lname})
+          create_entity(Tapir::Entities::Person, {:name => answer.registrant_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab registrant contact" 
@@ -136,7 +141,7 @@ def run
       #
       # Parse out the netrange - WARNING SUPERGHETTONESS ABOUND
       #
-      doc = Nokogiri::XML(open ("http://whois.arin.net/rest/ip/#{@entity.ip_address}"))
+      doc = Nokogiri::XML(open ("http://whois.arin.net/rest/ip/#{@entity.name}"))
       start_address = doc.xpath("//xmlns:net/xmlns:startAddress").text
       end_address = doc.xpath("//xmlns:net/xmlns:endAddress").text
       handle = doc.xpath("//xmlns:net/xmlns:handle").text

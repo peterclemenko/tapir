@@ -34,7 +34,7 @@ def run
   nmap_options = @options['nmap_options']
   
   if @entity.kind_of? Tapir::Entities::Host
-    to_scan = @entity.ip_address
+    to_scan = @entity.name
   elsif @entity.kind_of? Tapir::Entities::NetBlock
     to_scan = @entity.range
   elsif @entity.kind_of? Tapir::Entities::Domain
@@ -65,7 +65,7 @@ def run
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
     master_entity = @entity
     if @entity.kind_of? Tapir::Entities::NetBlock or @entity.kind_of? Tapir::Entities::Domain
-      @entity = create_entity(Tapir::Entities::Host, {:ip_address => host.addr })
+      @entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
     end
 
     [:tcp, :udp].each do |proto_type|

@@ -72,7 +72,7 @@ def run
 
         # create new host and domain entitys
         d = create_entity(Tapir::Entities::Domain, {:name => domain })
-        h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
+        h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
 
       end
 

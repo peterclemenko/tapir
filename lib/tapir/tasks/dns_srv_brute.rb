@@ -85,7 +85,7 @@ def run
           d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
 
           # Create a host to store the ip address
-          h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
+          h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
           
           # Create a service, and also associate that with our host.
           create_entity(Tapir::Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})

@@ -32,7 +32,7 @@ def run
   super
   r = Rex::Socket::RangeWalker.new @entity.range
   r.each do|address|
-    create_entity(Tapir::Entities::Host, {:ip_address => address})
+    create_entity(Tapir::Entities::Host, {:name => address})
   end
 end
 

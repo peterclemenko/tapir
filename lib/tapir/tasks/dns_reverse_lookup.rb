@@ -29,7 +29,7 @@ def run
 
   begin
 
-    resolved_name = Resolv.new.getname(@entity.ip_address).to_s
+    resolved_name = Resolv.new.getname(@entity.name).to_s
 
     if resolved_name
       @task_logger.log_good "Creating domain #{name}"
@@ -40,7 +40,7 @@ def run
       # Add the domain for this host
       @entity.domains << d
     else
-      @task_logger.log "Unable to find a name for #{@entity.ip_address}"
+      @task_logger.log "Unable to find a name for #{@entity.name}"
     end
 
   rescue Exception => e

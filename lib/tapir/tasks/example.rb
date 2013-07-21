@@ -34,7 +34,7 @@ def run
   super
   # create an ip
   ip_address = "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"
-  x = create_entity Tapir::Entities::Host, { :ip_address => ip_address }
+  x = create_entity Tapir::Entities::Host, { :name => ip_address }
 end
 
 def cleanup

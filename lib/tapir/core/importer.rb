@@ -52,11 +52,10 @@ class Importer
               Tapir::Entities::Domain.create(:name => import_items[1].strip)
             when "host"
               TapirLogger.instance.log "Creating a host!"
-              Tapir::Entities::Host.create(:ip_address => import_items[1].strip)
+              Tapir::Entities::Host.create(:name => import_items[1].strip)
             when "user"
-              TapirLogger.instance.log "Creating a user!"
-              Tapir::Entities::User.create(:first_name => import_items[1].strip, 
-                          :last_name => import_items[2].strip)
+              TapirLogger.instance.log "Creating a person!"
+              Tapir::Entities::Person.create(:name => import_items[1].strip )
           end  
         end
       rescue Exception => e

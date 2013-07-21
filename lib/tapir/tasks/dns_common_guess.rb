@@ -45,7 +45,7 @@ def run
 
         # We know the domain is ~valid, and the ip address too
         d = create_entity(Tapir::Entities::Domain, :name => domain)
-        h = create_entity(Tapir::Entities::Host, :ip_address => res_answer)
+        h = create_entity(Tapir::Entities::Host, :name => res_answer)
 
     end
     rescue Dnsruby::Refused

@@ -22,7 +22,7 @@ def setup(entity, options={})
   super(entity, options)
 
   if @entity.kind_of? Tapir::Entities::Host
-    url = "http://#{@entity.ip_address}"
+    url = "http://#{@entity.name}"
   elsif @entity.kind_of? Tapir::Entities::Domain
     url = "http://#{@entity.name}"
   else
