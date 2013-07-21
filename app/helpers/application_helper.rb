@@ -1,42 +1,40 @@
 module ApplicationHelper
 
-  def tapir_entities_path(id=nil)
-    "/tapir/entities/#{id}"
-  end
-  
-  def render_children(item,result)
-    result << "<ul>"        
-    if item.children.empty?
-      result = ""
+  def render_children(entity,result)
+    result << "<ul>"
+    if entity.children.empty?
+      return result = ""
     else
       # Print all the parents
-      item.children.each do |x|
+      entity.children.each do |x|
         result << print_result(x)
         result << render_children(x,"")
-        result << "</ul>"
       end
     end
+    result << "</ul>"
   result
   end
 
-  def render_parents(item,result)
-    result << "<ul>"        
-    if item.parents.empty?
-      result = ""
+  def render_parents(entity,result)
+    result << "<ul>"
+    if entity.parents.empty?
+      return result = ""
     else
       # Print all the parents
-      item.parents.each do |x|
+      result << "<ul>"
+      entity.parents.each do |x|
         result << print_result(x)
         result << render_parents(x,"")
-        result << "</ul>"
       end
+      result << "</ul>"
     end
+    result << "</ul>"
   result
   end
 
-  def print_result(item)
+  def print_result(entity)
     # << " (#{item.task_runs.where(:task_entity_id => item.id).first}) " 
-    "<li>" << link_to(item, tapir_entity_path(item.id.to_s)) << "</li>"   
+    "<li>" << link_to(entity, entity_path(entity)) << "</li>"   
   end
 
 end

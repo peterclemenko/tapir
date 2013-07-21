@@ -1,44 +1,27 @@
 Tapir::Application.routes.draw do
 
-  resource :tapir do
-    resources :tasks
-    resources :task_runs
-    resources :task_run_sets
-    resources :entity_mappings
-    resources :entities
-    resources :settings
-    resources :users  
-    resources :report_templates
+  resources :tasks
+  resources :task_runs
+  resources :task_run_sets
+  resources :entity_mappings
+  resources :entities
+  resources :settings
+  #resources :users  
+  resources :report_templates
     
-    ###
-    ### Welcome page
-    ###
-    match "/welcome" => "welcome#index"
-
-    ###
-    ### Reports
-    ###
-    #match "/reports" => "reports#index"
-    #match "/reports/google_default" => "reports#google_default"
-    #match "/reports/findings" => "reports#findings"
-    #match "/reports/list_all" => "reports#list_all"
-    #match "/reports/organization_report" => "reports#organization_report"    
-    #match "/reports/peeping_tom" => "reports#peeping_tom"
-
-    ###
-    ### Task Runner
-    ###
-    match "/run_task" => "task_run_sets#run", :via => [:post, :get]
-  end
-
-  match "/" => "tapir/welcome#index"
-  
-  #root :to => redirect("/")
+  ###
+  ### Welcome page
+  ###
+  match "/" => "welcome#index"  
   root :to => "welcome#index"
+
+  ###
+  ### Task Runner
+  ###
+  match "/run_task" => "task_run_sets#run", :via => [:post, :get]
   
   # Configure Devise
   devise_for :users, :class_name => "Tapir::User"
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -86,10 +69,6 @@ Tapir::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 

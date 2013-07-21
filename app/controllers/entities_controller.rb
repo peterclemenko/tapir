@@ -1,5 +1,7 @@
 class EntitiesController < ApplicationController
 
+  before_filter :authenticate_user!
+
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
@@ -16,7 +18,6 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/1.json
   def show
     @entity = Tapir::Entities::Base.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @entity }
@@ -36,11 +37,7 @@ class EntitiesController < ApplicationController
 
   # GET /tapir/entities/1/edit
   def edit
-    type = params[:type]
-
-    # TODO - security - verify.
-
-    @entity = eval("#{type}").find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
   end
 
   # POST /tapir/tapir/entities
@@ -72,13 +69,11 @@ class EntitiesController < ApplicationController
   # PUT /tapir/entities/1
   # PUT /tapir/entities/1.json
   def update
-    type = params[:type]
-
-    @entity = eval("#{type}").find(params[:oid])
+    @entity = Tapir::Entities::Base.find(params[:oid])
 
     respond_to do |format|
       if @entity.update_attributes(params)
-        format.html { redirect_to tapir_entity_path(@entity), notice: 'Entity was successfully updated.' }
+        format.html { redirect_to entity_path(@entity), notice: 'Entity was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -90,12 +85,11 @@ class EntitiesController < ApplicationController
   # DELETE /tapir/entities/1
   # DELETE /tapir/entities/1.json
   def destroy
-    type = params[:type]
-    @entity = eval("#{type}").find(params[:id])
+    @entity = Tapir::Entities::Base.find(params[:id])
     @entity.destroy
 
     respond_to do |format|
-      format.html { redirect_to tapir_entities_url }
+      format.html { redirect_to entities_url }
       format.json { head :ok }
     end
   end

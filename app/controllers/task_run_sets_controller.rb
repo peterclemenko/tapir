@@ -1,4 +1,7 @@
 class TaskRunSetsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /task_run_sets
   # GET /task_run_sets.json
   def index

@@ -2,7 +2,7 @@
 <b>Entities:</b>
   <ul>
   <% @entities.each do |t|%>
-    <li><%= link_to t, tapir_entity_path(t.id.to_s) %></li>
+    <li><%= link_to t, entity_path(t) %></li>
   <% end %>
   </ul>
 </p>

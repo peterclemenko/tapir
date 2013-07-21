@@ -1,4 +1,7 @@
 class ReportTemplatesController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /report_templates
   # GET /report_templates.json
   def index

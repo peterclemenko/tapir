@@ -57,11 +57,11 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
-      [    :entities_tab              ,    'Entities'              ,    tapir_entities_path                                      ,    true        ,    true        ],
-      [    :tasks_tab                 ,    'Tasks'                 ,    tapir_tasks_path                                         ,    true        ,    true        ],
-      [    :task_runs_tab             ,    'Completed Tasks'       ,    tapir_task_runs_path                                     ,    true        ,    true        ],
-      [    :reports_tab               ,    'Reports'               ,    tapir_report_templates_path                              ,    true        ,    true        ],
-      [    :settings_tab              ,    'Settings'              ,    tapir_settings_path                                      ,    true        ,    true        ],
+      [    :entities_tab              ,    'Entities'              ,    entities_path                                      ,    true        ,    true        ],
+      [    :tasks_tab                 ,    'Tasks'                 ,    tasks_path                                         ,    true        ,    true        ],
+      [    :task_runs_tab             ,    'Completed Tasks'       ,    task_runs_path                                     ,    true        ,    true        ],
+      [    :reports_tab               ,    'Reports'               ,    report_templates_path                              ,    true        ,    true        ],
+      [    :settings_tab              ,    'Settings'              ,    settings_path                                      ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#

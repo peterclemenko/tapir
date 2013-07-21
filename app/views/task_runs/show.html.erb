@@ -10,7 +10,7 @@
 
 <p>
   <b>Parent:</b>
-   <%= link_to(@task_run.entity_mappings.first.get_parent, "/tapir/entities/#{@task_run.entity_mappings.first.get_parent.id}") if @task_run.entity_mappings.first %>
+   <%= link_to(@task_run.entity_mappings.first.get_parent, entity_path(@task_run.entity_mappings.first.get_parent)) if @task_run.entity_mappings.first %>
 </p>
 
 <p>
@@ -29,14 +29,12 @@
 </p>
 
 <p>
-  <b>Associated Objects :</b>
+  <b>Associated Objects:</b>
   <ul>
-    <% @task_run.entity_mappings.each {|o|%>
-      <li><%= link_to(o.get_child,"/tapir/entities/#{o.get_child.id}") %></li>
-    <% } %>
+    <%= simple_format display_associated_children %>
   </ul>
 </p>
 
 
 <%= link_to "Destroy", @task_run, :confirm => 'Are you sure?', :method => :delete %>
-<%= link_to 'Back', tapir_task_runs_path %>
+<%= link_to 'Back', task_runs_path %>

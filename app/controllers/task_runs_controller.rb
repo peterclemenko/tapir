@@ -1,4 +1,7 @@
 class TaskRunsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /task_runs
   # GET /task_runs.json
   def index

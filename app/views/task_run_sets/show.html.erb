@@ -14,7 +14,7 @@
       <% task_run.entity_mappings.each do |x| %>
         <% child = x.get_child 
           if child %>
-        <li><%= link_to(child,"/tapir/entities/#{child.id}")  %></li>
+        <li><%= link_to(child,entity_path(child)) %></li>
       <%  end 
         end %>
       </ul>
@@ -24,4 +24,4 @@
   <% end %>
 </table>
 
-<%= link_to 'Back', tapir_entities_path %>
+<%= link_to 'Back', entities_path %>

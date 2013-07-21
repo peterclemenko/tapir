@@ -11,7 +11,7 @@ class Setting
   field :value, type: String
   field :visibility, type: String
 
-  validates_uniqueness_of :name
+  validates_uniqueness_of :name, :scope => :tenant_id
 
 end
 end
