@@ -18,7 +18,7 @@ class TaskLogger
   end
 
   def log(message)
-    _log "[_] #{@name}: " << message  
+    _log "[ ] #{@name}: " << message  
   end
 
   ######
