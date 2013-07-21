@@ -1,34 +1,28 @@
 module ApplicationHelper
 
   def render_children(entity,result)
-    result << "<ul>"
-    if entity.children.empty?
-      return result = ""
-    else
-      # Print all the parents
-      entity.children.each do |x|
-        result << print_result(x)
-        result << render_children(x,"")
-      end
+    return result = "" if entity.children.empty?
+    
+    result << "<ul>"  
+    entity.children.each do |x|
+      result << print_result(x)
+      result << render_children(x,"")
     end
     result << "</ul>"
+    
   result
   end
 
   def render_parents(entity,result)
-    result << "<ul>"
-    if entity.parents.empty?
-      return result = ""
-    else
-      # Print all the parents
-      result << "<ul>"
-      entity.parents.each do |x|
-        result << print_result(x)
-        result << render_parents(x,"")
-      end
-      result << "</ul>"
+    return result = "" if entity.parents.empty?
+    
+    result << "<ul>"      
+    entity.parents.each do |x|
+      result << print_result(x)
+      result << render_parents(x,"")
     end
     result << "</ul>"
+
   result
   end
 
