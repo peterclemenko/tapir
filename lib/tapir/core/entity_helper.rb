@@ -116,7 +116,7 @@ module EntityHelper
       :parent_type => self.class.to_s,
       :child_id => params[:child].id,
       :child_type => params[:child].class.to_s,
-      :task_run_id => params[:task_run].id || nil)
+      :task_run_id => params[:task_run].id || nil) unless parent_id == child_id
   end
 
 end
