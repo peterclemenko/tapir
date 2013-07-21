@@ -95,28 +95,16 @@ module EntityHelper
     _map_child(params)
   end
 
-  # 
-  # This method returns a pretty print version of the relationships
-  #  of this entity
-  # 
-  #def to_graph(indent=nil)
-  #  out = "Parents:\n"
-  #  self.parents.each { |parent| out << " #{parent}" }
-  #  out << "\Entity: #{self.to_s}\n"
-  #  out << "Children:\n"
-  #  self.children.each { |child| out << " #{child}" }
-  #  out
-  #end
-
   def _map_child(params)
     TapirLogger.instance.log "Creating new child mapping #{self} => #{params[:child]}"
 
+    # Create a new entity mapping, unless they happen to be the same object (is that possible?)
     EntityMapping.create(
       :parent_id => self.id,
       :parent_type => self.class.to_s,
       :child_id => params[:child].id,
       :child_type => params[:child].class.to_s,
-      :task_run_id => params[:task_run].id || nil) unless parent_id == child_id
+      :task_run_id => params[:task_run].id || nil) unless self.id == params[:child].id
   end
 
 end
