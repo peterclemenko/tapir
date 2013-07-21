@@ -8,10 +8,6 @@ module Tapir
       field :port_num, type: Integer
 
       belongs_to :host
-
-      def to_s
-         super << " #{port_num}/#{proto}"
-      end
     end
   end
 end
