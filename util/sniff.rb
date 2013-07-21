@@ -7,7 +7,8 @@ require "packetfu"
 
 # Set the current tenant - this is required because
 # all entities must be scoped according to the tenant
-Mongoid::Multitenancy.current_tenant = Tapir::Tenant.all.first
+Tapir::Tenant.current = Tapir::Tenant.all.first
+Tapir::Project.current = Tapir::Project.all.first
 
 @excluded = [ "^172.16", "^192.168" , "^74.16", "^74.125", "^224.0.0", "^199.71", "^199.43", "^199.212"]
 @included = [ "^10.0.0" ]
@@ -42,13 +43,19 @@ puts "[+] We be sniffin!"
   next unless !excluded || !packet.is_ip?
   
   #Check to see if we have the host's details already
-  host = Tapir::Entities::Host.where(:ip_address => packet.ip_daddr)
+  host = Tapir::Entities::Host.where(
+    :name => packet.ip_daddr, 
+    :project_id => Tapir::Project.current.id,
+    :tenant_id => Tapir::Tenant.current.id)
+
   next if host.count > 0
 
   puts "[+] Creating new host: #{packet.ip_daddr}"
-  h = Tapir::Entities::Host.create(:ip_address => packet.ip_daddr)
+  h = Tapir::Entities::Host.create(
+    :name => packet.ip_daddr, 
+    :project_id => Tapir::Project.current.id,
+    :tenant_id => Tapir::Tenant.current.id)
 
   h.run_task("dns_reverse_lookup", {})
-  #h.run_task("geolocate_host", {})
 
 end

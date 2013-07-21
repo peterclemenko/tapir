@@ -35,28 +35,22 @@ def run
   ## John Effing Doe
   ##
 
+  split_name = @entity.name.split(" ")
+
   #johndoe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
   
   # john.doe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}.#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
 
   # john_doe 
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}_#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}_#{split_name.last}"}
   
   # jdoe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name.split("").first}#{@entity.last_name}"}
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first.first}#{split_name.last}"}
 
   # doe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.last_name}"}
-  
-  if @entity.middle_name
-    #johneffingdoe
-    create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name}#{@entity.middle_name}#{@entity.last_name}"}
-
-    #jedoe
-    create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{@entity.first_name.split("").first}#{@entity.middle_name.split("").first}#{@entity.last_name}"}
-  end
+  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.last}"}
 
 
 end

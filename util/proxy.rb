@@ -9,12 +9,19 @@ require "#{File.join(File.dirname(__FILE__), "..", "config", "environment")}"
 require 'webrick' 
 require 'webrick/httpproxy' 
 
+# Set the current tenant - this is required because
+# all entities must be scoped according to the tenant
+Tapir::Tenant.current = Tapir::Tenant.all.first
+Tapir::Project.current = Tapir::Project.all.first
+
 s = WEBrick::HTTPProxyServer.new(
     :Port => 8080,
     :RequestCallback => Proc.new { |req,res| 
       begin
-        Mongoid::Multitenancy.current_tenant = Tapir::Tenant.all.first
-        Tapir::Entities::Domain.create(:name => "#{req.host}")
+        Tapir::Entities::Domain.create(
+          :name => "#{req.host}",
+          :tenant_id => Tapir::Tenant.current.id,
+          :project_id => Tapir::Project.current.id)
       rescue Exception => e
         puts "Exception #{e}"
       end

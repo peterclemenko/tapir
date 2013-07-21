@@ -37,7 +37,7 @@ def run
   end
 
   @task_logger.log "Using name: #{myname}"
-  @task_logger.log "Tracing route to #{@entity.ip_address}"
+  @task_logger.log "Tracing route to #{@entity.name}"
 
   start_ttl     = @options[:start_ttl] || 1
   max_ttl       = @options[:max_ttl] || 35
@@ -68,7 +68,7 @@ def run
   # Connect to remote host
   #
   begin
-    dgram_sock.connect @entity.ip_address, 999
+    dgram_sock.connect @entity.name, 999
   rescue SocketError => err_msg
     @task_logger.log "Can't connect to remote host (#{err_msg})."
     return

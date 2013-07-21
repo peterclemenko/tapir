@@ -27,15 +27,15 @@ def run
   super
 
   begin
-    @task_logger.log "looking up location for #{@entity.ip_address}"
+    @task_logger.log "looking up location for #{@entity.name}"
 
     #
     # This call attempts to do a lookup
     #
-    loc = @db.city(@entity.ip_address)
+    loc = @db.city(@entity.name)
     
     if loc
-      @task_logger.log "adding location for #{@entity.ip_address}"
+      @task_logger.log "adding location for #{@entity.name}"
       create_entity(Tapir::Entities::PhysicalLocation, {
         :name => "#{loc.latitude} #{loc.longitude}",
         :zip => loc.postal_code.encode('UTF-8', :invalid => :replace),

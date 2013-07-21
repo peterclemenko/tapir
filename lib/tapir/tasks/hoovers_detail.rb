@@ -84,14 +84,9 @@ def run
           user_line.inner_text.gsub!("&#xa0;"," ")
           full_name = user_line.inner_text unless /E-mail/ =~ user_line.inner_text 
 
-          # Split up the name
-          first_name,last_name = full_name.split(' ')
-
           # Create the user entitys
           @task_logger.log_good "Adding user entity for: #{full_name}"
-          create_entity(Tapir::Entities::User, { 
-            :first_name => first_name, 
-            :last_name => last_name })
+          create_entity(Tapir::Entities::Person, { :name => full_name })
         end
 
         # Get Company Profile set this

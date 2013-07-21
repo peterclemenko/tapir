@@ -179,11 +179,8 @@ class Task
   # send "name" and special case anything else.
   #
   def find_entity(type, params)
-    if type == Tapir::Entities::Host
-      return Tapir::Entities::Host.where({
-        :ip_address => params[:ip_address]}).first
 
-    elsif type == Tapir::Entities::NetBlock
+    if type == Tapir::Entities::NetBlock
       return Tapir::Entities::NetBlock.where({
         :range => params[:range]}).first
 

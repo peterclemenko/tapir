@@ -34,13 +34,25 @@ def run
   
   # construct uri
   protocol = ssl ? "https://" : "http://"
-  uri = "#{protocol}#{@entity.host.ip_address}:#{@entity.port_num}"
+  uri = "#{protocol}#{@entity.host.name}:#{@entity.port_num}"
 
   create_entity(Tapir::Entities::WebApplication, {
     :name => uri,
     :host => @entity.host,
     :netsvc => @entity
   })
+
+  @entity.host.domains.each do |d|
+
+    uri = "#{protocol}#{d.name}:#{@entity.port_num}"
+
+    create_entity(Tapir::Entities::WebApplication, {
+      :name => uri,
+      :host => @entity.host,
+      :netsvc => @entity
+    })
+
+  end
 
 end
 

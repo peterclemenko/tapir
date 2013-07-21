@@ -1,11 +1,9 @@
 module Tapir
   module Entities
-    class Host < Base
+    class EmailAddress < Base
       include TenantAndProjectScoped
 
-      has_many :net_svcs
-      has_many :domains
-      
+      belongs_to :person
     end
   end
 end

@@ -101,7 +101,7 @@ def run
         if resolved_address
           @task_logger.log_good "Creating domain and host entities..."
           d = create_entity(Tapir::Entities::Domain, {:name => domain})
-          h = create_entity(Tapir::Entities::Host, {:ip_address => resolved_address})
+          h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
         end
 
         #@task_run.save_raw_result "#{domain}: resolved_address"
