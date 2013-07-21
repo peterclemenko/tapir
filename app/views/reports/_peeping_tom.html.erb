@@ -6,7 +6,7 @@
       <tr>
     <% end %>      
       <td>
-        <a href="/tapir/entities/<%= image._id %>"><img width=150 height=150 src="/images/<%=image.local_path.split("/").last%>"/></a>
+        <a href="<%= entity_path(image) %>"><img width=150 height=150 src="/images/<%=image.local_path.split("/").last%>"/></a>
       </td>
     <% if index%6 == 5  %>
       </tr>

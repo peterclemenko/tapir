@@ -4,3 +4,9 @@ development:
       database: tapir
       hosts:
         - localhost:27017
+production:
+  sessions:
+    default:
+      database: tapir
+      hosts:
+        - localhost:27017

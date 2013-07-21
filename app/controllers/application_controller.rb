@@ -3,7 +3,6 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_current_tenant
   before_filter :set_current_project
-  before_filter :authenticate_user!
 
   def set_current_tenant
 

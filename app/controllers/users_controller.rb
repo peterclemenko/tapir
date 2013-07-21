@@ -8,5 +8,4 @@ class UsersController < ApplicationController
     @users = Tapir::User.all
   end
 
-
 end

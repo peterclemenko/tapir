@@ -1,4 +1,7 @@
 class SettingsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /settings
   # GET /settings.json
   def index
@@ -40,11 +43,16 @@ class SettingsController < ApplicationController
   # POST /settings
   # POST /settings.json
   def create
-    @setting = Tapir::Setting.new(params[:setting])
+
+    @setting = Tapir::Setting.new(
+      :tenant => Tapir::Tenant.current,
+      :user => current_user,
+      :name => params[:name],
+      :value => params[:value])
 
     respond_to do |format|
       if @setting.save
-        format.html { redirect_to @setting, notice: 'Setting was successfully created.' }
+        format.html { redirect_to "/settings/#{@setting.id}", notice: 'Setting was successfully created.' }
         format.json { render json: @setting, status: :created, location: @setting }
       else
         format.html { render action: "new" }
@@ -62,7 +70,7 @@ class SettingsController < ApplicationController
 
     respond_to do |format|
       if @setting.update_attributes(params)
-        format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
+        format.html { redirect_to  "/settings/#{@setting.id}", notice: 'Setting was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -78,7 +86,7 @@ class SettingsController < ApplicationController
     @setting.destroy
 
     respond_to do |format|
-      format.html { redirect_to tapir_settings_url }
+      format.html { redirect_to settings_url }
       format.json { head :no_content }
     end
   end

@@ -5,7 +5,7 @@
   <% @entity.fields.each do |field,value|
       next if field =~ /_id|created_at|updated_at|status/ %>
     <tr>
-      <td><%= value.name %>:</td>
+      <td><%= value.name %>:</td>      
       <td><%= eval("@entity.#{value.name}")%></td>
     </tr>
   <% end %>

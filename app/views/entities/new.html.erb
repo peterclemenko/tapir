@@ -1,8 +1,8 @@
 <h1>New entity</h1>
 
-<%= form_tag "/tapir/entities" do %>
+<%= form_tag "/entities" do %>
   <%= select_tag "type",options_from_collection_for_select(@entity_types, "to_s", "to_s") %>
   <%= submit_tag "Go!" %>
 <% end %>
 
-<%= link_to 'Back', tapir_entities_path %>
+<%= link_to 'Back', entities_path %>

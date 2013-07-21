@@ -1,8 +1,5 @@
-<p>
 <b>Entities:</b>
-  <p>
-    <% @entities.each do |child| %>
-      <%= simple_format render_children(child,"") %>
-    <% end %>
-  </p>
-</p>
+<% @entities.each do |child| %>
+  <ul><li> <%= link_to(child, entity_path(child)) %></li>
+  <%= simple_format render_children(child,"") %></ul>
+<% end %>

@@ -1,4 +1,7 @@
 class EntityMappingsController < ApplicationController
+
+  before_filter :authenticate_user!
+
   # GET /entity_mappings
   # GET /entity_mappings.json
   def index
