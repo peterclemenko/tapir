@@ -54,7 +54,7 @@ module LinkedIn
 #
 class SearchService
 
-  def initialize(api_key, secret_key, access_keys)
+  def initialize()
     
     @client = ::LinkedIn::Client.new(api_key, secret_key)
     #rtoken = @client.request_token.token

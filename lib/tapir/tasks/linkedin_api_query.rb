@@ -29,8 +29,8 @@ end
 def run
   super
 
-  client = Tapir::Client::LinkedIn::SearchService.new
-  details = client.query(@entity.name)
+  linkedin_search = Tapir::Client::LinkedIn::SearchService.new
+  details = linkedin_search.query(@entity.name, :person)
   @task_logger.log "Got result: #{details.inspect.to_s.html_safe}"
 
   #create_entity(Tapir::Entities::Domain, {:name => "#{details['url']}"})
