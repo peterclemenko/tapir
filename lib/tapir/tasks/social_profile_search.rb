@@ -34,7 +34,7 @@ def run
   #
   # Store the account name, depending on the entity we passed in.
   #
-  if @entity.kind_of? Tapir::Entities::User
+  if @entity.kind_of? Tapir::Entities::Person
     account_names = @entity.usernames.all
   else
     account_names = [@entity.name]
