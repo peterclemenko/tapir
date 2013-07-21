@@ -10,10 +10,6 @@ module Tapir
       field :zip, type: String
       field :latitude, type: String
       field :longitude, type: String
-      
-      def to_s
-         super << " #{latitude}/#{longitude}"
-      end
 
     end
   end
