@@ -98,12 +98,13 @@ class EntitiesController < ApplicationController
 
   # Return the valid entity types
   def _get_valid_type_class_names
-    Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+    types = Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+  types.sort_by{ |t| t.downcase }
   end
   
   # Return the valid entity types
   def _get_valid_types
-    Tapir::Entities::Base.descendants
+    types = Tapir::Entities::Base.descendants
   end
 
 end

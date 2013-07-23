@@ -39,7 +39,8 @@ module EntityHelper
   #
   def tasks
     TapirLogger.instance.log "Getting tasks for #{self}"
-    TaskManager.instance.get_tasks_for(self)
+    tasks = TaskManager.instance.get_tasks_for(self)
+  tasks.sort_by{ |t| t.name.downcase }
   end
 
   #
