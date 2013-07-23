@@ -49,7 +49,7 @@ def run
   @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  safe_system("nmap #{to_scan} #{nmap_options} -p 80,443,8080 -oX #{@rand_file_path}")
+  safe_system("nmap -P0 #{to_scan} #{nmap_options} -p 80,443,8080,8081 -oX #{@rand_file_path}")
   
   # Gather the XML and parse
   @task_logger.log "Raw Result:\n #{File.open(@rand_file_path).read}"
