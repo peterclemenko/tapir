@@ -48,6 +48,13 @@ def run
 
   result_list = []
 
+  # Check for wildcard DNS, modify behavior appropriately. (Only create entities
+  # when we know there's a new host associated)
+  if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
+    wildcard_domain = true 
+    @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
+  end
+
   subdomain_list.each do |sub|
     begin
 
@@ -67,13 +74,21 @@ def run
       
       # If we resolved, create the right entitys
       if resolved_address
- 
-        @task_logger.log_good "Creating domain and host entities..."
 
-        # create new host and domain entitys
-        d = create_entity(Tapir::Entities::Domain, {:name => domain })
-        h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+          unless wildcard_domain
+            @task_logger.log_good "Creating domain and host entities..."
+            # create new host and domain entitys
+            d = create_entity(Tapir::Entities::Domain, {:name => domain })
+            h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+          else
+            # Check to make sure we don't already have this host, if we don't 
+            # we probably want to save the domain as a new entity (and the host)
+            if Tapir::Entities::Host.where(:name => resolved_address).count == 0
+              d = create_entity(Tapir::Entities::Domain, {:name => domain })
+              h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+            end
 
+          end
       end
 
       #@task_run.save_raw_result  "#{domain}: #{resolved_address}"
