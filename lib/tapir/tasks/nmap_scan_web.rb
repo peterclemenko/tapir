@@ -49,7 +49,7 @@ def run
   @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  safe_system("nmap -P0 #{to_scan} #{nmap_options} -p 80,443,8080,8081 -oX #{@rand_file_path}")
+  safe_system("nmap #{to_scan} #{nmap_options} -P0 -p 80,443,8080,8081 -oX #{@rand_file_path}")
   
   # Gather the XML and parse
   @task_logger.log "Raw Result:\n #{File.open(@rand_file_path).read}"
@@ -63,9 +63,11 @@ def run
     @task_logger.log "Handling nmap data for #{host.addr}"
 
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
-    master_entity = @entity
     if @entity.kind_of? Tapir::Entities::NetBlock or @entity.kind_of? Tapir::Entities::Domain
-      @entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
+      @host_entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
+      @host_entity.domains << @entity
+    else
+      @host_entity = @entity # We already have a host
     end
 
     [:tcp, :udp].each do |proto_type|
@@ -73,13 +75,12 @@ def run
       @task_logger.log "Creating Service: #{port}"
       create_entity(Tapir::Entities::NetSvc, {
         :name => "#{@entity.name}:#{port.num}/#{port.proto}",
-        :host_id => @entity.id,
+        :host_id => @host_entity.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
       end
-      # reset this back to the main task entity & loop
-      @entity = master_entity
+
     end
   
   end

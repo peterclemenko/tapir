@@ -63,9 +63,11 @@ def run
     @task_logger.log "Handling nmap data for #{host.addr}"
 
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
-    master_entity = @entity
     if @entity.kind_of? Tapir::Entities::NetBlock or @entity.kind_of? Tapir::Entities::Domain
-      @entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
+      @host_entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
+      @host_entity.domains << @entity
+    else
+      @host_entity = @entity # We already have a host
     end
 
     [:tcp, :udp].each do |proto_type|
@@ -73,13 +75,12 @@ def run
       @task_logger.log "Creating Service: #{port}"
       create_entity(Tapir::Entities::NetSvc, {
         :name => "#{@entity.name}:#{port.num}/#{port.proto}",
-        :host_id => @entity.id,
+        :host_id => @host_entity.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
       end
-      # reset this back to the main task entity & loop
-      @entity = master_entity
+
     end
   
   end
