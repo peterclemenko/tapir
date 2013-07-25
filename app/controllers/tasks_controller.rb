@@ -74,13 +74,13 @@ class TasksController < ApplicationController
 
   # DELETE /Tasks/1
   # DELETE /Tasks/1.json
-  def destroy
-    @task = Tapir::Task.find(params[:id])
-    @task.destroy
-
-    respond_to do |format|
-      format.html { redirect_to Tasks_url }
-      format.json { head :ok }
-    end
-  end
+  #def destroy
+  #  @task = Tapir::Task.find(params[:id])
+  #  @task.destroy
+  #
+  #  respond_to do |format|
+  #    format.html { redirect_to Tasks_url }
+  #    format.json { head :ok }
+  #  end
+  #end
 end

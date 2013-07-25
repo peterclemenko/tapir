@@ -7,6 +7,7 @@ class Project
   include TenantScoped
 
   field :name, type: String
+  field :description, type: String
   validates_uniqueness_of :name, :scope => :tenant_id
 
 

@@ -8,7 +8,7 @@ module SettingsHelper
     "/settings"
   end
 
-  def tapir_setting_path(setting=nil, temp=nil)
+  def tapir_setting_path(setting=nil, whatever=nil)
     "/settings/#{setting._id}"
   end
 
