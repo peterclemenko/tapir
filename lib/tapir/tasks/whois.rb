@@ -141,21 +141,73 @@ def run
       #
       # Parse out the netrange - WARNING SUPERGHETTONESS ABOUND
       #
+
+=begin
+      <?xml version='1.0'?>
+      <?xml-stylesheet type='text/xsl' href='http://whois.arin.net/xsl/website.xsl' ?>
+      <net xmlns="http://www.arin.net/whoisrws/core/v1" xmlns:ns2="http://www.arin.net/whoisrws/rdns/v1" xmlns:ns3="http://www.arin.net/whoisrws/netref/v2" termsOfUse="https://www.arin.net/whois_tou.html">
+        <registrationDate>2009-09-21T17:15:11-04:00</registrationDate>
+        <ref>http://whois.arin.net/rest/net/NET-8-8-8-0-1</ref>
+        <endAddress>8.8.8.255</endAddress>
+        <handle>NET-8-8-8-0-1</handle>
+        <name>LVLT-GOOGL-1-8-8-8</name>
+        <netBlocks><netBlock>
+        <cidrLength>24</cidrLength>
+        <endAddress>8.8.8.255</endAddress>
+        <description>Reassigned</description>
+        <type>S</type>
+        <startAddress>8.8.8.0</startAddress>
+        </netBlock></netBlocks>
+        <orgRef name="Google Incorporated" handle="GOOGL-1">http://whois.arin.net/rest/org/GOOGL-1</orgRef>
+        <parentNetRef name="LVLT-ORG-8-8" handle="NET-8-0-0-0-1">http://whois.arin.net/rest/net/NET-8-0-0-0-1</parentNetRef>
+        <startAddress>8.8.8.0</startAddress>
+        <updateDate>2009-09-21T17:15:11-04:00</updateDate>
+        <version>4</version>
+      </net>  
+=end
       doc = Nokogiri::XML(open ("http://whois.arin.net/rest/ip/#{@entity.name}"))
-      start_address = doc.xpath("//xmlns:net/xmlns:startAddress").text
-      end_address = doc.xpath("//xmlns:net/xmlns:endAddress").text
-      handle = doc.xpath("//xmlns:net/xmlns:handle").text
-      org_ref = doc.xpath("//xmlns:net/xmlns:orgRef").text
-      #
-      #
-      #
-      create_entity Tapir::Entities::NetBlock, {
-        :name => "#{start_address}-#{end_address}",
-        :range => "#{start_address}-#{end_address}",
-        :handle => handle, 
-        :description => org_ref
+      org_ref = doc.xpath("//xmlns:orgRef").text
+      parent_ref = doc.xpath("//xmlns:parentNetRef").text
+      handle = doc.xpath("//xmlns:handle").text
+
+      # For each netblock, create an entity
+      doc.xpath("//xmlns:net/xmlns:netBlocks").children.each do |netblock|
+        # Grab the relevant info
+        
+        cidr_length = ""
+        start_address = ""
+        end_address = ""
+        block_type = ""
+        description = ""
+
+        netblock.children.each do |child|
+
+          cidr_length = child.text if child.name == "cidrLength"
+          start_address = child.text if child.name == "startAddress"
+          end_address = child.text if child.name == "endAddress"
+          block_type = child.text if child.name == "type"
+          description = child.text if child.name == "description"
+
+        end # End netblock children
+          
+        #
+        # Create the netblock entity
+        #
+        entity = create_entity Tapir::Entities::NetBlock, {
+          :name => "#{start_address}/#{cidr_length}",
+          :start_address => "#{start_address}",
+          :end_address => "#{end_address}",
+          :cidr => "#{cidr_length}",
+          :description => "#{description}",
+          :block_type => "#{block_type}",
+          :handle => handle,
+          :organization_reference => org_ref,
+          :parent_reference => parent_ref
         }
-    end
+
+      end # End Netblocks
+
+    end # end Host Type
 
   else
     @task_logger.log "Domain WHOIS failed, we don't know what nameserver to query."

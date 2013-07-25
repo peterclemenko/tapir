@@ -43,13 +43,15 @@ def run
     raise ArgumentError, "Unknown entity type"
   end
   
-  @rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{to_scan}_#{rand(100000000)}.xml"
+  @rand_file_path = "#{Dir::tmpdir}/nmap_scan_#{rand(100000000)}.xml"
   
   # shell out to nmap and run the scan
   @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  safe_system("nmap #{to_scan} #{nmap_options} -P0 -p 80,443,8080,8081 -oX #{@rand_file_path}")
+  nmap_string = "nmap #{to_scan} #{nmap_options} -P0 -p 80,443,8080,8081 -oX #{@rand_file_path}"
+  @task_logger.log "calling nmap: #{nmap_string}"
+  safe_system(nmap_string)
   
   # Gather the XML and parse
   @task_logger.log "Raw Result:\n #{File.open(@rand_file_path).read}"
