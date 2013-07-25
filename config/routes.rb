@@ -6,7 +6,7 @@ Tapir::Application.routes.draw do
   resources :entity_mappings
   resources :entities
   resources :settings
-  #resources :users  
+  resources :projects  
   resources :report_templates
     
   ###
@@ -19,7 +19,7 @@ Tapir::Application.routes.draw do
   ### Task Runner
   ###
   match "/run_task" => "task_run_sets#run", :via => [:post, :get]
-  
+
   # Configure Devise
   devise_for :users, :class_name => "Tapir::User"
 
