@@ -30,3 +30,4 @@ public/images/*
 
 # Ignore secret token
 .secret
+doc
