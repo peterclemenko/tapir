@@ -48,17 +48,16 @@ def run
   @task_logger.log_good "Using subdomain list: #{subdomain_list}"
 
   result_list = []
+  begin
+    # Check for wildcard DNS, modify behavior appropriately. (Only create entities
+    # when we know there's a new host associated)
+    if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
+      wildcard_domain = true 
+      @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
+    end
 
-  # Check for wildcard DNS, modify behavior appropriately. (Only create entities
-  # when we know there's a new host associated)
-  if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
-    wildcard_domain = true 
-    @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
-  end
-
-  subdomain_list.each do |sub|
-    begin
-
+    subdomain_list.each do |sub|
+    
       # Calculate the domain name
       if @options[:mashed_domains]
       
@@ -91,14 +90,12 @@ def run
 
           end
       end
-
-      #@task_run.save_raw_result  "#{domain}: #{resolved_address}"
-
-    rescue Exception => e
-      @task_logger.log_error "Hit exception: #{e}"
-    end
   end
-  
+
+  rescue Exception => e
+    @task_logger.log_error "Hit exception: #{e}"
+  end
+
   # Keep track of our raw data
 
   
