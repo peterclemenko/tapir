@@ -76,7 +76,7 @@ def run
       host.getports(proto_type, "open") do |port|
       @task_logger.log "Creating Service: #{port}"
       create_entity(Entities::NetSvc, {
-        :name => "#{host}:#{port.num}/#{port.proto}",
+        :name => "#{host.addr}:#{port.num}/#{port.proto}",
         :host_id => @host_entity.id,
         :port_num => port.num,
         :proto => port.proto,
