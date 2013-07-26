@@ -6,6 +6,7 @@ class TasksController < ApplicationController
   # GET /Tasks.json
   def index
     @tasks = Task.all
+    @tasks.sort_by{ |t| t.downcase }
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,21 +3,6 @@ module EntitiesHelper
   ### TODO - There's probably a better way to do this
   ### even if it means using method_missing
 
-  #def entities_path
-  #  "/entities"
-  #end
-
-  # We currently handle invalid entities via this helper. If an entity has 
-  # been deleted, simply return a blank string. It's not ideal, but should 
-  # do the trick for now.
-  #def entity_path(entity=nil,whatever=nil)
-  #  if entity
-  #    url_for entity #, entity.id #/entities/#{entity._id}"
-  #  else
-  #    "{deleted}"
-  #  end
-  #end
-
   def entities_account_path(id=nil)
     "/entities/#{id}"  
   end
