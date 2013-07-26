@@ -19,7 +19,7 @@ def description
 end
 
 def allowed_types
-  [Tapir::Entities::Host]
+  [Entities::Host]
 end
 
 def setup(entity, options={})
