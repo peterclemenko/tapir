@@ -1,6 +1,7 @@
-<table>
+<table border=1>
   <tr>
     <th>Name</th>
+    <th>Description</th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -10,6 +11,7 @@
     <% else %>
       <td><%= link_to project.name, project_path(project) %></td>
     <% end %>
+    <td><%= project.description %></td>
   </tr>
 <% end %>
 </table>

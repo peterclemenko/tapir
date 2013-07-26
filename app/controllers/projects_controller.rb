@@ -45,7 +45,7 @@ class ProjectsController < ApplicationController
   def create
 
     @project = Project.new({
-        :tenant => Tenant.current}.merge(params[:tapir_project]))
+        :tenant => Tenant.current}.merge(params[:project]))
 
     respond_to do |format|
       if @project.save
@@ -73,6 +73,17 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def activate
+    @project = Project.find(params[:id])
+    
+    # Destroy all associated entites
+    cookies[:project] = @project.name
+
+    respond_to do |format|
+      format.html { redirect_to projects_url }
+      format.json { head :ok }
+    end
+  end
 
   # DELETE /projects/1
   # DELETE /projects/1.json
@@ -90,6 +101,7 @@ class ProjectsController < ApplicationController
       format.json { head :ok }
     end
   end
+
 
 
 end
