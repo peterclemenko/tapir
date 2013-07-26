@@ -6,7 +6,9 @@ module ApplicationHelper
     result << "<ul>"  
     entity.children.each do |x|
       result << print_result(x)
-      render_children(x, result)
+      next if x.children.include? entity
+
+      render_children(x, result) 
     end
     result << "</ul>"
 
@@ -18,7 +20,11 @@ module ApplicationHelper
     
     result << "<ul>"
     entity.parents.each do |x|
+
       result << print_result(x)
+
+      next if x.parents.include? entity
+
       render_parents(x, result)
     end
     result << "</ul>"
