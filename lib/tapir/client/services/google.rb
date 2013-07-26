@@ -47,6 +47,7 @@ module Google
         Capybara.run_server = false
         Capybara.default_selector = :xpath
         Capybara.current_driver = :webkit
+        Capybara.default_wait_time = 20
 
         # Uncomment to capybara-webkit scraping
         # Capybara.current_driver = :selenium -> 
