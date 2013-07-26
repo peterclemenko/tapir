@@ -45,8 +45,7 @@ module Google
       def initialize
         Capybara.run_server = false
         Capybara.default_selector = :xpath
-        Capybara.current_driver = :selenium
-
+        Capybara.current_driver = :webkit
 
         # Uncomment to capybara-webkit scraping
         # Capybara.current_driver = :selenium -> 
