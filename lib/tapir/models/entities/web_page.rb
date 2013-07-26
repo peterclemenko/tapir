@@ -6,7 +6,7 @@ module Entities
     field :uri, type: String
     field :content, type: String
 
-    belongs_to :web_application, :class_name => "Tapir::Entities::WebApplication"
+    belongs_to :web_application, :class_name => "Entities::WebApplication"
 
   end
 end
