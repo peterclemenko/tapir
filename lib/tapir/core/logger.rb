@@ -2,7 +2,7 @@ require 'singleton'
 #
 # Simple logger class for the whole application
 #
-module Tapir
+
 class TapirLogger
 
   include Singleton
@@ -35,5 +35,4 @@ private
    @out.flush
   end
 
-end
 end

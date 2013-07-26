@@ -15,7 +15,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::ParsableFile]
+  [Entities::ParsableFile]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -32,7 +32,7 @@ def run
   super
 
   # Create our parser
-  xml = Tapir::Import::ShodanXml.new
+  xml = Import::ShodanXml.new
   parser = Nokogiri::XML::SAX::Parser.new(xml)
   # Send some XML to the parser
   parser.parse(open(@entity.uri).read)
@@ -41,15 +41,15 @@ def run
     #
     # Create the host / loc / domain entity for each host we know about
     #
-    domain = create_entity(Tapir::Entities::Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
-    host = create_entity(Tapir::Entities::Host, {:name => shodan_host.ip_address })
-    loc = create_entity(Tapir::Entities::PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
+    domain = create_entity(Entities::Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
+    host = create_entity(Entities::Host, {:name => shodan_host.ip_address })
+    loc = create_entity(Entities::PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
 
     shodan_host.services.each do |shodan_service|
       #
       # Create the service and associate it with our host above
       #
-      create_entity(Tapir::Entities::NetSvc, {
+      create_entity(Entities::NetSvc, {
         :port_num => shodan_service.port,
         :type => "tcp",
         :fingerprint => shodan_service.data })

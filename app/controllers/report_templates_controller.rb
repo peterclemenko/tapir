@@ -5,7 +5,7 @@ class ReportTemplatesController < ApplicationController
   # GET /report_templates
   # GET /report_templates.json
   def index
-    @report_templates = Tapir::ReportTemplate.all
+    @report_templates = ReportTemplate.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,13 +16,15 @@ class ReportTemplatesController < ApplicationController
   # GET /report_templates/1
   # GET /report_templates/1.json
   def show
-    @report_template = Tapir::ReportTemplate.find(params[:id])
+    @report_template = ReportTemplate.find(params[:id])
     
     eval(@report_template.setup)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @report_template }
+      format.json { render json: @report_template.setup }
+      format.xml { render xml: @report_template.setup }
     end
   end
+
 end

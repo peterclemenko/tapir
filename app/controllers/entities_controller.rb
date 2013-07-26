@@ -17,7 +17,7 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities/1
   # GET /tapir/entities/1.json
   def show
-    @entity = Tapir::Entities::Base.find(params[:id])
+    @entity = Entities::Base.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @entity }
@@ -37,7 +37,7 @@ class EntitiesController < ApplicationController
 
   # GET /tapir/entities/1/edit
   def edit
-    @entity = Tapir::Entities::Base.find(params[:id])
+    @entity = Entities::Base.find(params[:id])
   end
 
   # POST /tapir/tapir/entities
@@ -53,7 +53,7 @@ class EntitiesController < ApplicationController
     # TODO - there has to be a better way to do this
     render action: "new", notice: "invalid entity type." unless @entity_types.include?(type)
 
-    @entity = eval("Tapir::Entities::#{type}").create
+    @entity = eval("Entities::#{type}").create
 
     respond_to do |format|
       if @entity.save(:validate => false)
@@ -69,7 +69,7 @@ class EntitiesController < ApplicationController
   # PUT /tapir/entities/1
   # PUT /tapir/entities/1.json
   def update
-    @entity = Tapir::Entities::Base.find(params[:oid])
+    @entity = Entities::Base.find(params[:oid])
 
     respond_to do |format|
       if @entity.update_attributes(params)
@@ -85,7 +85,7 @@ class EntitiesController < ApplicationController
   # DELETE /tapir/entities/1
   # DELETE /tapir/entities/1.json
   def destroy
-    @entity = Tapir::Entities::Base.find(params[:id])
+    @entity = Entities::Base.find(params[:id])
     @entity.destroy
 
     respond_to do |format|
@@ -98,13 +98,13 @@ class EntitiesController < ApplicationController
 
   # Return the valid entity types
   def _get_valid_type_class_names
-    types = Tapir::Entities::Base.descendants.map{|x| x.name.split("::").last}
+    types = Entities::Base.descendants.map{|x| x.name.split("::").last}
   types.sort_by{ |t| t.downcase }
   end
   
   # Return the valid entity types
   def _get_valid_types
-    types = Tapir::Entities::Base.descendants
+    types = Entities::Base.descendants
   end
 
 end

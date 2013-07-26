@@ -1,10 +1,9 @@
-module Tapir
-  module Entities
-    class Username < Base
-      include TenantAndProjectScoped
 
-      belongs_to :person
+module Entities
+  class Username < Base
+    include TenantAndProjectScoped
 
-    end
+    belongs_to :person, :class_name => "Entities::Person"
+
   end
 end

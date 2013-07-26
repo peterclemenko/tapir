@@ -1,4 +1,3 @@
-module Tapir
 module Client
 module Bing
   
@@ -19,7 +18,7 @@ module Bing
       results = []
 
       api_path = "http://api.bing.net/xml.aspx"
-      search_data = #"?AppId=#{Tapir::ApiKeys.instance.keys['bing_api_key']}" +
+      search_data = #"?AppId=#{ApiKeys.instance.keys['bing_api_key']}" +
         "?Query=#{search_string}&Sources=Web&Version=2.0&Market=en-us&" +
         "Adult=Moderate&Options=EnableHighlighting&Web.Count=50&Web.Offset=0" + 
         "&Web.Options=DisableQueryAlterations"
@@ -81,6 +80,5 @@ module Bing
 
   end
 
-end
 end
 end

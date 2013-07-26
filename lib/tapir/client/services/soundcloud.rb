@@ -1,9 +1,8 @@
-module Tapir
 module Client
 module SoundCloud
  class WebClient
 
-    include Tapir::Client::Social
+    include Client::Social
 
     attr_accessor :service_name
     
@@ -21,6 +20,5 @@ module SoundCloud
     end
     
   end
-end
 end
 end

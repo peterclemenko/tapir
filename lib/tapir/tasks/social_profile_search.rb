@@ -13,8 +13,8 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::Person,
-    Tapir::Entities::Username]
+  [ Entities::Person,
+    Entities::Username]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,7 +33,7 @@ def run
   #
   # Store the account name, depending on the entity we passed in.
   #
-  if @entity.kind_of? Tapir::Entities::Person
+  if @entity.kind_of? Entities::Person
     usernames = @entity.usernames.all
   else
     usernames = [@entity.name]
@@ -55,14 +55,14 @@ def run
       #
       # Create a client of the current type
       # 
-      client = eval("Tapir::Client::#{client_name}::WebClient.new")
+      client = eval("Client::#{client_name}::WebClient.new")
       if client.check_account_exists(username.name)
         @task_logger.log "Found an account at: #{client.check_account_uri_for(username.name)}"
         
         #
         # Create an account w/ the correct parameters
         #
-        obj = create_entity Tapir::Entities::Account, 
+        obj = create_entity Entities::Account, 
         :account_name => username.name, 
         :service_name => client.service_name, 
         :check_uri => client.check_account_uri_for(username.name),

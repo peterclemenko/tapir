@@ -15,7 +15,7 @@ end
 # Returns an array of valid types for this task
 def allowed_types
   [ 
-    Tapir::Entities::Domain
+    Entities::Domain
   ]
 end
 
@@ -29,10 +29,10 @@ def run
   super
 
   # Attach to the google service & search
-  results = Tapir::Client::Google::SearchScraper.new.search("filetype:doc site:#{@entity.name}")
+  results = Client::Google::SearchScraper.new.search("filetype:doc site:#{@entity.name}")
 
   results.each do |result|
-    create_entity Tapir::Entities::DocFile, :name => result
+    create_entity Entities::DocFile, :name => result
   end
 
 end

@@ -14,7 +14,6 @@
 # http://stackoverflow.com/questions/9984621/sax-parsing-strange-element-with-nokogiri
 #
 
-module Tapir
 module Import
 
 class ShodanXml < Nokogiri::XML::SAX::Document
@@ -89,5 +88,3 @@ class ShodanService
 end
 
 end
-end
-

@@ -12,7 +12,7 @@
 
 <p>
   <b>Task run:</b>
-  <%= link_to Tapir::TaskRun.where(:id => @entity_mapping.task_run_id).first %>
+  <%= link_to TaskRun.where(:id => @entity_mapping.task_run_id).first %>
 </p>
 
 

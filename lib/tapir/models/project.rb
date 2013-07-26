@@ -1,4 +1,4 @@
-module Tapir
+
 class Project
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -21,5 +21,4 @@ class Project
     end
   end
 
-end
 end

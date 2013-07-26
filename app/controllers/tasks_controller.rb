@@ -5,7 +5,7 @@ class TasksController < ApplicationController
   # GET /Tasks
   # GET /Tasks.json
   def index
-    @tasks = Tapir::Task.all
+    @tasks = Task.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class TasksController < ApplicationController
   # GET /Tasks/1
   # GET /Tasks/1.json
   def show
-    @task = Tapir::Task.find(params[:id])
+    @task = Task.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +27,7 @@ class TasksController < ApplicationController
   # GET /Tasks/new
   # GET /Tasks/new.json
   def new
-    @task = Tapir::Task.new
+    @task = Task.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,13 +37,13 @@ class TasksController < ApplicationController
 
   # GET /Tasks/1/edit
   def edit
-    @task = Tapir::Task.find(params[:id])
+    @task = Task.find(params[:id])
   end
 
   # POST /Tasks
   # POST /Tasks.json
   def create
-    @task = Tapir::Task.new(params[:tapir_task])
+    @task = Task.new(params[:tapir_task])
 
     respond_to do |format|
       if @task.save
@@ -59,7 +59,7 @@ class TasksController < ApplicationController
   # PUT /Tasks/1
   # PUT /Tasks/1.json
   def update
-    @task = Tapir::Task.find(params[:id])
+    @task = Task.find(params[:id])
 
     respond_to do |format|
       if @task.update_attributes(params[:tapir_task])
@@ -75,7 +75,7 @@ class TasksController < ApplicationController
   # DELETE /Tasks/1
   # DELETE /Tasks/1.json
   #def destroy
-  #  @task = Tapir::Task.find(params[:id])
+  #  @task = Task.find(params[:id])
   #  @task.destroy
   #
   #  respond_to do |format|

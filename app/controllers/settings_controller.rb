@@ -5,7 +5,11 @@ class SettingsController < ApplicationController
   # GET /settings
   # GET /settings.json
   def index
-    @settings = Tapir::Setting.all
+    
+    # HACKY!!!
+    current_user.create_settings
+
+    @settings = Setting.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +20,7 @@ class SettingsController < ApplicationController
   # GET /settings/1
   # GET /settings/1.json
   def show
-    @setting = Tapir::Setting.find(params[:id])
+    @setting = Setting.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +31,7 @@ class SettingsController < ApplicationController
   # GET /settings/new
   # GET /settings/new.json
   def new
-    @setting = Tapir::Setting.new
+    @setting = Setting.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,15 +41,15 @@ class SettingsController < ApplicationController
 
   # GET /settings/1/edit
   def edit
-    @setting = Tapir::Setting.find(params[:id])
+    @setting = Setting.find(params[:id])
   end
 
   # POST /settings
   # POST /settings.json
   def create
 
-    @setting = Tapir::Setting.new(
-      :tenant => Tapir::Tenant.current,
+    @setting = Setting.new(
+      :tenant => Tenant.current,
       :user => current_user,
       :name => params[:name],
       :value => params[:value])
@@ -64,7 +68,7 @@ class SettingsController < ApplicationController
   # PUT /settings/1
   # PUT /settings/1.json
   def update
-    @setting = Tapir::Setting.find(params[:oid])
+    @setting = Setting.find(params[:oid])
 
     #binding.pry
 
@@ -82,7 +86,7 @@ class SettingsController < ApplicationController
   # DELETE /settings/1
   # DELETE /settings/1.json
   def destroy
-    @setting = Tapir::Setting.find(params[:id])
+    @setting = Setting.find(params[:id])
     @setting.destroy
 
     respond_to do |format|

@@ -5,7 +5,7 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <% if project == Tapir::Project.current %>
+    <% if project == Project.current %>
       <td><b><%= link_to project.name, project_path(project) %></b></td>
     <% else %>
       <td><%= link_to project.name, project_path(project) %></td>

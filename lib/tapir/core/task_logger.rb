@@ -1,5 +1,4 @@
 # Simple logger class
-module Tapir
 class TaskLogger
 
   attr_accessor :name
@@ -49,5 +48,4 @@ private
     end 
   end
 
-end
 end

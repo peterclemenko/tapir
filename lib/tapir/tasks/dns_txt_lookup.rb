@@ -15,7 +15,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Domain]
+  [Entities::Domain]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -53,7 +53,7 @@ def run
       # Create a finding for each 
       unless res_answer.answer.count == 0
         res_answer.answer.each do |answer|
-          create_entity Tapir::Entities::Finding, { :name => "TXT Record", :content => answer , :details => res_answer }
+          create_entity Entities::Finding, { :name => "TXT Record", :content => answer , :details => res_answer }
         end
       end
       

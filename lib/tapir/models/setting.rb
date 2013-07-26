@@ -1,4 +1,3 @@
-module Tapir
 class Setting
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -12,6 +11,4 @@ class Setting
   field :visibility, type: String
 
   validates_uniqueness_of :name, :scope => :tenant_id
-
-end
 end

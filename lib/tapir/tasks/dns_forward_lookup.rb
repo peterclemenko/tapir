@@ -13,7 +13,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Domain]
+  [Entities::Domain]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,7 +33,7 @@ def run
       
       if resolved_address
         @task_logger.log_good "Creating host entity for #{resolved_address}"
-        h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+        h = create_entity(Entities::Host, {:name => resolved_address})
         # Set the host for this domain
         @entity.host = h
       else

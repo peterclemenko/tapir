@@ -1,4 +1,3 @@
-module Tapir
 class Importer
 
   #
@@ -7,7 +6,7 @@ class Importer
   def import_users(file)
     import_file = file
     FasterCSV.parse(import_file.read).each do |row|
-      temp_user = Tapir::Entities::User.new(:email => row[0], :first_name => row[1], :last_name => row[2])
+      temp_user = Entities::User.new(:email => row[0], :first_name => row[1], :last_name => row[2])
       temp_user.save!  
     end
   end
@@ -16,7 +15,7 @@ class Importer
   #  Export users to a file
   #
   def export_users(file)
-    users = Tapir::Entities::User.all
+    users = Entities::User.all
 
     csv_string = FasterCSV.generate do |csv|
       users.each do |user|
@@ -46,16 +45,16 @@ class Importer
           case import_items[0]
             when "organization"
               TapirLogger.instance.log "Creating an organization!"
-              Tapir::Entities::Organization.create(:name => import_items[1].strip)
+              Entities::Organization.create(:name => import_items[1].strip)
             when "domain"
               TapirLogger.instance.log "Creating a domain!"
-              Tapir::Entities::Domain.create(:name => import_items[1].strip)
+              Entities::Domain.create(:name => import_items[1].strip)
             when "host"
               TapirLogger.instance.log "Creating a host!"
-              Tapir::Entities::Host.create(:name => import_items[1].strip)
+              Entities::Host.create(:name => import_items[1].strip)
             when "user"
               TapirLogger.instance.log "Creating a person!"
-              Tapir::Entities::Person.create(:name => import_items[1].strip )
+              Entities::Person.create(:name => import_items[1].strip )
           end  
         end
       rescue Exception => e
@@ -63,5 +62,4 @@ class Importer
       end
     end
   end
-end
 end

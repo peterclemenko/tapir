@@ -1,4 +1,3 @@
-module Tapir
 class Task
 
   # Rails model compatibility #
@@ -28,7 +27,7 @@ class Task
 
   def candidates
     candidate_list = []
-    Tapir::Entities::Base.all.each do |entity| 
+    Entities::Base.all.each do |entity| 
       candidate_list << entity if self.allowed_types.include? entity.class
     end
   candidate_list
@@ -180,16 +179,16 @@ class Task
   #
   def find_entity(type, params)
 
-    if type == Tapir::Entities::NetBlock
-      return Tapir::Entities::NetBlock.where({
+    if type == Entities::NetBlock
+      return Entities::NetBlock.where({
         :range => params[:range]}).first
 
-    elsif type == Tapir::Entities::ParsableFile
-      return Tapir::Entities::ParsableFile.where({
+    elsif type == Entities::ParsableFile
+      return Entities::ParsableFile.where({
         :path => params[:path]}).first
 
-    elsif type == Tapir::Entities::PhysicalLocation
-      return Tapir::Entities::PhysicalLocation.where({
+    elsif type == Entities::PhysicalLocation
+      return Entities::PhysicalLocation.where({
         :latitude => params[:latitude], 
         :longitude => params[:longitude]}).first
     else
@@ -235,5 +234,4 @@ class Task
     @task_run.save
   end
   
-end
 end

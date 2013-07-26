@@ -15,7 +15,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Domain]
+  [Entities::Domain]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -79,14 +79,14 @@ def run
           unless wildcard_domain
             @task_logger.log_good "Creating domain and host entities..."
             # create new host and domain entitys
-            d = create_entity(Tapir::Entities::Domain, {:name => domain })
-            h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+            d = create_entity(Entities::Domain, {:name => domain })
+            h = create_entity(Entities::Host, {:name => resolved_address})
           else
             # Check to make sure we don't already have this host, if we don't 
             # we probably want to save the domain as a new entity (and the host)
-            if Tapir::Entities::Host.where(:name => resolved_address).count == 0
-              d = create_entity(Tapir::Entities::Domain, {:name => domain })
-              h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+            if Entities::Host.where(:name => resolved_address).count == 0
+              d = create_entity(Entities::Domain, {:name => domain })
+              h = create_entity(Entities::Host, {:name => resolved_address})
             end
 
           end

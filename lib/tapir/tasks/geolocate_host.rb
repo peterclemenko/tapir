@@ -14,7 +14,7 @@ def description
 end
 
 def allowed_types
-  [Tapir::Entities::Host]
+  [Entities::Host]
 end
 
 def setup(entity, options={})
@@ -36,7 +36,7 @@ def run
     
     if loc
       @task_logger.log "adding location for #{@entity.name}"
-      create_entity(Tapir::Entities::PhysicalLocation, {
+      create_entity(Entities::PhysicalLocation, {
         :name => "#{loc.latitude} #{loc.longitude}",
         :zip => loc.postal_code.encode('UTF-8', :invalid => :replace),
         :city => loc.city_name.encode('UTF-8', :invalid => :replace),

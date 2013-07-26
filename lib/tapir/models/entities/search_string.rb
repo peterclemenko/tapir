@@ -1,10 +1,9 @@
-module Tapir
-  module Entities
-    class SearchString < Base
-      include TenantAndProjectScoped
 
-      field :description, type: String
+module Entities
+  class SearchString < Base
+    include TenantAndProjectScoped
 
-    end
+    field :description, type: String
+
   end
 end

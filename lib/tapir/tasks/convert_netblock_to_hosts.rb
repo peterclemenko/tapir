@@ -15,7 +15,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::NetBlock]
+  [Entities::NetBlock]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -32,7 +32,7 @@ def run
   super
   r = Rex::Socket::RangeWalker.new @entity.range
   r.each do|address|
-    create_entity(Tapir::Entities::Host, {:name => address})
+    create_entity(Entities::Host, {:name => address})
   end
 end
 

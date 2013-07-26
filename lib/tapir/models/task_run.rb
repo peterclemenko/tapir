@@ -1,4 +1,3 @@
-module Tapir
 class TaskRun
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,9 +14,11 @@ class TaskRun
   has_many :entity_mappings
 
   def to_s
-
     "#{task_name} #{entity_mappings.first.get_parent if entity_mappings.first} (#{self.entity_mappings.count} children)"
   end
 
-end
+  def entity
+    eval(task_entity_type).find task_entity_id
+  end
+
 end

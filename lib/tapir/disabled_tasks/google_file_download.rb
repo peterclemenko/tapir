@@ -10,8 +10,8 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::SearchString, 
-    Tapir::Entities::Domain]
+  [ Entities::SearchString, 
+    Entities::Domain]
 end
 
 def setup(entity, options={})
@@ -24,7 +24,7 @@ def run
 
   file_type_list = ["pdf", "doc", "xls", "ppt", "txt"] || @options['file_type_list'].split(",")
 
-  x = Tapir::Client::Google::SearchService.new
+  x = Client::Google::SearchService.new
 
   file_type_list.each do |file_type|
     results = x.search("#{@entity.name} filetype:#{file_type}")

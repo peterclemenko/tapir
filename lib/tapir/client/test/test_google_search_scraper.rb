@@ -8,7 +8,7 @@ class TestGoogleSearchScraper < Test::Unit::TestCase
     # TODO - needs work
     #pending
 
-    #  scraper = Tapir::Client::Google::SearchScraper.new  
+    #  scraper = Client::Google::SearchScraper.new  
     #  results = scraper.search("test")
     #  assert results.count == 10,"Wrong count, should be 10, is #{results.count}"
   #end

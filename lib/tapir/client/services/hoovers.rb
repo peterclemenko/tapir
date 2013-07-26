@@ -1,7 +1,6 @@
 require 'open-uri'
 require 'cgi'
 
-module Tapir
 module Client
 module Hoovers
 
@@ -47,6 +46,5 @@ module Hoovers
   
   end
 
-end
 end
 end

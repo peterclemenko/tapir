@@ -5,9 +5,9 @@ module TenantScoped
   included do
 
     belongs_to :tenant
-    before_validation { self.tenant = Tapir::Tenant.current }
+    before_validation { self.tenant = Tenant.current }
 
-    default_scope(lambda { {:where => {:tenant_id => Tapir::Tenant.current}} })
+    default_scope(lambda { {:where => {:tenant_id => Tenant.current}} })
   end
 
 end

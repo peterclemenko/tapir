@@ -18,7 +18,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::SearchString]
+  [Entities::SearchString]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -42,7 +42,7 @@ def run
 
     # Open page & parse
     @task_logger.log "Using Company URI: #{search_uri}"
-    doc = Nokogiri::HTML(open(search_uri, "User-Agent" => Tapir::USER_AGENT_STRING))
+    doc = Nokogiri::HTML(open(search_uri, "User-Agent" => USER_AGENT_STRING))
 
     # Open the returned xhtml doc
     doc.xpath("//*[@class='company_name']").each do |xpath|
@@ -54,7 +54,7 @@ def run
       @task_logger.log "Using Company search URI: #{company_uri}"
 
       # Create a new organization entity
-      o = create_entity(Tapir::Entities::Organization, { :name => company_name })
+      o = create_entity(Entities::Organization, { :name => company_name })
 
       # Queue a detailed search
       # TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})

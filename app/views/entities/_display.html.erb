@@ -10,7 +10,7 @@
     </tr>
   <% end %>
 
-  <% if @entity.kind_of?(Tapir::Entities::Image) %>
+  <% if @entity.kind_of?(Entities::Image) %>
       <tr><td>Image:</td><td><img src="/images/<%=@entity.local_path.split("/").last%>"/></td><tr>
   <% end %>
 

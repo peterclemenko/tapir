@@ -2,13 +2,12 @@ require "capybara"
 require "capybara/dsl"
 require "googleajax"
 
-module Tapir
 module Client
 module Google
   
   class WebClient
   
-    include Tapir::Client::Social
+    include Client::Social
   
     attr_accessor :service_name
   
@@ -84,7 +83,7 @@ module Google
 
     def initialize
       GoogleAjax.referrer = "localhost"
-      #GoogleAjax.api_key = Tapir::ApiKeys.instance.keys['google_ajax_key']
+      #GoogleAjax.api_key = ApiKeys.instance.keys['google_ajax_key']
     end
 
     # 
@@ -134,6 +133,5 @@ module Google
 
   end
 
-end
 end
 end

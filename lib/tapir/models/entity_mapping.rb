@@ -1,4 +1,3 @@
-module Tapir
 class EntityMapping
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -40,5 +39,4 @@ class EntityMapping
     "#{self.class}: #{child_type}:#{child_id} <-> #{parent_type}:#{parent_id} - (task_run: #{task_run.id})"
   end 
 
-end
 end

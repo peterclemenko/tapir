@@ -13,8 +13,8 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::Host, 
-    Tapir::Entities::Domain]
+  [ Entities::Host, 
+    Entities::Domain]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -56,7 +56,7 @@ def run
     #
     # if it was a domain, we've got a whole lot of shit we can scoop
     #
-    if @entity.kind_of? Tapir::Entities::Domain
+    if @entity.kind_of? Entities::Domain
       #
       # We're going to have nameservers either way?
       #
@@ -66,12 +66,12 @@ def run
           # If it's an ip address, let's create a host record
           #
           if nameserver.to_s =~ /\d\.\d\.\d\.\d/
-            new_entity = create_entity Tapir::Entities::Host , :name => nameserver.to_s
+            new_entity = create_entity Entities::Host , :name => nameserver.to_s
           else
             #
             # Otherwise it's another domain, and we can't do much but add it
             #
-            new_entity = create_entity Tapir::Entities::Domain, :name => nameserver.to_s
+            new_entity = create_entity Entities::Domain, :name => nameserver.to_s
           end
         end
       end
@@ -102,7 +102,7 @@ def run
       begin
         if answer.technical_contact
           @task_logger.log "Creating user from technical contact"
-          create_entity(Tapir::Entities::Person, {:name => answer.technical_contact.name})
+          create_entity(Entities::Person, {:name => answer.technical_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab technical contact" 
@@ -114,7 +114,7 @@ def run
       begin
         if answer.admin_contact
           @task_logger.log "Creating user from admin contact"
-          create_entity(Tapir::Entities::Person, {:name => answer.admin_contact.name})
+          create_entity(Entities::Person, {:name => answer.admin_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab admin contact" 
@@ -126,7 +126,7 @@ def run
       begin
         if answer.registrant_contact
           @task_logger.log "Creating user from registrant contact"
-          create_entity(Tapir::Entities::Person, {:name => answer.registrant_contact.name})
+          create_entity(Entities::Person, {:name => answer.registrant_contact.name})
         end
       rescue Exception => e 
         @task_logger.log "Unable to grab registrant contact" 
@@ -193,7 +193,7 @@ def run
         #
         # Create the netblock entity
         #
-        entity = create_entity Tapir::Entities::NetBlock, {
+        entity = create_entity Entities::NetBlock, {
           :name => "#{start_address}/#{cidr_length}",
           :start_address => "#{start_address}",
           :end_address => "#{end_address}",

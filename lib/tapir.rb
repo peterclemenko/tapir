@@ -6,6 +6,9 @@ require 'nokogiri'
 require 'mongoid'
 require 'yaml'
 
+module Tapir
+end
+
 #
 # Configure the path to all tapir backend files
 #

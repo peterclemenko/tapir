@@ -16,8 +16,8 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host ]
+  [ Entities::Domain, 
+    Entities::Host ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -55,7 +55,7 @@ def run
     if @options['save_directory']
       save_location = "#{@options['save_directory']}/#{@entity.name}.png" 
     else
-      save_location = "#{Tapir::PUBLIC_DIRECTORY}/#{@entity.name}.png"
+      save_location = "#{PUBLIC_DIRECTORY}/#{@entity.name}.png"
     end
 
     browse_location = "http://#{@entity.name}"
@@ -69,7 +69,7 @@ def run
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      create_entity Tapir::Entities::Image,
+      create_entity Entities::Image,
         :name => browse_location, 
         :local_path => save_location,
         :remote_path => browse_location        

@@ -13,7 +13,7 @@ end
 
 # Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::TwitterAccount]
+  [Entities::TwitterAccount]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -29,12 +29,12 @@ end
 def run
   super
 
-  client = Tapir::Client::Twitter::ApiClient.new
+  client = Client::Twitter::ApiClient.new
   details = client.query(@entity.name)
 
   @task_logger.log "Got result: #{details.inspect.to_s.html_safe}"
 
-  create_entity(Tapir::Entities::Domain, {:name => "#{details['url']}"})
+  create_entity(Entities::Domain, {:name => "#{details['url']}"})
 end
 
 def cleanup

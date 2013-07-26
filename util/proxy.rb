@@ -11,17 +11,17 @@ require 'webrick/httpproxy'
 
 # Set the current tenant - this is required because
 # all entities must be scoped according to the tenant
-Tapir::Tenant.current = Tapir::Tenant.all.first
-Tapir::Project.current = Tapir::Project.all.first
+Tenant.current = Tenant.all.first
+Project.current = Project.all.first
 
 s = WEBrick::HTTPProxyServer.new(
     :Port => 8080,
     :RequestCallback => Proc.new { |req,res| 
       begin
-        Tapir::Entities::Domain.create(
+        Entities::Domain.create(
           :name => "#{req.host}",
-          :tenant_id => Tapir::Tenant.current.id,
-          :project_id => Tapir::Project.current.id)
+          :tenant_id => Tenant.current.id,
+          :project_id => Project.current.id)
       rescue Exception => e
         puts "Exception #{e}"
       end

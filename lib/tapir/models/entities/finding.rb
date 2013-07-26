@@ -1,12 +1,11 @@
-module Tapir
-  module Entities
-    class Finding < Base
-      include TenantAndProjectScoped
 
-      field :content, type: String
-      field :details, type: String
+module Entities
+  class Finding < Base
+    include TenantAndProjectScoped
 
-      validates_uniqueness_of :content, :scope => [:tenant_id,:project_id]
-    end
+    field :content, type: String
+    field :details, type: String
+
+    validates_uniqueness_of :content, :scope => [:tenant_id,:project_id]
   end
 end

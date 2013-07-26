@@ -1,27 +1,35 @@
-<p id="notice"><%= notice %></p>
-
-<table>
+<% @task_run_set.task_runs.each do |task_run| %>
+<table border="1" width="100%">
   <tr>
-    <th>Task Name:</th>
-    <th>Result:</th>
-    <th>Task Log:</th>
+    <th>Task Name</th>
+    <td>&nbsp;</td>
+    <td><%= link_to task_run.task_name, task_run_path(task_run, :tapir) %></td>
   </tr>
-  <% @task_run_set.task_runs.each do |task_run| %>
   <tr>
-    <td><%= task_run.task_name %></td>
+    <th>Task Entity</th>
+    <td>&nbsp;</td>
+    <td><%= link_to task_run.entity, entity_path(task_run.entity) %></td>
+  </tr>
+  <tr>
+    <th>Result:</th>
+    <td>&nbsp;</td>
     <td>
       <ul>
       <% task_run.entity_mappings.each do |x| %>
         <% child = x.get_child 
           if child %>
-        <li><%= link_to(child,entity_path(child)) %></li>
+        <li><%= link_to(child,entity_path(child)) %> <%= link_to "[X]", entity_path(child), :confirm => 'Are you sure?', :method => :delete %></li>
       <%  end 
         end %>
       </ul>
     </td>
+  </tr>
+  <tr>
+    <th>Task Log:</th>
+    <td>&nbsp;</td>
     <td><%= simple_format task_run.task_log %></td>
   </tr>
+</table><br/>
   <% end %>
-</table>
 
 <%= link_to 'Back', entities_path %>
