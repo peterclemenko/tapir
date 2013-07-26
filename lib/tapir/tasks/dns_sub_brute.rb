@@ -49,11 +49,16 @@ def run
 
   result_list = []
   begin
-    # Check for wildcard DNS, modify behavior appropriately. (Only create entities
-    # when we know there's a new host associated)
-    if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
-      wildcard_domain = true 
-      @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
+
+    begin
+      # Check for wildcard DNS, modify behavior appropriately. (Only create entities
+      # when we know there's a new host associated)
+      if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
+        wildcard_domain = true 
+        @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
+      end
+    rescue Resolv::ResolvError
+      @task_logger.log_good "Looks like no wildcard dns. Moving on."
     end
 
     subdomain_list.each do |sub|
