@@ -54,6 +54,12 @@ ReportTemplate.create(
   :setup => "@entities = Entities::Host.all")
 
 ReportTemplate.create( 
+  :name => "children_by_host",
+  :pretty_name => "Children by Domain", 
+  :template => "show_children",
+  :setup => "@entities = Entities::Domain.all")
+
+ReportTemplate.create( 
   :name => "children_by_findings", 
   :pretty_name => "Children by Finding", 
   :template => "show_children",
