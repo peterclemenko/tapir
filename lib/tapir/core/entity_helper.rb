@@ -1,4 +1,3 @@
-module Tapir
 module Entities
 module EntityHelper
 
@@ -7,32 +6,33 @@ module EntityHelper
   end
 
   # Class method to convert to a path
-  def self.path
-    self.class.to_s.downcase.gsub("::","/")
-  end
+  #def self.path
+  #  self.class.to_s.downcase.gsub("::","/")
+  #end
 
   # Class method to convert to a path
-  def self.underscore
-    self.class.to_s.downcase.gsub("::","_")
-  end
+  #def self.underscore
+  #  self.class.to_s.downcase.gsub("::","_")
+  #end
 
   # Instance method to convert to a path
-  def path
-    self.class.to_s.downcase.gsub("::","/")
-  end
+  #def path
+  #  self.class.to_s.downcase.gsub("::","/")
+  #end
 
   # Instance method to convert to a path
-  def underscore
-    self.class.to_s.downcase.gsub("::","_")
-  end
+  #def underscore
+  #  self.class.to_s.downcase.gsub("::","_")
+  #end
 
   def entity_type
     self.class.to_s.downcase.split("::").last
   end
 
-  def underscore
-    ActiveSupport::Inflector.underscore self.class
-  end
+  #def underscore
+  #  ActiveSupport::Inflector.underscore self.class
+  #end
+
 
   #
   # This method lets you query the available tasks for this entity type
@@ -108,6 +108,5 @@ module EntityHelper
       :task_run_id => params[:task_run].id || nil) unless self.id == params[:child].id
   end
 
-end
 end
 end

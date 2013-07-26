@@ -13,7 +13,7 @@ end
 
 # Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::LinkedinAccount]
+  [Entities::LinkedinAccount]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -29,11 +29,11 @@ end
 def run
   super
 
-  linkedin_search = Tapir::Client::LinkedIn::SearchService.new
+  linkedin_search = Client::LinkedIn::SearchService.new
   details = linkedin_search.query(@entity.name, :person)
   @task_logger.log "Got result: #{details.inspect.to_s.html_safe}"
 
-  #create_entity(Tapir::Entities::Domain, {:name => "#{details['url']}"})
+  #create_entity(Entities::Domain, {:name => "#{details['url']}"})
 end
 
 def cleanup

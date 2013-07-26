@@ -18,7 +18,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Organization]
+  [Entities::Organization]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -72,7 +72,7 @@ def run
         @task_logger.log_good "Got City & State: #{city_state}"
 
         # Set the City and State
-        create_entity(Tapir::Entities::PhysicalLocation, {
+        create_entity(Entities::PhysicalLocation, {
           :address => street_address,
           :city => city_state.split(' ').first, 
           :state => city_state.split(' ').last })
@@ -86,7 +86,7 @@ def run
 
           # Create the user entitys
           @task_logger.log_good "Adding user entity for: #{full_name}"
-          create_entity(Tapir::Entities::Person, { :name => full_name })
+          create_entity(Entities::Person, { :name => full_name })
         end
 
         # Get Company Profile set this

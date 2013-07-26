@@ -1,8 +1,7 @@
-module Tapir
 module Client
 module Facebook
   class WebClient
-    include Tapir::Client::Social
+    include Client::Social
     
     attr_accessor :service_name
 
@@ -26,6 +25,5 @@ module Facebook
   ## Search Service
   # http://www.facebook.com/search.php?q=User+Name
   
-end
 end
 end

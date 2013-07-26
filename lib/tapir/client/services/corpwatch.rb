@@ -1,4 +1,3 @@
-module Tapir
 module Client
 module Corpwatch
 
@@ -23,7 +22,7 @@ module Corpwatch
         search_uri = get_service_endpoint(search_string)
 
         # Open page & parse
-        doc = Nokogiri::XML(open(search_uri, {"User-Agent" => Tapir::USER_AGENT_STRING})) do |config|
+        doc = Nokogiri::XML(open(search_uri, {"User-Agent" => USER_AGENT_STRING})) do |config|
           config.noblanks
         end
         
@@ -48,7 +47,7 @@ module Corpwatch
     end
 
     def get_service_endpoint(company_name)
-      return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}" #"&key=#{Tapir::ApiKeys.instance.keys['corpwatch_api_key']}"
+      return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}" #"&key=#{ApiKeys.instance.keys['corpwatch_api_key']}"
     end
   end
 
@@ -107,6 +106,5 @@ module Corpwatch
     end
 
   end
-end
 end
 end

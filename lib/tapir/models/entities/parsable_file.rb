@@ -1,11 +1,10 @@
-module Tapir
-  module Entities
-    class ParsableFile < Base
-      
-      include TenantAndProjectScoped
 
-      field :uri, type: String
+module Entities
+  class ParsableFile < Base
+    
+    include TenantAndProjectScoped
 
-    end
+    field :uri, type: String
+
   end
 end

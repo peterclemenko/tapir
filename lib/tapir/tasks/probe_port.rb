@@ -15,7 +15,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::NetSvc]
+  [Entities::NetSvc]
 end
 
 ## Returns an array of valid options and their description/type for this task

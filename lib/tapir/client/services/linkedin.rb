@@ -1,13 +1,12 @@
 require 'linkedin'
 require 'cgi'
 
-module Tapir
 module Client
 module LinkedIn
 
   class WebClient
 
-    include Tapir::Client::Social
+    include Client::Social
 
     attr_accessor :service_name
 
@@ -28,7 +27,7 @@ module LinkedIn
   
   class DirectoryClient
 
-    include Tapir::Client::Social
+    include Client::Social
   
     attr_accessor :service_name
     
@@ -59,7 +58,7 @@ class SearchService
     @client = ::LinkedIn::Client.new(api_key, secret_key)
     #rtoken = @client.request_token.token
     #rsecret = @client.request_token.secret
-    #pin = Tapir::ApiKeys.instance.keys['linkedin_pin']
+    #pin = ApiKeys.instance.keys['linkedin_pin']
     # to test from your desktop, open the following url in your browser
     # and record the pin it gives you
     #@client.request_token.authorize_url
@@ -107,6 +106,5 @@ class SearchResult
   
 end
 
-end
 end
 end

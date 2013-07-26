@@ -1,4 +1,4 @@
-Tapir::Application.routes.draw do
+Application.routes.draw do
 
   resources :tasks
   resources :task_runs
@@ -8,7 +8,7 @@ Tapir::Application.routes.draw do
   resources :settings
   resources :projects  
   resources :report_templates
-    
+  devise_for :users
   ###
   ### Welcome page
   ###
@@ -19,9 +19,6 @@ Tapir::Application.routes.draw do
   ### Task Runner
   ###
   match "/run_task" => "task_run_sets#run", :via => [:post, :get]
-
-  # Configure Devise
-  devise_for :users, :class_name => "Tapir::User"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

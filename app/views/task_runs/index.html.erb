@@ -5,7 +5,7 @@
 
 <% @task_runs.reverse.each do |task_run| %>
   <tr>
-    <td><%= link_to task_run, task_run %></td>
+    <td><%= link_to task_run, task_run_path(task_run) %></td>
   </tr>
 <% end %>
 </table>

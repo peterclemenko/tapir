@@ -13,7 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::Person]
+  [Entities::Person]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -38,19 +38,19 @@ def run
   split_name = @entity.name.split(" ")
 
   #johndoe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
+  create_entity Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
   
   # john.doe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
+  create_entity Entities::Username, {:person => @entity, :name => "#{split_name.first}.#{split_name.last}"}
 
   # john_doe 
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first}_#{split_name.last}"}
+  create_entity Entities::Username, {:person => @entity, :name => "#{split_name.first}_#{split_name.last}"}
   
   # jdoe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.first.first}#{split_name.last}"}
+  create_entity Entities::Username, {:person => @entity, :name => "#{split_name.first.first}#{split_name.last}"}
 
   # doe
-  create_entity Tapir::Entities::Username, {:person => @entity, :name => "#{split_name.last}"}
+  create_entity Entities::Username, {:person => @entity, :name => "#{split_name.last}"}
 
 
 end

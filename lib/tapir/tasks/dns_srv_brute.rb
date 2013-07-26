@@ -15,7 +15,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Domain]
+  [Entities::Domain]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -82,13 +82,13 @@ def run
           @task_logger.log_good "Creating domain and host entities..."
 
           # Create a domain. pass down the organization if we have it.
-          d = create_entity(Tapir::Entities::Domain, {:name => domain, :organization => @entity.organization })
+          d = create_entity(Entities::Domain, {:name => domain, :organization => @entity.organization })
 
           # Create a host to store the ip address
-          h = create_entity(Tapir::Entities::Host, {:name => resolved_address})
+          h = create_entity(Entities::Host, {:name => resolved_address})
           
           # Create a service, and also associate that with our host.
-          create_entity(Tapir::Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})
+          create_entity(Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})
 
         end
 

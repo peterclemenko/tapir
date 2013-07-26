@@ -1,9 +1,8 @@
-module Tapir
 module Client
 module FourSquare
   
   class WebClient
-    include Tapir::Client::Social
+    include Client::Social
     
     attr_accessor :service_name
     
@@ -22,6 +21,5 @@ module FourSquare
     
   end
   
-end
 end
 end

@@ -3,4 +3,6 @@
 </p>
 
 <%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Destroy', @setting, method: :delete, data: { confirm: 'Are you sure?' } %>|
 <%= link_to 'Back', settings_path %>
+

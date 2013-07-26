@@ -10,9 +10,9 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::SearchString, 
-    Tapir::Entities::Organization, 
-    Tapir::Entities::Domain]
+  [ Entities::SearchString, 
+    Entities::Organization, 
+    Entities::Domain]
 end
 
 def setup(entity, options={})
@@ -24,7 +24,7 @@ end
 def run
   super
 
-  x = Tapir::Client::Google::SearchService.new
+  x = Client::Google::SearchService.new
   results = x.search @entity.name
 
   results.each do |result|

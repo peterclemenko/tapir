@@ -7,8 +7,8 @@ require "packetfu"
 
 # Set the current tenant - this is required because
 # all entities must be scoped according to the tenant
-Tapir::Tenant.current = Tapir::Tenant.all.first
-Tapir::Project.current = Tapir::Project.all.first
+Tenant.current = Tenant.all.first
+Project.current = Project.all.first
 
 @excluded = [ "^172.16", "^192.168" , "^74.16", "^74.125", "^224.0.0", "^199.71", "^199.43", "^199.212"]
 @included = [ "^10.0.0" ]
@@ -21,7 +21,7 @@ raise ArgumentError, "Please specify interface" unless ethernet_adapter
   :start => true,
   :filter => "ip")
 
-puts "Using tenant: #{Tapir::Tenant.all.first.host}"
+puts "Using tenant: #{Tenant.all.first.host}"
 puts "Using network adapter: #{ethernet_adapter}"
 puts "[+] We be sniffin!"
 
@@ -43,18 +43,18 @@ puts "[+] We be sniffin!"
   next unless !excluded || !packet.is_ip?
   
   #Check to see if we have the host's details already
-  host = Tapir::Entities::Host.where(
+  host = Entities::Host.where(
     :name => packet.ip_daddr, 
-    :project_id => Tapir::Project.current.id,
-    :tenant_id => Tapir::Tenant.current.id)
+    :project_id => Project.current.id,
+    :tenant_id => Tenant.current.id)
 
   next if host.count > 0
 
   puts "[+] Creating new host: #{packet.ip_daddr}"
-  h = Tapir::Entities::Host.create(
+  h = Entities::Host.create(
     :name => packet.ip_daddr, 
-    :project_id => Tapir::Project.current.id,
-    :tenant_id => Tapir::Tenant.current.id)
+    :project_id => Project.current.id,
+    :tenant_id => Tenant.current.id)
 
   h.run_task("dns_reverse_lookup", {})
 

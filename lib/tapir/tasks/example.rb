@@ -13,11 +13,11 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host, 
-    Tapir::Entities::Organization, 
-    Tapir::Entities::SearchString, 
-    Tapir::Entities::Person]
+  [ Entities::Domain, 
+    Entities::Host, 
+    Entities::Organization, 
+    Entities::SearchString, 
+    Entities::Person]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -34,7 +34,7 @@ def run
   super
   # create an ip
   ip_address = "#{rand(255)}.#{rand(255)}.#{rand(255)}.#{rand(255)}"
-  x = create_entity Tapir::Entities::Host, { :name => ip_address }
+  x = create_entity Entities::Host, { :name => ip_address }
 end
 
 def cleanup

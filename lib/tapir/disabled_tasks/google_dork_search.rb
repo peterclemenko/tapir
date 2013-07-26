@@ -10,10 +10,10 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::SearchString, 
-    Tapir::Entities::Organization, 
-    Tapir::Entities::Domain, 
-    Tapir::Entities::Host]
+  [ Entities::SearchString, 
+    Entities::Organization, 
+    Entities::Domain, 
+    Entities::Host]
 end
 
 def setup(entity, options={})
@@ -26,7 +26,7 @@ def run
   super
 
   # Attach to the corpwatch service & search
-  x = Tapir::Client::Google::SearchScraper.new
+  x = Client::Google::SearchScraper.new
   
   dork_strings = ["filetype:xls","filetype:doc", "filetype:asp"]
   

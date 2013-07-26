@@ -1,7 +1,6 @@
-module Tapir
-  module Entities
-    class PdfFile < Base
-      include TenantAndProjectScoped
-    end
+
+module Entities
+  class PdfFile < Base
+    include TenantAndProjectScoped
   end
 end

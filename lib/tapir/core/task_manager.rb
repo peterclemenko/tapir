@@ -1,6 +1,4 @@
 require 'singleton'
-
-module Tapir
 class TaskManager
   include Singleton
 
@@ -133,5 +131,4 @@ private
     end
     raise "Unknown Task!"  # couldn't find it. boo.
   end
-end
 end

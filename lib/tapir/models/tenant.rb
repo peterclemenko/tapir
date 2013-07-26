@@ -1,4 +1,3 @@
-module Tapir
 class Tenant
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -15,5 +14,4 @@ class Tenant
     end
   end
 
-end
 end

@@ -13,7 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::NetSvc]
+  [Entities::NetSvc]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -36,7 +36,7 @@ def run
   protocol = ssl ? "https://" : "http://"
   uri = "#{protocol}#{@entity.host.name}:#{@entity.port_num}"
 
-  create_entity(Tapir::Entities::WebApplication, {
+  create_entity(Entities::WebApplication, {
     :name => uri,
     :host => @entity.host,
     :netsvc => @entity
@@ -46,7 +46,7 @@ def run
 
     uri = "#{protocol}#{d.name}:#{@entity.port_num}"
 
-    create_entity(Tapir::Entities::WebApplication, {
+    create_entity(Entities::WebApplication, {
       :name => uri,
       :host => @entity.host,
       :netsvc => @entity

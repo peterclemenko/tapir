@@ -1,8 +1,7 @@
-module Tapir
 module Client
 module Myspace
   class WebClient
-    include Tapir::Client::Social
+    include Client::Social
 
     attr_accessor :service_name
 
@@ -20,6 +19,5 @@ module Myspace
     end
   
   end
-end
 end
 end

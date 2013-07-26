@@ -1,13 +1,12 @@
 require 'open-uri'
 require 'nokogiri'
   
-module Tapir
 module Client
 module TwitPic
 
   class WebClient
     
-    include Tapir::Client::Social
+    include Client::Social
     
     attr_accessor :service_name
     
@@ -45,7 +44,7 @@ module TwitPic
       search_uri = "http://twitpic.com/photos/#{username}"
 
       # Open page & parse
-      doc = Nokogiri::HTML(open(search_uri, {"User-Agent" => Tapir::USER_AGENT_STRING})) do |config|
+      doc = Nokogiri::HTML(open(search_uri, {"User-Agent" => Constants::USER_AGENT_STRING})) do |config|
         config.noblanks
       end
 
@@ -56,7 +55,7 @@ module TwitPic
         image_link = "http://twitpic.com/#{path}"
 
         # grabe the page
-        doc = Nokogiri::HTML(open(image_link, {"User-Agent" => Tapir::USER_AGENT_STRING})) do |config|
+        doc = Nokogiri::HTML(open(image_link, {"User-Agent" => Constants::USER_AGENT_STRING})) do |config|
            config.noblanks
         end
 
@@ -79,7 +78,7 @@ module TwitPic
     def initialize(link, do_download=true)
           # grab the image & store locally
           @remote_path = link
-          @local_path = "/#{Tapir::PUBLIC_DIRECTORY}/twitpic_file_#{rand(1000000)}"
+          @local_path = "/#{PUBLIC_DIRECTORY}/twitpic_file_#{rand(1000000)}"
           download_remote_file if do_download
     end
 
@@ -100,6 +99,5 @@ module TwitPic
     end
 
   end
-end
 end
 end

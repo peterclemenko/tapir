@@ -8,8 +8,8 @@ class EntitiesDatatable
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: Tapir::Entities::Base.all.count,
-      iTotalDisplayRecords: Tapir::Entities::Base.all.count,
+      iTotalRecords: Entities::Base.all.count,
+      iTotalDisplayRecords: Entities::Base.all.count,
       aaData: data
     }
   end
@@ -32,9 +32,9 @@ private
     # Fetch the correct objects
 
     if params[:sSearch].present?
-      entities = Tapir::Entities::Base.where( :name => /#{params[:sSearch]}/i ).order_by("#{sort_column} #{sort_direction}")
+      entities = Entities::Base.where( :name => /#{params[:sSearch]}/i ).order_by("#{sort_column} #{sort_direction}")
     else
-      entities = Tapir::Entities::Base.order_by("#{sort_column} #{sort_direction}")
+      entities = Entities::Base.order_by("#{sort_column} #{sort_direction}")
     end
     
     # Page the objects if necessary

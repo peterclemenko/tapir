@@ -26,4 +26,4 @@ def find_secure_token
   end
 end
 
-Tapir::Application.config.secret_token = find_secure_token
+Application.config.secret_token = find_secure_token

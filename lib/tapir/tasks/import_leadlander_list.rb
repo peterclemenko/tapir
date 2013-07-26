@@ -15,7 +15,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::ParsableFile]
+  [Entities::ParsableFile]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -38,7 +38,7 @@ def run
     split_name = line.split(" ")
     split_name.shift
     org_name = split_name.join(" ")
-    org = create_entity(Tapir::Entities::Organization, {:name => org_name }) if org_name
+    org = create_entity(Entities::Organization, {:name => org_name }) if org_name
   end 
   
 end

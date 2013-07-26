@@ -14,13 +14,13 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::SearchString, 
-    Tapir::Entities::Organization, 
-    Tapir::Entities::Domain, 
-    Tapir::Entities::Host,
-    Tapir::Entities::Person, 
-    Tapir::Entities::Username, 
-    Tapir::Entities::Account]
+  [ Entities::SearchString, 
+    Entities::Organization, 
+    Entities::Domain, 
+    Entities::Host,
+    Entities::Person, 
+    Entities::Username, 
+    Entities::Account]
 end
 
 def setup(entity, options={})
@@ -33,11 +33,11 @@ def run
   super
 
   # Attach to the google service & search
-  results = Tapir::Client::Google::SearchService.new.search(@entity.name)
+  results = Client::Google::SearchService.new.search(@entity.name)
 
   results.each do |result|
-    create_entity Tapir::Entities::Domain, :name => result[:visible_url]
-    create_entity Tapir::Entities::SearchResult, {
+    create_entity Entities::Domain, :name => result[:visible_url]
+    create_entity Entities::SearchResult, {
       :name => result[:title_no_formatting],
       :url => result[:unescaped_url],
       :content => result[:content]

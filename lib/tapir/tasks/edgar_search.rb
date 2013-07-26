@@ -14,7 +14,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::SearchString]
+  [Entities::SearchString]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -32,16 +32,16 @@ def run
   super
 
   # Attach to the corpwatch service & search
-  x = Tapir::Client::Corpwatch::CorpwatchService.new
+  x = Client::Corpwatch::CorpwatchService.new
   corps = x.search @entity.name
 
   corps.each do |corp|
     # Create a new organization entity & attach a record
-    o = create_entity Tapir::Entities::Organization, { 
+    o = create_entity Entities::Organization, { 
       :name => corp.name, 
     }
     
-    create_entity(Tapir::Entities::PhysicalLocation, {
+    create_entity(Entities::PhysicalLocation, {
       :address => corps.first.address, 
       :state => corps.first.state,
       :country => corps.first.country }

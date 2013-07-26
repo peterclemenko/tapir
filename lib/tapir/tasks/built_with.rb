@@ -13,17 +13,17 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host, 
-    Tapir::Entities::WebApplication]
+  [ Entities::Domain, 
+    Entities::Host, 
+    Entities::WebApplication]
 end
 
 def setup(entity, options={})
   super(entity, options)
 
-  if @entity.kind_of? Tapir::Entities::Host
+  if @entity.kind_of? Entities::Host
     url = "http://#{@entity.name}"
-  elsif @entity.kind_of? Tapir::Entities::Domain
+  elsif @entity.kind_of? Entities::Domain
     url = "http://#{@entity.name}"
   else
     url = "#{@entity.name}"
@@ -75,7 +75,7 @@ def setup(entity, options={})
       target_strings.each do |target|
         matches = contents.scan(target[:regex]) #.map{Regexp.last_match}
         matches.each do |match|
-          create_entity(Tapir::Entities::Finding,
+          create_entity(Entities::Finding,
             { :name => "#{@entity.name} - #{target[:finding]}",
               :content => "Found #{match} on #{@entity.name}",
               :details => contents 

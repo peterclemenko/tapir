@@ -1,4 +1,3 @@
-module Tapir
 class TaskRunSet
 
   include Mongoid::Document
@@ -10,5 +9,4 @@ class TaskRunSet
     TaskRun.where(:task_run_set_id => self.id)
   end
 
-end
 end

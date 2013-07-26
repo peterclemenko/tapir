@@ -1,7 +1,6 @@
-module Tapir
-  module Entities
-    class FacebookAccount < Base 
-      include TenantAndProjectScoped
-    end
+
+module Entities
+  class FacebookAccount < Base 
+    include TenantAndProjectScoped
   end
 end

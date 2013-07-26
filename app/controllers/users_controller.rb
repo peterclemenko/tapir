@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
   def show
-    @user = Tapir::User.where(:id => params[:id])
+    @user = User.where(:id => params[:id])
   end
 
   def index
-    @users = Tapir::User.all
+    @users = User.all
   end
 
 end

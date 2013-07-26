@@ -10,7 +10,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Tapir::Entities::Domain]
+  [ Entities::Domain]
 end
 
 def setup(entity, options={})
@@ -23,7 +23,7 @@ def run
   super
 
   # Attach to the google search service
-  x = Tapir::Client::Google::SearchService.new
+  x = Client::Google::SearchService.new
 
   # Use the inurl: capability
   results = x.search "inurl:.#{@entity.name}"

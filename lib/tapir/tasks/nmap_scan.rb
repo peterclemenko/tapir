@@ -13,9 +13,9 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host, 
-    Tapir::Entities::NetBlock]
+  [ Entities::Domain, 
+    Entities::Host, 
+    Entities::NetBlock]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,11 +33,11 @@ def run
   
   nmap_options = @options['nmap_options']
   
-  if @entity.kind_of? Tapir::Entities::Host
+  if @entity.kind_of? Entities::Host
     to_scan = @entity.name
-  elsif @entity.kind_of? Tapir::Entities::NetBlock
+  elsif @entity.kind_of? Entities::NetBlock
     to_scan = @entity.range
-  elsif @entity.kind_of? Tapir::Entities::Domain
+  elsif @entity.kind_of? Entities::Domain
     to_scan = @entity.name
   else
     raise ArgumentError, "Unknown entity type"
@@ -65,8 +65,8 @@ def run
     @task_logger.log "Handling nmap data for #{host.addr}"
 
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
-    if @entity.kind_of? Tapir::Entities::NetBlock or @entity.kind_of? Tapir::Entities::Domain
-      @host_entity = create_entity(Tapir::Entities::Host, {:name => host.addr })
+    if @entity.kind_of? Entities::NetBlock or @entity.kind_of? Entities::Domain
+      @host_entity = create_entity(Entities::Host, {:name => host.addr })
       @host_entity.domains << @entity
     else
       @host_entity = @entity # We already have a host
@@ -75,7 +75,7 @@ def run
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
       @task_logger.log "Creating Service: #{port}"
-      create_entity(Tapir::Entities::NetSvc, {
+      create_entity(Entities::NetSvc, {
         :name => "#{@entity.name}:#{port.num}/#{port.proto}",
         :host_id => @host_entity.id,
         :port_num => port.num,

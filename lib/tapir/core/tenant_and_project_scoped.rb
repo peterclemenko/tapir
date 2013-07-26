@@ -5,12 +5,12 @@ module TenantAndProjectScoped
   included do
 
     belongs_to :tenant
-    before_validation { self.tenant = Tapir::Tenant.current }
+    before_validation { self.tenant = Tenant.current }
 
     belongs_to :project
-    before_validation { self.project = Tapir::Project.current }
+    before_validation { self.project = Project.current }
 
-    default_scope(lambda { {:where => {:project_id => Tapir::Project.current, :tenant_id => Tapir::Tenant.current}} })
+    default_scope(lambda { {:where => {:project_id => Project.current, :tenant_id => Tenant.current}} })
   end
 
 end

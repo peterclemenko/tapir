@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Tapir::Project.all
+    @projects = Project.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    @project = Tapir::Project.find(params[:id])
+    @project = Project.find(params[:id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   # GET /projects/new.json
   def new
-    @project = Tapir::Project.new
+    @project = Project.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,15 +37,15 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    @project = Tapir::Project.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   # POST /projects
   # POST /projects
   def create
 
-    @project = Tapir::Project.new({
-        :tenant => Tapir::Tenant.current}.merge(params[:tapir_project]))
+    @project = Project.new({
+        :tenant => Tenant.current}.merge(params[:tapir_project]))
 
     respond_to do |format|
       if @project.save
@@ -61,7 +61,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    @project = Tapir::Project.find(params[:id])
+    @project = Project.find(params[:id])
     respond_to do |format|
       if @project.update_attributes(params[:tapir_project])
         format.html { redirect_to project_path(@project), notice: 'Project was successfully updated.' }
@@ -77,10 +77,10 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project = Tapir::Project.find(params[:id])
+    @project = Project.find(params[:id])
     
     # Destroy all associated entites
-    @project_entities = Tapir::Entities::Base.all.each { |entity| entity.destroy  }
+    @project_entities = Entities::Base.all.each { |entity| entity.destroy  }
 
     # Destroy the project
     @project.destroy

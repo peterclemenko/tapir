@@ -1,4 +1,3 @@
-module Tapir
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
@@ -52,5 +51,32 @@ class User
   field :email, type: String
   has_many :settings
 
-end
+  def create_settings
+    setting_keys = [ 
+     {:name => "linkedin_api_key"},
+     {:name => "linkedin_secret_key"},
+     {:name => "linkedin_auth"},
+     {:name => "bing_api"},
+     {:name => "google_api"},
+     {:name => "corpwatch_api"},
+     {:name => "any_old_setting", :default_value => "whatever"}
+    ]
+
+    setting_keys.each do |setting|
+
+      # Check to see if it exists
+      setting_exists = Setting.where(
+        :name => setting[:name], 
+        :user => self).count > 0
+    
+      # if not, create it  
+      Setting.create(
+          :user => self, 
+          :name => setting[:name],
+          :value => setting[:default_value]) unless setting_exists
+
+    end
+
+  end
+
 end

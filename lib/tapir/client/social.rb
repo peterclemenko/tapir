@@ -1,4 +1,3 @@
-module Tapir
 module Client
 module Social
 
@@ -41,6 +40,5 @@ def check_account_exists(account_name)
 return true
 end
 
-end
 end
 end

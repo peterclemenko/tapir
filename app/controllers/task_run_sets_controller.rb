@@ -5,7 +5,7 @@ class TaskRunSetsController < ApplicationController
   # GET /task_run_sets
   # GET /task_run_sets.json
   def index
-    @task_run_sets = Tapir::TaskRunSet.all
+    @task_run_sets = TaskRunSet.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,7 +16,7 @@ class TaskRunSetsController < ApplicationController
   # GET /task_run_sets/1
   # GET /task_run_sets/1.json
   def show
-    @task_run_set = Tapir::TaskRunSet.find(params[:id])
+    @task_run_set = TaskRunSet.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -27,7 +27,7 @@ class TaskRunSetsController < ApplicationController
   # GET /task_run_sets/new
   # GET /task_run_sets/new.json
   def new
-    @task_run_set = Tapir::TaskRunSet.new
+    @task_run_set = TaskRunSet.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,13 +37,13 @@ class TaskRunSetsController < ApplicationController
 
   # GET /task_run_sets/1/edit
   def edit
-    @task_run_set = Tapir::TaskRunSet.find(params[:id])
+    @task_run_set = TaskRunSet.find(params[:id])
   end
 
   # POST /task_run_sets
   # POST /task_run_sets.json
   def create
-    @task_run_set = Tapir::TaskRunSet.new(params[:tapir_task_set])
+    @task_run_set = TaskRunSet.new(params[:tapir_task_set])
 
     respond_to do |format|
       if @task_run_set.save
@@ -59,7 +59,7 @@ class TaskRunSetsController < ApplicationController
   # PUT /task_run_sets/1
   # PUT /task_run_sets/1.json
   def update
-    @task_run_set = Tapir::TaskRunSet.find(params[:id])
+    @task_run_set = TaskRunSet.find(params[:id])
 
     respond_to do |format|
       if @task_run_set.update_attributes(params[:tapir_task_set])
@@ -75,7 +75,7 @@ class TaskRunSetsController < ApplicationController
   # DELETE /task_run_sets/1
   # DELETE /task_run_sets/1.json
   def destroy
-    @task_run_set = Tapir::TaskRunSet.find(params[:id])
+    @task_run_set = TaskRunSet.find(params[:id])
     @task_run_set.destroy
 
     respond_to do |format|
@@ -91,7 +91,7 @@ class TaskRunSetsController < ApplicationController
     entity_set = params[:entities]
     task_name = params[:task_name]
     options = params[:options] || {}
-    task_run_set = Tapir::TaskRunSet.create
+    task_run_set = TaskRunSet.create
     
     #
     # If we don't have reasonable input, return
@@ -110,8 +110,8 @@ class TaskRunSetsController < ApplicationController
         # Convert the parameter to a class and create an object
         # 
         # Example: 
-        #  - entity_set - {"Tapir::Entities::Domain#5143ddc9ad19763c1d000004"=>"on"}
-        #  - entity.titleize.gsub(" ","").gsub("/","::") - "Tapir::Entities::Domain"
+        #  - entity_set - {"Entities::Domain#5143ddc9ad19763c1d000004"=>"on"}
+        #  - entity.titleize.gsub(" ","").gsub("/","::") - "Entities::Domain"
         #
         entity_type = key.split("#").first
         entity_id = key.split("#").last

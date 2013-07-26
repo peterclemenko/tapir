@@ -15,7 +15,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Tapir::Entities::Organization]
+  [Entities::Organization]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -44,8 +44,8 @@ def run
         @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
-        d = create_entity(Tapir::Entities::Domain, :name => domain)
-        h = create_entity(Tapir::Entities::Host, :name => res_answer)
+        d = create_entity(Entities::Domain, :name => domain)
+        h = create_entity(Entities::Host, :name => res_answer)
 
     end
     rescue Dnsruby::Refused

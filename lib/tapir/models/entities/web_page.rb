@@ -1,13 +1,12 @@
-module Tapir
-  module Entities
-    class WebPage < Base
-      include TenantAndProjectScoped
 
-      field :uri, type: String
-      field :content, type: String
+module Entities
+  class WebPage < Base
+    include TenantAndProjectScoped
 
-      belongs_to :web_application, :class_name => "Tapir::Entities::WebApplication"
+    field :uri, type: String
+    field :content, type: String
 
-    end
+    belongs_to :web_application, :class_name => "Tapir::Entities::WebApplication"
+
   end
 end

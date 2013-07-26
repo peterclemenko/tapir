@@ -13,10 +13,10 @@ end
 # Returns an array of types that are allowed to call this task
 #
 def allowed_types
-  [ Tapir::Entities::Domain, 
-    Tapir::Entities::Host, 
-    Tapir::Entities::Organization, 
-    Tapir::Entities::User]
+  [ Entities::Domain, 
+    Entities::Host, 
+    Entities::Organization, 
+    Entities::User]
 end
 
 def setup(entity, options={})

@@ -1,8 +1,7 @@
-module Tapir
 module Client
 module Twitter
   class WebClient
-    include Tapir::Client::Social
+    include Client::Social
 
     attr_accessor :service_name
 
@@ -32,8 +31,8 @@ module Twitter
 
       begin
         
-        contents = open("#{uri}", :allow_redirections => :safe).read
-        hash = JSON.parse(contents)
+      contents = open("#{uri}", :allow_redirections => :safe).read
+      hash = JSON.parse(contents)
 
       rescue Timeout::Error
       rescue OpenURI::HTTPError => e
@@ -51,6 +50,5 @@ module Twitter
 
   end
 
-end
 end
 end

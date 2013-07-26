@@ -17,7 +17,7 @@ end
 
 # Returns an array of types that are allowed to call this task
 def allowed_types
-  [Tapir::Entities::Person]
+  [Entities::Person]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,7 +33,7 @@ end
 def run
   super
 
-  x = Tapir::Client::TwitPic::TwitPicScraper.new
+  x = Client::TwitPic::TwitPicScraper.new
   @entity.usernames.each do |username|
     photos = x.search_by_user "#{username}"
       
@@ -68,7 +68,7 @@ def run
         @task_logger.log_error "Unable to parse, malformed jpg"
       end
 
-      create_entity Tapir::Entities::Image, 
+      create_entity Entities::Image, 
         :local_path => photo.local_path,
         :remote_path => photo.remote_path, 
         :description => "twitpic image"
