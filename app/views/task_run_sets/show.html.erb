@@ -3,7 +3,7 @@
   <tr>
     <th>Task Name</th>
     <td>&nbsp;</td>
-    <td><%= link_to task_run.task_name, task_run_path(task_run, :tapir) %></td>
+    <td><%= link_to task_run.task_name, task_path(Task.find_by_name(task_run.task_name).name) %></td>
   </tr>
   <tr>
     <th>Task Entity</th>
