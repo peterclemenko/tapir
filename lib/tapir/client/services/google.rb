@@ -1,5 +1,6 @@
 require "capybara"  
 require "capybara/dsl"
+require 'capybara-webkit'
 require "googleajax"
 
 module Client
