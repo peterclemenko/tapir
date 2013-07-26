@@ -6,7 +6,9 @@ Application.routes.draw do
   resources :entity_mappings
   resources :entities
   resources :settings
-  resources :projects  
+  resources :projects
+  match '/projects/:id/activate', :controller => 'projects', :action => 'activate'
+
   resources :report_templates
   devise_for :users
   ###
