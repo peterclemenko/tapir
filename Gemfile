@@ -105,7 +105,7 @@ group :pain do
   #   brew update
   #   brew install qt
 
-  #gem 'capybara-webkit'
+  gem 'capybara-webkit'
 end
 
 group :test do
