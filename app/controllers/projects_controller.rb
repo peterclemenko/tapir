@@ -77,7 +77,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     
     # Destroy all associated entites
-    cookies[:project] = @project.name
+    cookies.permanent[:project] = @project.name 
 
     respond_to do |format|
       format.html { redirect_to projects_url }

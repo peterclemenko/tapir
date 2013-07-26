@@ -21,13 +21,8 @@ class ApplicationController < ActionController::Base
 
     # Create a project cookie if none exists
     unless @current_project
-
       @current_project = Project.current = Project.create(:name => "default")
-      cookies[:project] = {
-        :value => Project.current.name,
-        :domain => request.host,
-        :expires => 1.year.from_now
-      }
+      cookies.permanent[:project] = Project.current.name
     end
   end
 
