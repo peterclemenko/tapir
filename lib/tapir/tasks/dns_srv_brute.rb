@@ -81,11 +81,13 @@ def run
         if resolved_address
           @task_logger.log_good "Creating domain and host entities..."
 
-          # Create a domain. pass down the organization if we have it.
-          d = create_entity(Entities::Domain, {:name => domain, :organization => @entity.organization })
+          # Create a domain
+          d = create_entity(Entities::Domain, {:name => domain })
 
           # Create a host to store the ip address
           h = create_entity(Entities::Host, {:name => resolved_address})
+          h.domains << d
+          h.save
           
           # Create a service, and also associate that with our host.
           create_entity(Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})
