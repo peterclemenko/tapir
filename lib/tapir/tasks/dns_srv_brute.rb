@@ -90,7 +90,12 @@ def run
           h.save
           
           # Create a service, and also associate that with our host.
-          create_entity(Entities::NetSvc, {:proto => "tcp", :port_num => port, :host => h})
+          create_entity(Entities::NetSvc, {
+            :proto => "tcp", 
+            :port_num => port, 
+            :name => "#{h.name}:#{port}/tcp",
+            :host_id => h.id
+          })
 
         end
 
