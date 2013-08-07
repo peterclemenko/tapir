@@ -113,11 +113,23 @@ ReportTemplate.create(
   :template => "peeping_tom",
   :setup => "@entities = Entities::Image.all")
 
-#puts 'SETTING UP DEFAULT USER LOGIN'
-#user = User.create!( 
-#  :tenant_id => Tenant.first,
-#  :name => 'Tapir', 
-#  :email => 'tapir@tapir.com', 
-#  :password => 'tapir123', 
-#  :password_confirmation => 'tapir123')
-#puts 'New user created: ' << user.name
+User.all.each{|u| u.destroy}
+
+Tenant.each do |t|
+  user = User.where(:tenant_id => t.id) 
+  if user.count == 0  
+    puts "could not find a user for tenant #{t.host}"
+    account_name = "#{t.host.split(".").first}"
+    account_email = "#{account_name}@tapirrecon.com"
+    puts "using account name #{account_name}"
+    user = User.create!( 
+      :tenant_id => t.id,
+      :name => "#{account_name}", 
+      :email => "#{account_email}", 
+      :password => 'tapir123', 
+      :password_confirmation => 'tapir123')
+    puts 'New user created: ' << user.name
+  else
+    puts "found user for #{t.host}"
+  end
+end
