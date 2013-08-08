@@ -61,7 +61,6 @@ class User
      {:name => "bing_api"},
      {:name => "google_api"},
      {:name => "corpwatch_api"},
-     {:name => "any_old_setting", :default_value => "whatever"}
     ]
 
     setting_keys.each do |setting|
