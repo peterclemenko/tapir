@@ -12,13 +12,17 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   field :name
-  validates_presence_of :name
-  validates_uniqueness_of :name, :email, :case_sensitive => false
+  validates_uniqueness_of :name, :case_sensitive => false, :scope => :tenant_id
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
+  validates_uniqueness_of :email, :case_sensitive => false, :scope => :tenant_id
+
   field :encrypted_password, :type => String, :default => ""
   
+  validates_presence_of :name, :email
+
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -47,8 +51,6 @@ class User
   ## Token authenticatable
   # field :authentication_token, :type => String
   
-  field :username, type: String
-  field :email, type: String
   has_many :settings
 
   def create_settings

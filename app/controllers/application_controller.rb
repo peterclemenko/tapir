@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_current_tenant
   before_filter :set_current_project
+  #before_filter :create_default_user_if_none_exists
+
+  #def create_default_user_if_none_exists
+  #end
 
   def set_current_tenant
 

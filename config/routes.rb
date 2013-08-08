@@ -7,10 +7,12 @@ Application.routes.draw do
   resources :entities
   resources :settings
   resources :projects
+  resources :report_templates
+
   match '/projects/:id/activate', :controller => 'projects', :action => 'activate'
 
-  resources :report_templates
   devise_for :users
+  
   ###
   ### Welcome page
   ###
