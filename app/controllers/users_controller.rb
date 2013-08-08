@@ -8,4 +8,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def edit 
+    @user = User.where(:id => params[:id])
+  end
+
+
 end
