@@ -19,7 +19,7 @@ form_for(@entity, :url => "/entities/#{@entity.id}") do |f| %>
     <!-- Iterate through fields here --> 
     <table>
     <% @entity.fields.each do |field,value|
-        next if field =~ /_type|_id|created_at|updated_at/ %>
+        next if field =~ /_type|_id|created_at|updated_at|confidence|status/ %>
       <tr>
         <td><%= value.name %>:</td>
         <td><input name="<%=value.name%>" type="string" value=<%= eval("@entity.#{value.name}")%> > </input></td>
@@ -28,6 +28,7 @@ form_for(@entity, :url => "/entities/#{@entity.id}") do |f| %>
     </table>
     <!-- Done iterating through fields --> 
   </div>
+  <br/>
 
   <div class="actions">
     <%= f.submit %>
