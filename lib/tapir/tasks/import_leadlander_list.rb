@@ -15,7 +15,8 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Entities::ParsableFile]
+  [Entities::ParsableFile, 
+   Entities::ParsableText ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -31,8 +32,12 @@ end
 def run
   super
 
-  # Read the file
-  list = open(@entity.uri).readlines
+  if @entity.kind_of? Entities::ParsableText
+    list = @entity.text
+  else
+    # Read the file
+    list = open(@entity.uri).readlines
+  end
   
   list.each do |line|
     split_name = line.split(" ")
