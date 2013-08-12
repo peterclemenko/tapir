@@ -15,7 +15,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Entities::Domain]
+  [Entities::DnsRecord]
 end
 
 ## Returns an array of valid options and their description/type for this task

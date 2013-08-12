@@ -48,7 +48,7 @@ def run
     #
     # Create the host / loc / domain entity for each host we know about
     #
-    d = create_entity(Entities::Domain, {:name => host.hostnames }) if host.hostnames.kind_of? String
+    d = create_entity(Entities::DnsRecord, {:name => host.hostnames }) if host.hostnames.kind_of? String
     
     h = create_entity(Entities::Host, {:name => host.ip_address })
     # TODO - associate the child here

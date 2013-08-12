@@ -16,7 +16,7 @@ end
 def allowed_types
   [ Entities::SearchString, 
     Entities::Organization, 
-    Entities::Domain, 
+    Entities::DnsRecord, 
     Entities::Host,
     Entities::Person, 
     Entities::Username, 
@@ -36,7 +36,7 @@ def run
   results = Client::Google::SearchService.new.search(@entity.name)
 
   results.each do |result|
-    create_entity Entities::Domain, :name => result[:visible_url]
+    create_entity Entities::DnsRecord, :name => result[:visible_url]
     create_entity Entities::SearchResult, {
       :name => result[:title_no_formatting],
       :url => result[:unescaped_url],

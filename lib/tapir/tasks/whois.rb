@@ -14,7 +14,7 @@ end
 ## Returns an array of valid types for this task
 def allowed_types
   [ Entities::Host, 
-    Entities::Domain]
+    Entities::DnsRecord]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -56,7 +56,7 @@ def run
     #
     # if it was a domain, we've got a whole lot of shit we can scoop
     #
-    if @entity.kind_of? Entities::Domain
+    if @entity.kind_of? Entities::DnsRecord
       #
       # We're going to have nameservers either way?
       #
@@ -71,7 +71,7 @@ def run
             #
             # Otherwise it's another domain, and we can't do much but add it
             #
-            new_entity = create_entity Entities::Domain, :name => nameserver.to_s
+            new_entity = create_entity Entities::DnsRecord, :name => nameserver.to_s
           end
         end
       end

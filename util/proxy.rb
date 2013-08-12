@@ -18,7 +18,7 @@ s = WEBrick::HTTPProxyServer.new(
     :Port => 8080,
     :RequestCallback => Proc.new { |req,res| 
       begin
-        Entities::Domain.create(
+        Entities::DnsRecord.create(
           :name => "#{req.host}",
           :tenant_id => Tenant.current.id,
           :project_id => Project.current.id)

@@ -1,7 +1,9 @@
 
 module Entities
-  class Domain < Base      
+  class DnsRecord < Base      
     include TenantAndProjectScoped
+
+    field :record_type
 
     field :record_created_on, type: Time
     field :record_updated_on, type: Time

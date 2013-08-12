@@ -46,9 +46,9 @@ class Importer
             when "organization"
               TapirLogger.instance.log "Creating an organization!"
               Entities::Organization.create(:name => import_items[1].strip)
-            when "domain"
-              TapirLogger.instance.log "Creating a domain!"
-              Entities::Domain.create(:name => import_items[1].strip)
+            when "dns_record"
+              TapirLogger.instance.log "Creating a dns_record!"
+              Entities::DnsRecord.create(:name => import_items[1].strip)
             when "host"
               TapirLogger.instance.log "Creating a host!"
               Entities::Host.create(:name => import_items[1].strip)

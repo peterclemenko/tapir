@@ -54,10 +54,10 @@ ReportTemplate.create(
   :setup => "@entities = Entities::Host.all")
 
 ReportTemplate.create( 
-  :name => "children_by_domain",
-  :pretty_name => "Children by Domain", 
+  :name => "children_by_dns_record",
+  :pretty_name => "Children by DNS Record", 
   :template => "show_children",
-  :setup => "@entities = Entities::Domain.all")
+  :setup => "@entities = Entities::DnsRecord.all")
 
 ReportTemplate.create( 
   :name => "children_by_findings", 
@@ -84,10 +84,10 @@ ReportTemplate.create(
   :setup => "@entities = Entities::PhysicalLocation.all")
 
 ReportTemplate.create( 
-  :name => "parents_by_domain",
-  :pretty_name => "Parents by Domain", 
+  :name => "parents_by_dns_record",
+  :pretty_name => "Parents by DNS Record", 
   :template => "show_parents",
-  :setup => "@entities = Entities::Domain.all")
+  :setup => "@entities = Entities::DnsRecord.all")
 
 ReportTemplate.create( 
   :name => "parents_by_host",

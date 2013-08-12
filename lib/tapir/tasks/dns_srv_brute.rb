@@ -15,7 +15,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Entities::Domain]
+  [Entities::DnsRecord]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -81,12 +81,12 @@ def run
         if resolved_address
           @task_logger.log_good "Creating domain and host entities..."
 
-          # Create a domain
-          d = create_entity(Entities::Domain, {:name => domain })
+          # Create a dns record
+          d = create_entity(Entities::DnsRecord, {:name => domain })
 
           # Create a host to store the ip address
           h = create_entity(Entities::Host, {:name => resolved_address})
-          h.domains << d
+          h.dns_records << d
           h.save
           
           # Create a service, and also associate that with our host.
