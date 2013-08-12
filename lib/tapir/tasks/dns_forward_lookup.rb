@@ -13,7 +13,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Entities::Domain]
+  [Entities::DnsRecord]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -34,7 +34,7 @@ def run
       if resolved_address
         @task_logger.log_good "Creating host entity for #{resolved_address}"
         h = create_entity(Entities::Host, {:name => resolved_address})
-        # Set the host for this domain
+        # Set the host for this dns record
         @entity.host = h
       else
         @task_logger.log "Unable to find address for #{@entity.name}"

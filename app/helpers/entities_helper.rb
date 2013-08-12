@@ -11,7 +11,7 @@ module EntitiesHelper
     "/entities/#{id}"  
   end
 
-  def entities_domain_path(id=nil)
+  def entities_dns_record_path(id=nil)
     "/entities/#{id}"  
   end
 

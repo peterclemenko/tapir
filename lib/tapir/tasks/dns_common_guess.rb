@@ -44,7 +44,7 @@ def run
         @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
-        d = create_entity(Entities::Domain, :name => domain)
+        d = create_entity(Entities::DnsRecord, :name => domain)
         h = create_entity(Entities::Host, :name => res_answer)
 
     end

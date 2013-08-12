@@ -19,10 +19,19 @@ form_for(@entity, :url => "/entities/#{@entity.id}") do |f| %>
     <!-- Iterate through fields here --> 
     <table>
     <% @entity.fields.each do |field,value|
-        next if field =~ /_type|_id|created_at|updated_at|confidence|status/ %>
+        next if field =~ /_type|_id|created_at|updated_at|confidence|status/ 
+        
+        # Set the type based on the field name
+        if field == "text"
+          type = "textarea" 
+        else
+          type = "string"
+        end
+    %>
+    
       <tr>
         <td><%= value.name %>:</td>
-        <td><input name="<%=value.name%>" type="string" value=<%= eval("@entity.#{value.name}")%> > </input></td>
+        <td><input name="<%=value.name%>" type="<%=type%>" value=<%= eval("@entity.#{value.name}")%> > </input></td>
       </tr>
     <% end %>
     </table>

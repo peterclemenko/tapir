@@ -15,7 +15,8 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [Entities::ParsableFile]
+  [ Entities::ParsableFile,
+    Entities::ParsableText ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -31,29 +32,42 @@ end
 def run
   super
 
-  # Create our parser
-  xml = Import::ShodanXml.new
-  parser = Nokogiri::XML::SAX::Parser.new(xml)
-  # Send some XML to the parser
-  parser.parse(open(@entity.uri).read)
+  if @entity.kind_of? Entities::ParsableText
+    text = @entity.text
+  else #ParsableFile
+    text = open(@entity.uri).read
+  end
   
-  xml.shodan_hosts.each do |shodan_host|
+  # Create our parser
+  hosts = []
+  shodan_xml = Import::ShodanXml.new(hosts)
+  parser = Nokogiri::XML::SAX::Parser.new(shodan_xml)
+  parser.parse(text)
+  
+  hosts.each do |host|
     #
     # Create the host / loc / domain entity for each host we know about
     #
-    domain = create_entity(Entities::Domain, {:name => shodan_host.hostnames }) if shodan_host.hostnames.kind_of? String
-    host = create_entity(Entities::Host, {:name => shodan_host.ip_address })
-    loc = create_entity(Entities::PhysicalLocation, {:city => shodan_host.city, :country => shodan_host.country})
+    d = create_entity(Entities::DnsRecord, {:name => host.hostnames }) if host.hostnames.kind_of? String
+    
+    h = create_entity(Entities::Host, {:name => host.ip_address })
+    # TODO - associate the child here
+    #d.associate_child(h)
+    
+    p = create_entity(Entities::PhysicalLocation, {:city => host.city, :country => host.country})
+    # TODO - associate the child here
+    #h.associate_child(p)
 
-    shodan_host.services.each do |shodan_service|
-      #
-      # Create the service and associate it with our host above
-      #
-      create_entity(Entities::NetSvc, {
-        :port_num => shodan_service.port,
-        :type => "tcp",
-        :fingerprint => shodan_service.data })
-    end # End services processing
+    #host.services.each do |shodan_service|
+    #  #
+    #  # Create the service and associate it with our host above
+    #  #
+    #  create_entity(Entities::NetSvc, {
+    #    :port_num => shodan_service.port,
+    #    :type => "tcp",
+    #    :fingerprint => shodan_service.data })
+    #
+    #end # End services processing
 
   end # End host processing
   

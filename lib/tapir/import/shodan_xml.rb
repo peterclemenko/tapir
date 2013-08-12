@@ -19,51 +19,54 @@ module Import
 class ShodanXml < Nokogiri::XML::SAX::Document
 
   attr_accessor :shodan_hosts
-  def initialize
-    @shodan_hosts = []
+  def initialize(hosts)
+    @hosts = hosts
   end
 
   def start_element(name, attrs = [])
-    @content = ""
+    #@content = ""
     @attrs = attrs
     
     if name == "host"
       #
       # create a host entity & set the vars
       #
-      @current_host = ShodanHost.new
-      @current_host.city = @attrs[0].last
-      @current_host.country = @attrs[1].last
-      @current_host.hostnames = @attrs[2].last
-      @current_host.ip_address = @attrs[3].last
-      @current_port = @attrs[4].last
-      @current_host.updated = @attrs[5].last
-      @shodan_hosts << @current_host
-    end
-    
-  end
+      current_host = ShodanHost.new
+      current_host.city = @attrs[0].last
+      current_host.country = @attrs[1].last
+      current_host.hostnames = @attrs[2].last
+      current_host.ip_address = @attrs[3].last
+      current_port = @attrs[4].last
+      current_host.updated = @attrs[5].last
 
-  def characters(string)
-    @content << string if @content
-  end
+      #require 'pry'
+      #binding.pry
+
+      @hosts << current_host
+    end
   
-  def cdata_block(string)
-    characters(string)
+    #if name == "data"
+    #  #
+    #  # This always follows a host entity, so let's add the port & associate 
+    #  #
+    #  @hosts.last.services << ShodanService.new(@current_port, @content)
+    #  @current_port=nil
+    #end
+
   end
 
-  def end_element(name)
-    if name == "data"
-      #
-      # This always follows a host entity, so let's add the port & associate 
-      #
-      @shodan_hosts.last.services << ShodanService.new(@current_port, @content) unless @shodan_hosts = []
-      @current_port=nil
-    end
+  #def characters(string)
+  #  @content << string if @content
+  #end
+  
+  #def cdata_block(string)
+  #  characters(string)
+  #end
 
+  #def end_element(name)
     # Reset this so we don't grab content accidentally
-
-    @content = nil
-  end
+    #@content = nil
+  #end
   
 end
 

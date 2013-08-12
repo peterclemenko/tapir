@@ -9,13 +9,13 @@ end
 
 # Returns a string which describes this task.
 def description
-  "This task hits Google and finds PDF files in a given domain."
+  "This task hits Google and finds PDF files for a given domain."
 end
 
 # Returns an array of valid types for this task
 def allowed_types
   [ 
-    Entities::Domain
+    Entities::DnsRecord
   ]
 end
 
