@@ -9,7 +9,7 @@ class User
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :registerable
 
   field :name
   validates_uniqueness_of :name, :case_sensitive => false, :scope => :tenant_id
