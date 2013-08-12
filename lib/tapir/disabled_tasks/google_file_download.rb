@@ -11,7 +11,7 @@ end
 # Returns an array of valid types for this task
 def allowed_types
   [ Entities::SearchString, 
-    Entities::Domain]
+    Entities::DnsRecord]
 end
 
 def setup(entity, options={})

@@ -10,7 +10,7 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [ Entities::Domain]
+  [ Entities::DnsRecord]
 end
 
 def setup(entity, options={})
@@ -30,7 +30,7 @@ def run
 
   results.each do |result|
     # Create a new domain
-    o = create_entity Domain, { :name => result.visible_url, 
+    o = create_entity Entities::DnsRecord, { :name => result.visible_url, 
       :organization => @entity.organization }
   end
 

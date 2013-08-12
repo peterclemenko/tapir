@@ -34,11 +34,11 @@ def run
     if resolved_name
       @task_logger.log_good "Creating domain #{name}"
       
-      # Create our new domain entity with the resolved name
-      d = create_entity(Entities::Domain, {:name => resolved_name})
+      # Create our new dns record entity with the resolved name
+      d = create_entity(Entities::DnsRecord, {:name => resolved_name})
 
-      # Add the domain for this host
-      @entity.domains << d
+      # Add the dns record for this host
+      @entity.dns_records << d
     else
       @task_logger.log "Unable to find a name for #{@entity.name}"
     end

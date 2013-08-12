@@ -15,7 +15,7 @@ end
 
 ## Returns an array of valid types for this task
 def allowed_types
-  [Entities::Domain]
+  [Entities::DnsRecord]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -68,7 +68,7 @@ def run
             zone.each do |z|
               if z.type == "A"
                 h = create_entity Entities::Host, { :name => z.address.to_s }
-                d = create_entity Entities::Domain, { :name => z.name.to_s }
+                d = create_entity Entities::DnsRecord, { :name => z.name.to_s }
               elsif z.type == "CNAME"
                 # TODO - recursively lookup cname host
                 @task_logger.log "TODO - handle a CNAME record"

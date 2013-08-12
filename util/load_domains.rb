@@ -10,7 +10,7 @@ f = File.open(ARGV[0], "r")
 
 puts "Importing..."
 f.each { |line| 
-	d = Entities::Domain.create(
+	d = Entities::DnsRecord.create(
     :name => line.chomp,
     :tenant_id => Tenant.current.id,
     :project_id => Project.current.id)

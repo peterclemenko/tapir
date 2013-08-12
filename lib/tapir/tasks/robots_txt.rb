@@ -14,7 +14,7 @@ end
 ## Returns an array of types that are allowed to call this task
 def allowed_types
   [ Entities::Host, 
-    Entities::Domain, 
+    Entities::DnsRecord, 
     Entities::WebApplication]
 end
 
@@ -28,7 +28,7 @@ def setup(entity, options={})
 
   if @entity.kind_of? Entities::Host
     url = "http://#{@entity.name}/robots.txt"
-  elsif @entity.kind_of? Entities::Domain
+  elsif @entity.kind_of? Entities::DnsRecord
     url = "http://#{@entity.name}/robots.txt"
   else 
     # Web application's name is already a URI

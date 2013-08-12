@@ -110,8 +110,8 @@ class TaskRunSetsController < ApplicationController
         # Convert the parameter to a class and create an object
         # 
         # Example: 
-        #  - entity_set - {"Entities::Domain#5143ddc9ad19763c1d000004"=>"on"}
-        #  - entity.titleize.gsub(" ","").gsub("/","::") - "Entities::Domain"
+        #  - entity_set - {"Entities::DnsRecord#5143ddc9ad19763c1d000004"=>"on"}
+        #  - entity.titleize.gsub(" ","").gsub("/","::") - "Entities::DnsRecord"
         #
         entity_type = key.split("#").first
         entity_id = key.split("#").last
