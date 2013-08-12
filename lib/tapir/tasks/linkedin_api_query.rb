@@ -33,7 +33,7 @@ def run
   details = linkedin_search.query(@entity.name, :person)
   @task_logger.log "Got result: #{details.inspect.to_s.html_safe}"
 
-  #create_entity(Entities::Domain, {:name => "#{details['url']}"})
+  #create_entity(Entities::DnsRecord, {:name => "#{details['url']}"})
 end
 
 def cleanup

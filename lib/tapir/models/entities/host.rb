@@ -4,7 +4,7 @@ module Entities
     include TenantAndProjectScoped
 
     has_many :net_svcs
-    has_many :domains
+    has_many :dns_records
     
   end
 end

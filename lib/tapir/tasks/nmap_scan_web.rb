@@ -13,7 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Entities::Domain, 
+  [ Entities::DnsRecord, 
     Entities::Host, 
     Entities::NetBlock]
 end
@@ -37,7 +37,7 @@ def run
     to_scan = @entity.name
   elsif @entity.kind_of? Entities::NetBlock
     to_scan = @entity.range
-  elsif @entity.kind_of? Entities::Domain
+  elsif @entity.kind_of? Entities::DnsRecord
     to_scan = @entity.name
   else
     raise ArgumentError, "Unknown entity type"
@@ -65,7 +65,7 @@ def run
     @task_logger.log "Handling nmap data for #{host.addr}"
 
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
-    if @entity.kind_of? Entities::NetBlock or @entity.kind_of? Entities::Domain
+    if @entity.kind_of? Entities::NetBlock or @entity.kind_of? Entities::DnsRecord
       @host_entity = create_entity(Entities::Host, {:name => host.addr })
       #@host_entity.domains << @entity
     else

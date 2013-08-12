@@ -12,7 +12,7 @@ end
 def allowed_types
   [ Entities::SearchString, 
     Entities::Organization, 
-    Entities::Domain, 
+    Entities::DnsRecord, 
     Entities::Host]
 end
 
