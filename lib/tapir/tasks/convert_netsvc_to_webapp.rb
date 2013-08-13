@@ -42,7 +42,7 @@ def run
     :netsvc => @entity
   })
 
-  @entity.host.domains.each do |d|
+  @entity.host.dns_records.each do |d|
 
     uri = "#{protocol}#{d.name}:#{@entity.port_num}"
 
