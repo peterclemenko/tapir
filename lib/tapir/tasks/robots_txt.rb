@@ -48,6 +48,8 @@ def setup(entity, options={})
     @task_logger.log "Unable to connect: #{e}"
   rescue Net::HTTPBadResponse => e
     @task_logger.log "Unable to connect: #{e}"
+  rescue OpenSSL::SSL::SSLError => e
+    @task_logger.log "Unable to connect: #{e}"
   rescue EOFError => e
     @task_logger.log "Unable to connect: #{e}"
   rescue SocketError => e
