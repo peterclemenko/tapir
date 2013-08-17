@@ -13,11 +13,31 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Entities::DnsRecord, 
+  [ Entities::Account,
+    Entities::DnsRecord, 
+    Entities::DocFile,
+    Entities::EmailAddress,
+    Entities::FacebookAccount,
+    Entities::Finding,
     Entities::Host, 
-    Entities::Organization, 
+    Entities::Image,
+    Entities::KloutAccount,
+    Entities::NetBlock,
+    Entities::NetSvc,
+    Entities::Organization,
+    Entities::ParsableFile,
+    Entities::ParsableText,
+    Entities::PdfFile,
+    Entities::Person,
+    Entities::PhysicalLocation, 
+    Entities::SearchResult,
     Entities::SearchString, 
-    Entities::Person]
+    Entities::TwitterAccount,
+    Entities::Username,
+    Entities::WebApplication,
+    Entities::WebForm,
+    Entities::WebPage,
+    Entities::XlsFile ]
 end
 
 ## Returns an array of valid options and their description/type for this task
