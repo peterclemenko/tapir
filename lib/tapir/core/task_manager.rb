@@ -124,7 +124,7 @@ class TaskManager
   end
 
 private
-  # This method is used to translate task names into task entitys
+  # This method is used to translate task names into task entities
   def _create_task_by_name(task_name)
     @tasks.each do |t|
       return t.clone if t.name == task_name
