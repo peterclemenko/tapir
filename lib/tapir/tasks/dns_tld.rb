@@ -32,6 +32,6 @@ end
 def run
   super
 
-  @entity.name.split('.').pop(2).join(".")
+  create_entity Entities::DnsRecord, :name => @entity.name.split('.').pop(2).join(".")
 
 end
