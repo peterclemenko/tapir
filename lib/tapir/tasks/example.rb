@@ -42,7 +42,9 @@ end
 
 ## Returns an array of valid options and their description/type for this task
 def allowed_options
- []
+ [{ :option_name   => "test", 
+    :option_type   => "String",
+    :option_value  => "test" }]
 end
 
 def setup(entity, options={})

@@ -4,35 +4,10 @@ module EntityHelper
   def to_s
     "#{self.class} #{self.name}"
   end
-
-  # Class method to convert to a path
-  #def self.path
-  #  self.class.to_s.downcase.gsub("::","/")
-  #end
-
-  # Class method to convert to a path
-  #def self.underscore
-  #  self.class.to_s.downcase.gsub("::","_")
-  #end
-
-  # Instance method to convert to a path
-  #def path
-  #  self.class.to_s.downcase.gsub("::","/")
-  #end
-
-  # Instance method to convert to a path
-  #def underscore
-  #  self.class.to_s.downcase.gsub("::","_")
-  #end
-
+  
   def entity_type
     self.class.to_s.downcase.split("::").last
   end
-
-  #def underscore
-  #  ActiveSupport::Inflector.underscore self.class
-  #end
-
 
   #
   # This method lets you query the available tasks for this entity type
