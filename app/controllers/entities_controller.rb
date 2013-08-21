@@ -5,8 +5,7 @@ class EntitiesController < ApplicationController
   # GET /tapir/entities
   # GET /tapir/entities.json
   def index
-    #require 'pry'
-    #binding.pry
+    @entities = Entities::Base.all
 
     respond_to do |format|
       format.html # index.html.erb

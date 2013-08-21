@@ -9,8 +9,8 @@ class EntitiesDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Entities::Base.all.count,
-      iTotalDisplayRecords: Entities::Base.all.count,
-      aaData: data
+      iTotalDisplayRecords: entities.count,
+      aaData: page(data)
     }
   end
 
@@ -19,7 +19,9 @@ private
   def data
     entities.map do |entity|
       [
-        link_to(entity, "/entities/#{entity._id}")
+        link_to("[x]","/entities/#{entity._id}", :method => :delete),
+        link_to(entity.class, "/entities"),
+        link_to(entity.name, "/entities/#{entity._id}")
       ]
     end
   end
@@ -36,11 +38,12 @@ private
     else
       entities = Entities::Base.order_by("#{sort_column} #{sort_direction}")
     end
-    
-    # Page the objects if necessary
-    entities = entities[start..(start + per_page)]
 
     entities
+  end
+
+  def page(data)
+    data[start..(start + per_page)]
   end
 
   def start
@@ -52,7 +55,7 @@ private
   end
 
   def sort_column
-    columns = %w[ name ]
+    columns = %w[ del type name ]
     columns[params[:iSortCol_0].to_i]
   end
 
