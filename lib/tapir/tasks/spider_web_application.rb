@@ -31,7 +31,7 @@ end
 def run
   super
 
-  Anemone.crawl(@entity.name, {:obey_robots => false, :depth_limit => 1} ) do |anemone|
+  Anemone.crawl(@entity.name, {:obey_robots => false, :depth_limit => 2} ) do |anemone|
     anemone.on_every_page do |page|
       create_entity(Entities::WebPage, {
         :name => page.url,
