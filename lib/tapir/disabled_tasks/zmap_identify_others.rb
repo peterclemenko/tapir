@@ -63,6 +63,5 @@ end
 
 def cleanup
   super
-  File.delete(@range_path)
   File.delete(@output_path)
 end
