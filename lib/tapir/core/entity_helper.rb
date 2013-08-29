@@ -35,6 +35,14 @@ module EntityHelper
   end
 
   #
+  # This method lets you find all available children, but doesn't check to see if they actually exist.
+  #
+  def nocheck_children
+    TapirLogger.instance.log "Finding unsafe children for #{self}"
+    EntityMapping.where(:parent_id => id)
+  end
+
+  #
   # This method lets you find all available parents
   #
   def parents
