@@ -12,9 +12,12 @@ class EntityMapping
   field :parent_type, type: String
   field :task_run_id, type: String
 
+  index({ child_id: 1, child_type: 1 }, { unique: true })
+  index({ parent_id: 1, parent_type: 1 }, { unique: true })
+
+  # TODO: INDEX
   def get_child
     TapirLogger.instance.log "Trying to find #{child_type}:#{child_id}"
-    
     begin
       eval "#{child_type}.find(\"#{child_id}\")"
     rescue Mongoid::Errors::DocumentNotFound => e
@@ -24,9 +27,9 @@ class EntityMapping
     
   end
   
+  # TODO: INDEX!!!
   def get_parent
     TapirLogger.instance.log "Trying to find #{parent_type}:#{parent_id}"
-    
     begin
       eval "#{parent_type}.find(\"#{parent_id}\")"
     rescue Mongoid::Errors::DocumentNotFound => e
