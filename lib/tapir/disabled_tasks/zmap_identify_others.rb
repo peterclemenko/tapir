@@ -28,7 +28,7 @@ end
 ## Default method, subclasses must override this
 def run
   super
-  
+
   # Grab options
   zmap_options = @options['zmap_options']
   
