@@ -1,9 +1,9 @@
 def name
-  "zmap_scan"
+  "zmap_identify_others"
 end
 
 def pretty_name
-  "Zmap Scan"
+  "Zmap Identify Other Systems"
 end
 
 ## Returns a string which describes what this task does
@@ -13,7 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Entities::NetBlock]
+  [ Entities::NetSvc ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,16 +33,12 @@ def run
   zmap_options = @options['zmap_options']
   
   # Write the range to a path
-  @range_path = "#{Dir::tmpdir}/zmap_range_#{rand(100000000)}.temp"
   @output_path = "#{Dir::tmpdir}/zmap_output_#{rand(100000000)}.temp"
-  File.open(@range_path,"w").write(@entity.range)
-
 
   # shell out to nmap and run the scan
-  @task_logger.log "scanning #{@entity.range} and storing in #{@range_path}"
   @task_logger.log "zmap options: #{zmap_options}"
   
-  zmap_string = "sudo zmap -p 80 -B 10M -w #{@range_path} -o #{@output_path}"
+  zmap_string = "sudo zmap -p #{@entity.port_num} -N 100 -B 10M -o #{@output_path}"
   @task_logger.log "calling zmap: #{zmap_string}"
   safe_system(zmap_string)
     
@@ -52,13 +48,13 @@ def run
 
   f = File.open(@output_path).each_line do |host|
     # Create entity for each discovered host + service
-    @task_logger.log "Creating host: #{host}"
+    @task_logger.log "Creating Host: #{host}"
     @host_entity = create_entity(Entities::Host, {:name => host.strip })
-    @task_logger.log "Creating Service: #{host}:80/tcp"
+    @task_logger.log "Creating Port: #{}"
     create_entity(Entities::NetSvc, {
-      :name => "#{host}:80/tcp",
+      :name => "#{host}:#{@entity.port_num}/tcp",
       :host_id => @host_entity.id,
-      :port_num => 80,
+      :port_num => @entity.port_num,
       :proto => "tcp",
       :fingerprint => "zmapped"})
   end
