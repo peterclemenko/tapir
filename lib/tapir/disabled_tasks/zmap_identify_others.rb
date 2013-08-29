@@ -38,7 +38,7 @@ def run
   # shell out to nmap and run the scan
   @task_logger.log "zmap options: #{zmap_options}"
   
-  zmap_string = "sudo zmap -p #{@entity.port_num} -N 100 -B 10M -o #{@output_path}"
+  zmap_string = "sudo zmap -p #{@entity.port_num} -N 10 -B 10M -o #{@output_path}"
   @task_logger.log "calling zmap: #{zmap_string}"
   safe_system(zmap_string)
     
