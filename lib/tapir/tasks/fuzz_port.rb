@@ -53,6 +53,8 @@ def run
     end
   rescue Timeout::Error
     @task_logger.log "Timed out"
+  rescue Errno::ECONNRESET
+    @task_logger.log "Connection Reset"
   end
   
   # Cleanup
