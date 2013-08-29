@@ -3,12 +3,12 @@ def name
 end
 
 def pretty_name
-  "Zmap Identify Other Systems"
+  "Identify Other Systems with the same port open, using Zmap"
 end
 
 ## Returns a string which describes what this task does
 def description
-  "This task runs a zmap scan on the target range."
+  "This task runs a zmap scan to find other systems with the same open service."
 end
 
 ## Returns an array of types that are allowed to call this task
