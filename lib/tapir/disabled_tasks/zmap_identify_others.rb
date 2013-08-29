@@ -47,10 +47,10 @@ def run
   @task_logger.log "Parsing #{@output_path}"
 
   f = File.open(@output_path).each_line do |host|
+    next if host.nil?
+    host = host.delete("\n").strip 
     # Create entity for each discovered host + service
-    @task_logger.log "Creating Host: #{host}"
-    @host_entity = create_entity(Entities::Host, {:name => host.strip })
-    @task_logger.log "Creating Port: #{}"
+    @host_entity = create_entity(Entities::Host, {:name => host })
     create_entity(Entities::NetSvc, {
       :name => "#{host}:#{@entity.port_num}/tcp",
       :host_id => @host_entity.id,
