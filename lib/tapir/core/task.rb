@@ -153,7 +153,7 @@ class Task
 
     # TODO - this currently uses an "unsafe" method, that doesn't check to see if a child actually
     # EXISTS. This can be dangerous, as the child may have already been deleted. in this case, we'll 
-    if current_entity.nocheck_children.include? new_entity
+    if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else
       @task_logger.log "Associating #{current_entity} with #{new_entity} and task run #{@task_run}"
