@@ -1,4 +1,4 @@
-<% if request.env["REQUEST_PATH"] == "/entities" %>
+<% if request.path =~ /entities/ %>
   <div class="sidebar">
   <br/>
   <%= link_to 'New Entity', new_entity_path %>
