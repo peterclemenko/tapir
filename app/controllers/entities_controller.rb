@@ -6,8 +6,7 @@ class EntitiesController < ApplicationController
   # GET /entities.json
   def index
 
-    session["view_types"] = params["type"] || get_valid_type_class_names
-    
+    session["view_types"] = params["type"] if params["type"]
     entities = []
     session["view_types"].each do |type|
       entities << eval("Entities::#{type}").all
