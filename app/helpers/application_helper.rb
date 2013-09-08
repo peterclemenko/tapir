@@ -15,7 +15,6 @@ module ApplicationHelper
   result 
   end
 
-
   def render_parents(entity, result = "", depth=0)
     
     if entity.parents.empty?
@@ -41,8 +40,6 @@ module ApplicationHelper
 
     result
   end
-
-
 
   def print_result(entity)
     # << " (#{item.task_runs.where(:task_entity_id => item.id).first}) " 

@@ -1,15 +1,16 @@
 class EntitiesDatatable
   delegate :params, :h, :link_to, :number_to_currency, to: :@view
 
-  def initialize(view)
+  def initialize(view, entities)
     @view = view
+    @entities = entities
   end
 
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Entities::Base.all.count,
-      iTotalDisplayRecords: entities.count,
+      iTotalDisplayRecords: data.count,
       aaData: page(data)
     }
   end
@@ -17,26 +18,27 @@ class EntitiesDatatable
 private
 
   def data
-    entities.map do |entity|
-      [
+    data = []
+    entities.map do |criteria|
+      criteria.map do |entity|
+      data << [
         link_to("[x]","/entities/#{entity._id}", :method => :delete),
         link_to(entity.class, "/entities"),
         link_to(entity.name, "/entities/#{entity._id}")
       ]
+      end
     end
+  data
   end
 
   def entities
-    @entities ||= fetch_entities
-  end
+    # Fetch the correct entities
 
-  def fetch_entities
-    # Fetch the correct objects
-
+    entities = []
     if params[:sSearch].present?
-      entities = Entities::Base.where( :name => /#{params[:sSearch]}/i ).order_by("#{sort_column} #{sort_direction}")
+      @entities.map.each {|x| entities << x.where( :name => /#{params[:sSearch]}/i ).order_by("#{sort_column} #{sort_direction}")}
     else
-      entities = Entities::Base.order_by("#{sort_column} #{sort_direction}")
+      entities = @entities #.order_by("#{sort_column} #{sort_direction}")
     end
 
     entities
