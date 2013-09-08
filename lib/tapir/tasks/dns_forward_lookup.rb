@@ -36,6 +36,7 @@ def run
         h = create_entity(Entities::Host, {:name => resolved_address})
         # Set the host for this dns record
         @entity.host = h
+        h.dns_records << @entity
       else
         @task_logger.log "Unable to find address for #{@entity.name}"
       end
