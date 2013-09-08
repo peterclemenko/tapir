@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   #
   # returns nothing
   def set_current_types
-    session["view_types"] = get_valid_type_class_names unless session["view_types"]
+    session["view_types"] = _get_valid_type_class_names unless session["view_types"]
   end
 
   # Public: This method sets the current tenant for this user based on the request.host submission
@@ -44,5 +44,20 @@ class ApplicationController < ActionController::Base
       cookies.permanent[:project] = Project.current.name
     end
   end
+
+  private
+
+    # Return the valid entity types
+    def _get_valid_type_class_names
+      types = Entities::Base.descendants.map{|x| x.name.split("::").last}
+    types.sort_by{ |t| t.downcase }
+    end
+
+
+    # Return the valid entity types
+    def _get_valid_types
+      types = Entities::Base.descendants
+    end
+
 
 end
