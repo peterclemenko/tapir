@@ -6,10 +6,9 @@
   <br/>
   Show types:
   <%= form_tag(entities_path, method: "get") do %>
-    <% @entity_types.each do |x|
-        entity_count = eval("Entities::#{x}").count
-        %>
-        <% if session[:view_types].include? x.to_s %>
+    <% get_valid_type_class_names.each do |x|
+        entity_count = eval("Entities::#{x}").count%>
+        <% if session["view_types"].include? x.to_s %>
           <%= check_box_tag("type[]",x.to_s,true) %>  <%= "#{x} (#{entity_count})" %> <br/>
         <% else %>
           <%= check_box_tag("type[]",x.to_s,false) %>  <%= "#{x} (#{entity_count})" %> <br/>

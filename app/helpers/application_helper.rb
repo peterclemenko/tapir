@@ -34,10 +34,7 @@ module ApplicationHelper
 
       # Recurse on the child
       render_parents(x, result, depth)
-
     end
-    
-
     result
   end
 

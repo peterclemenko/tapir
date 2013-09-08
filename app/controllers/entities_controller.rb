@@ -5,11 +5,11 @@ class EntitiesController < ApplicationController
   # GET /entities
   # GET /entities.json
   def index
-    
-    session[:view_types] = params["type"] if params["type"]
+
+    session["view_types"] = params["type"] || get_valid_type_class_names
     
     entities = []
-    session[:view_types].each do |type|
+    session["view_types"].each do |type|
       entities << eval("Entities::#{type}").all
     end
 
@@ -93,5 +93,19 @@ class EntitiesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+
+  
+  # Return the valid entity types
+  def get_valid_type_class_names
+    types = Entities::Base.descendants.map{|x| x.name.split("::").last}
+  types.sort_by{ |t| t.downcase }
+  end
+
+  private  
+    # Return the valid entity types
+    def _get_valid_types
+      types = Entities::Base.descendants
+    end
 
 end
