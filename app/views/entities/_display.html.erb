@@ -6,7 +6,14 @@
       next if field =~ /_id|created_at|updated_at|status/ %>
     <tr>
       <td><%= value.name %>:</td>      
-      <td><%= "#{eval("@entity.#{value.name}")}" %></td>
+      <td>
+        <%= if value.name == "text" 
+             simple_format "#{eval("@entity.#{value.name}")}" 
+            else
+              "#{eval("@entity.#{value.name}")}" 
+            end
+        %>
+      </td>
     </tr>
   <% end %>
 
