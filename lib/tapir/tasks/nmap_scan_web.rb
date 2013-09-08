@@ -67,7 +67,7 @@ def run
     # Handle the case of a netblock or domain - where we will need to create host entity(s)
     if @entity.kind_of? Entities::NetBlock or @entity.kind_of? Entities::DnsRecord
       @host_entity = create_entity(Entities::Host, {:name => host.addr })
-      #@host_entity.domains << @entity
+      @host_entity.dns_records << @entity if @entity.kind_of? Entities::DnsRecord
     else
       @host_entity = @entity # We already have a host
     end
