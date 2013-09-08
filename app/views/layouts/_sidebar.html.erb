@@ -10,13 +10,14 @@
         entity_count = eval("Entities::#{x}").count%>
         <% if entity_count > 0 %>
           <% if session["view_types"].include? x.to_s %>
-            <%= check_box_tag("type[]",x.to_s,true) %>  <%= "#{x} (#{entity_count})" %> <br/>
+            <%= check_box_tag("type[]",x.to_s,true) %> <a href="/entities?type[]=<%=x%>"><%="#{x} (#{entity_count})"%></a> <br/>
           <% else %>
-            <%= check_box_tag("type[]",x.to_s,false) %>  <%= "#{x} (#{entity_count})" %> <br/>
+            <%= check_box_tag("type[]",x.to_s,false) %> <a href="/entities?type[]=<%=x%>"><%="#{x} (#{entity_count})"%></a> <br/>
           <% end %>
         <% end %>
     <% end %>
-     <%= submit_tag "Filter" %>
+    <br/>
+     <%= submit_tag "Show Types" %>
    <% end %>
   </div>
 <%end %>
