@@ -50,7 +50,7 @@ class EntitiesController < ApplicationController
     type = params[:type]
     
     # TODO - there has to be a better way to do this
-    render action: "new", notice: "invalid entity type." unless @entity_types.include?(type)
+    render action: "new", notice: "invalid entity type." unless get_valid_type_class_names.include?(type)
 
     @entity = eval("Entities::#{type}").create
 
