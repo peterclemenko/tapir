@@ -21,6 +21,20 @@
       <tr><td>Image:</td><td><img src="/images/<%=@entity.local_path.split("/").last%>"/></td><tr>
   <% end %>
 
+  <% if @entity.kind_of?(Entities::PhysicalLocation) %>
+      <tr>
+        <td>Image:</td>
+        <td><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=@entity.latitude%>,<%=@entity.longitude%>&zoom=11&size=200x200&sensor=false"></td>
+      </tr>
+      <tr>
+        <td>Street View:</td>
+        <td><img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@entity.latitude%>,<%=@entity.longitude%>&heading=0&sensor=true"></td>
+        <td><img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@entity.latitude%>,<%=@entity.longitude%>&heading=90&sensor=true"></td>
+        <td><img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@entity.latitude%>,<%=@entity.longitude%>&heading=180&sensor=true"></td>
+        <td><img src="http://maps.googleapis.com/maps/api/streetview?size=200x200&location=<%=@entity.latitude%>,<%=@entity.longitude%>&heading=270&sensor=true"></td>
+      </tr>
+  <% end %>
+
   </table>
   <!-- Done iterating through fields --> 
 </div>
