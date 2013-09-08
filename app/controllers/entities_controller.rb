@@ -2,19 +2,25 @@ class EntitiesController < ApplicationController
 
   before_filter :authenticate_user!
 
-  # GET /tapir/entities
-  # GET /tapir/entities.json
+  # GET /entities
+  # GET /entities.json
   def index
-    @entities = Entities::Base.all
+    
+    session[:view_types] = params["type"] if params["type"]
+    
+    entities = []
+    session[:view_types].each do |type|
+      entities << eval("Entities::#{type}").all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: EntitiesDatatable.new(view_context) }
+      format.json { render json: EntitiesDatatable.new(view_context, entities) }
     end
   end
 
-  # GET /tapir/entities/1
-  # GET /tapir/entities/1.json
+  # GET /entities/1
+  # GET /entities/1.json
   def show
     @entity = Entities::Base.find(params[:id])
     respond_to do |format|
@@ -23,31 +29,26 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # GET /tapir/entities/new
-  # GET /tapir/entities/new.json
+  # GET /entities/new
+  # GET /entities/new.json
   def new
-    @entity_types = _get_valid_type_class_names
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @entity }
     end
   end
 
-  # GET /tapir/entities/1/edit
+  # GET /entities/1/edit
   def edit
     @entity = Entities::Base.find(params[:id])
   end
 
-  # POST /tapir/tapir/entities
-  # POST /tapir/tapir/entities.json
+  # POST /entities
+  # POST /entities.json
   def create
 
     # interpret the type based on the user's input. 
     type = params[:type]
-
-    # Check valid entities
-    @entity_types = _get_valid_type_class_names
     
     # TODO - there has to be a better way to do this
     render action: "new", notice: "invalid entity type." unless @entity_types.include?(type)
@@ -65,8 +66,8 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # PUT /tapir/entities/1
-  # PUT /tapir/entities/1.json
+  # PUT /entities/1
+  # PUT /entities/1.json
   def update
     @entity = Entities::Base.find(params[:oid])
 
@@ -81,8 +82,8 @@ class EntitiesController < ApplicationController
     end
   end
 
-  # DELETE /tapir/entities/1
-  # DELETE /tapir/entities/1.json
+  # DELETE /entities/1
+  # DELETE /entities/1.json
   def destroy
     @entity = Entities::Base.find(params[:id])
     @entity.destroy
@@ -91,19 +92,6 @@ class EntitiesController < ApplicationController
       format.html { redirect_to entities_url }
       format.json { head :ok }
     end
-  end
-
-  private
-
-  # Return the valid entity types
-  def _get_valid_type_class_names
-    types = Entities::Base.descendants.map{|x| x.name.split("::").last}
-  types.sort_by{ |t| t.downcase }
-  end
-  
-  # Return the valid entity types
-  def _get_valid_types
-    types = Entities::Base.descendants
   end
 
 end
