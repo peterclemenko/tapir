@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
 
-  def render_parents(entity, result = "", depth=1)
+  def render_parents(entity, result = "", depth=0)
     
     if entity.parents.empty?
       # Base case - Close up the upper-lists
