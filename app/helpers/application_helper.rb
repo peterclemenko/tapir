@@ -43,4 +43,16 @@ module ApplicationHelper
     "<li>" << link_to(entity, entity_path(entity)) << "</li>"   
   end
 
+  # Return the valid entity types
+  def get_valid_type_class_names
+    types = Entities::Base.descendants.map{|x| x.name.split("::").last}
+  types.sort_by{ |t| t.downcase }
+  end
+
+  private  
+    # Return the valid entity types
+    def _get_valid_types
+      types = Entities::Base.descendants
+    end
+
 end
