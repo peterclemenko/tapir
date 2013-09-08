@@ -3,16 +3,10 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_current_tenant
   before_filter :set_current_project
-  before_filter :get_entity_types
   #before_filter :create_default_user_if_none_exists
 
   #def create_default_user_if_none_exists
   #end
-
-
-  def get_entity_types
-    @entity_types = _get_valid_type_class_names
-  end
 
   def set_current_tenant
 
@@ -35,18 +29,5 @@ class ApplicationController < ActionController::Base
       cookies.permanent[:project] = Project.current.name
     end
   end
-
-
-  private
-    # Return the valid entity types
-    def _get_valid_type_class_names
-      types = Entities::Base.descendants.map{|x| x.name.split("::").last}
-    types.sort_by{ |t| t.downcase }
-    end
-    
-    # Return the valid entity types
-    def _get_valid_types
-      types = Entities::Base.descendants
-    end
 
 end
