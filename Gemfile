@@ -72,6 +72,7 @@ gem 'flickr'
 gem 'pry'
 gem 'pry-rails'
 gem 'pry-nav'
+gem 'pry-stack_explorer'
 
 # Network Spider
 gem 'anemone'
