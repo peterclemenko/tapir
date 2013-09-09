@@ -8,9 +8,18 @@ class TasksController < ApplicationController
     @tasks = Task.all
     @tasks.sort_by!{ |t| t.name.downcase }
 
+    @data= { 
+      "sEcho" => 0,
+      "iTotalRecords" => @tasks.count,
+      "iTotalDisplayRecords" => @tasks.count,
+      "aaData" =>  @tasks.map do |task|
+         ["<a href=\"/tasks/#{task.name}\">#{task.name}</a>","#{task.description}"]
+        end
+    }
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @tasks }
+      format.json { render json: @data } 
     end
   end
 

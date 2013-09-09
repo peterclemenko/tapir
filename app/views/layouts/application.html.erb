@@ -24,15 +24,13 @@
       <div class="container">
         <div class="content">
            <div class="row">
-            <div class="span3"> 
+            <div class="span2"> 
               <%= render 'layouts/sidebar' %>
             </div>
-            <div class="span6">
-              <div class="row">
-                <div class="span8">
-                  <%= render 'layouts/messages' %>
-                  <%= yield %>
-                </div>
+            <div class="row">
+              <div class="span10">
+                <%= render 'layouts/messages' %>
+                <%= yield %>
               </div>
             </div>
           </div>

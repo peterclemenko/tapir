@@ -1,15 +1,12 @@
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-  </tr>
-
-<% @tasks.each do |task| %>
-  <tr>
-    <td><%= link_to task.pretty_name, task_path(task.name) %></td>
-    <td><%= task.description %></td>
-  </tr>
-<% end %>
+<table id="tasks" class="display" data-source="<%= tasks_url(format: "json") %>">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 
-<br />
+
