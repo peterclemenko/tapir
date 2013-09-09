@@ -1,23 +1,10 @@
-<table>
-  <tr>
-    <th>ID</th>
-    <th># of Task Runs</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @task_run_sets.each do |task_run_set| %>
-  <tr>
-    <td><%= task_run_set.id %></td>
-    <td><%= task_run_set.task_runs.count %></td>
-    <td><%= link_to 'Show', task_run_set %></td>
-    <td><%= link_to 'Edit', edit_tapir_task_run_set_path(task_run_set) %></td>
-    <td><%= link_to 'Destroy', task_run_set, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table id="task_run_sets" class="display" data-source="<%= task_run_sets_url(format: "json") %>">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'Back', tapir_entities_path %>

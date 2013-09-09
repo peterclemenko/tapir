@@ -1,13 +1,9 @@
-<table>
-  <tr>
-    <th>Task Name</th>
-  </tr>
-
-<% @task_runs.reverse.each do |task_run| %>
-  <tr>
-    <td><%= link_to task_run, task_run_path(task_run) %></td>
-  </tr>
-<% end %>
+<table id="task_runs" class="display" data-source="<%= task_runs_url(format: "json") %>">
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
-
-<br />

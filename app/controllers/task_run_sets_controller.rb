@@ -7,9 +7,18 @@ class TaskRunSetsController < ApplicationController
   def index
     @task_run_sets = TaskRunSet.all
 
+    @data= { 
+      "sEcho" => 0,
+      "iTotalRecords" => @task_run_sets.count,
+      "iTotalDisplayRecords" => @task_run_sets.count,
+      "aaData" =>  @task_run_sets.map do |task_run_set|
+         ["<a href=\"/tasks/#{task_run_set}\">#{task_run_set}</a>"]
+        end
+    }
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @task_run_sets }
+      format.json { render json: @data }
     end
   end
 
