@@ -25,6 +25,10 @@ class Task
   attr_accessor :task_logger
   attr_accessor :task_run
 
+  def to_json
+    { :name => name, :description => description}
+  end
+
   def candidates
     candidate_list = []
     Entities::Base.all.each do |entity| 
