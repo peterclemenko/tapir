@@ -9,6 +9,8 @@
       <td>
         <%= if value.name == "text" 
              simple_format "#{eval("@entity.#{value.name}")}" 
+            elsif value.name == "url"
+              simple_format "<a href=\"#{eval("@entity.#{value.name}")}\">#{eval("@entity.#{value.name}")}</a>"
             else
               "#{eval("@entity.#{value.name}")}" 
             end
