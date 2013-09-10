@@ -41,9 +41,9 @@ def run
 
     @task_logger.log "Looking for account name: #{username.name}"
     
-    ###
-    ### Loop through services, creating a client & checking
-    ###
+    #
+    # Loop through services, creating a client & checking
+    #
     ["Facebook", "FourSquare", "LinkedIn", "Google", "Myspace", 
     "SoundCloud", "TwitPic", "Twitter",  "YFrog" ].each do |client_name|
       

@@ -3,7 +3,7 @@ jQuery ->
     sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
     bJQueryUI: true
     sPaginationType: "scrolling"
-    sScrollY: "500px"
+    sScrollY: "400px"
     sDom: "frtiS"
     bDeferRender: true
     bProcessing: true

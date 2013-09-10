@@ -1,8 +1,6 @@
 <% if request.path =~ /entities/ %>
   <div class="sidebar">
   <br/>
-  <%= link_to 'New Entity', new_entity_path %>
-  <br/>
   <br/>
   Show types:
   <%= form_tag(entities_path, method: "get") do %>
@@ -19,5 +17,12 @@
     <br/>
      <%= submit_tag "Show Types" %>
    <% end %>
+    <br/>
+    <br/>
+    <%= link_to '[New Entity]', new_entity_path %>
   </div>
-<%end %>
+<% else  %>
+   <div class="sidebar">
+     &nbsp;
+   </div>
+<% end %>
