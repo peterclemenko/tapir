@@ -13,8 +13,7 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Entities::Person,
-    Entities::Username]
+  [ Entities::Username ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -33,12 +32,8 @@ def run
   #
   # Store the account name, depending on the entity we passed in.
   #
-  if @entity.kind_of? Entities::Person
-    usernames = @entity.usernames.all
-  else
-    usernames = [@entity.name]
-  end
-  
+  usernames = [@entity.name]
+
   #
   # Iterate through all account names!
   #
