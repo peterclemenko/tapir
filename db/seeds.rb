@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'securerandom'
+
 puts "Removing Reports"
 ReportTemplate.all.each {|x| x.destroy }
 
@@ -120,16 +122,24 @@ Tenant.each do |t|
   # Check to see if we have any users available for this tenant
   if User.count == 0
     puts "Could not find a user for tenant #{t.host}"
+    
+    account_domain = t.host
+    account_domain = account_domain.split(".")
+    account_domain.shift  #drop the subdomain
+    account_domain = account_domain.join(".")
+
     account_name = "#{t.host.split(".").first}"
-    account_email = "#{account_name}@tapirrecon.com"
-    puts "Creating a user with name: #{account_name} and email: #{account_email}"
+    account_email = "#{account_name}@#{account_domain}"
+    account_password = SecureRandom.hex(6)
+
     user = User.create!( 
       :name => account_name, 
-      :email => account_email, 
-      :password => 'tapir123', 
-      :password_confirmation => 'tapir123')
-    puts "Created user #{user.email} for tenant #{t.host}"
+      :email => account_email,
+      :password => account_password,  
+      :password_confirmation => account_password)
+    puts "Created user #{user.email} for tenant #{t.host} with password #{account_password}"
   else
     puts "User exists for tenant #{t.host}"
   end
+
 end
