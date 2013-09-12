@@ -88,10 +88,20 @@ class EntitiesController < ApplicationController
     @entity.destroy
 
     respond_to do |format|
-      format.html { redirect_to entities_url }
+      format.html { 
+        # This is a hack to handle the delete via the 
+        # task_run_sets page specially. We don't want 
+        # to always send the user back to the index action
+        if request.referer =~ /task_run_sets/
+          redirect_to request.referer
+        else
+          redirect_to entities_url 
+        end
+      }
       format.json { head :ok }
     end
   end
+
 
 
   

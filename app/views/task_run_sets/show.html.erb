@@ -18,7 +18,7 @@
       <% task_run.entity_mappings.each do |x| %>
         <% child = x.get_child 
           if child %>
-        <li><%= link_to(child,entity_path(child)) %> <%= link_to "[X]", entity_path(child), :confirm => 'Are you sure?', :method => :delete %></li>
+        <li><%= link_to(child,entity_path(child)) %> <%= link_to "[X]", entity_path(child), :method => :delete %></li>
       <%  end 
         end %>
       </ul>
