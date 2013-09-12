@@ -23,7 +23,7 @@ private
       criteria.map do |entity|
       data << [
         link_to("[x]","/entities/#{entity._id}", :method => :delete),
-        link_to(entity.class, "/entities"),
+        entity.class.to_s,
         link_to(entity.name, "/entities/#{entity._id}")
       ]
       end
