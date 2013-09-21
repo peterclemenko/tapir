@@ -23,10 +23,10 @@ class ApplicationController < ActionController::Base
   def set_current_tenant
 
     # Grab the current host
-    @current_tenant = Tenant.current = Tenant.where(:host => request.host).first
+    @current_tenant = Tenant.current = Tenant.where(:host => request.host.to_s.downcase).first
 
     # Create a tenant record for this host if none exists. 
-    @current_tenant = Tenant.current = Tenant.create(:host => request.host) unless @current_tenant
+    @current_tenant = Tenant.current = Tenant.create(:host => request.host.to_s.downcase) unless @current_tenant
   end
 
 
