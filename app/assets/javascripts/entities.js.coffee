@@ -3,7 +3,7 @@ jQuery ->
     bJQueryUI: true
     sPaginationType: "scrolling"
     sScrollY: "500px"
-    sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'>>S"
+    sDom: "<'row-fluid'<'span6'T><'span6'f>r>t<'row-fluid'<'span6'i><'span6'>>"
     bDeferRender: true
     bProcessing: true
     bServerSide: true
@@ -11,20 +11,16 @@ jQuery ->
     aaSorting: [ [0,'asc'], [1,'asc'] ]
     aoColumns: [
       { "sTitle": "Type", "sWidth": "30%" },
-      { "sTitle": "Name", "sWidth": "70%" }
-    ]
+      { "sTitle": "Name", "sWidth": "70%" }]
     sAjaxSource: $('#entities').data('source')
     oTableTools: {
-        "sRowSelect": "multi",
-        "aButtons": [ "copy",
-                      "print",
-                      "select_all",
-                      "select_none",
-                      {
-                        "sExtends":    "collection",
-                        "sButtonText": 'Save <span class="caret" />',
-                        "aButtons":    [ "csv", "xls", "pdf" ]
-                      }
-                    ]
+      sRowSelect: "multi",
+      sSwfPath: "media/extras/TableTools/swf/copy_csv_xls_pdf.swf",
+      aButtons: [ "select_all", "select_none", "copy",
+          {
+            sExtends:    "collection",
+            sButtonText: "Save",
+            aButtons:    [ "csv", "xls", "pdf" ]
+          }
+        ]
     }
-

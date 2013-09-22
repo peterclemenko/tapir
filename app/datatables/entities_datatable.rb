@@ -56,7 +56,7 @@ private
   end
 
   def sort_column
-    columns = %w[ del type name ]
+    columns = %w[ type name ]
     columns[params[:iSortCol_0].to_i]
   end
 

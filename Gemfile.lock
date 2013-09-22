@@ -17,7 +17,7 @@ GIT
 
 GIT
   remote: https://github.com/pentestify/jquery-datatables-rails
-  revision: 38097f0a1ae1ac7d3fcb2f19b44569742e04699c
+  revision: 7b4197b9d09a90f31cbff6d2c984e168f725a91a
   specs:
     jquery-datatables-rails (1.11.2)
       jquery-rails
