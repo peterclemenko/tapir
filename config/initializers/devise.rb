@@ -1,10 +1,26 @@
+
+# As stolen from secret_token.rb
+def find_secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist? token_file
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    raise "Unable to find secret token for devise"
+  end
+end
+
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "postmaster@intrigue.io"
+
+  # Use the same secret token as the app
+  config.secret_key = find_secure_token
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
