@@ -15,41 +15,19 @@
 
 /* compensate the overlap caused by bootstrap top navigation, min. 40px at the top! */
 body { 
-	background: url('/textures/retina_dust/retina_dust.png') repeat ;
+  background: url('/textures/retina_dust/retina_dust.png') repeat ;
   padding: 60px 10px 10px 10px;
   font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
 }
 
-div.dataTables_length label {
-    width: 460px;
-    float: left;
-    text-align: left;
-}
- 
-div.dataTables_length select {
-    width: 75px;
-}
- 
-div.dataTables_filter label {
-    float: right;
-    width: 460px;
-}
- 
-div.dataTables_info {
-    padding-top: 8px;
-}
- 
-div.dataTables_paginate {
-    float: right;
-    margin: 0;
-}
- 
-table {
-    margin: 1em 0;
-    clear: both;
-}
 
-.navbar-inner {
-	background: url('/textures/use_your_illusion/use_your_illusion.png') repeat ;
-  font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
+a:link {color:#0000FF;}      /* unvisited link */
+a:visited {color:#0000FF;}  /* visited link */
+a:hover {color:#0000FF;}  /* mouse over link */
+a:active {color:#0000FF;}  /* selected link */
+
+a.button {
+  &:visited {
+    color: #0000ff !important;
+  }
 }

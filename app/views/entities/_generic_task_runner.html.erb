@@ -1,0 +1,17 @@
+<p>
+<% if(@tasks.count > 0) %>
+<b>Run Task:</b>
+  <form name="task_runner" id="run_task" action="/run_task" method="POST">
+    <%=token_tag form_authenticity_token %>
+    <select name="task_name">
+      <% @tasks.each do |t| %>
+        <option value="<%=t.name%>"><%=t%></option>
+      <% end %>
+    </select>
+    <input type="Submit" value="Run Task"></input>
+  </form>
+ <% else %>
+ <b>Run Task:</b>
+    No tasks.
+<% end %>
+</p>

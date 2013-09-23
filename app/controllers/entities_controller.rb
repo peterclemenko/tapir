@@ -12,6 +12,9 @@ class EntitiesController < ApplicationController
       entities << eval("Entities::#{type}").all
     end
 
+    # Gather all tasks for our task runner
+    @tasks = Task.all
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: EntitiesDatatable.new(view_context, entities) }
