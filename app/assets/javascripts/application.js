@@ -12,7 +12,6 @@
 //= require dataTables/extras/ZeroClipboard
 //= require_tree .
 
-
 /* API method to get paging information */
 $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 {

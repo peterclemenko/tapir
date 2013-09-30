@@ -9,25 +9,14 @@
  *= require dataTables/extras/TableTools
  *= require dataTables/extras/TableTools_JUI
  *= require_tree .
-*/  
+*/
 
 @import "bootstrap";
 
 /* compensate the overlap caused by bootstrap top navigation, min. 40px at the top! */
+/* Texture from http://subtlepatterns.com/ */
 body { 
   background: url('/textures/retina_dust/retina_dust.png') repeat ;
   padding: 60px 10px 10px 10px;
   font-family: ‘Lucida Sans Unicode’, ‘Lucida Grande’, sans-serif;
-}
-
-
-a:link {color:#0000FF;}      /* unvisited link */
-a:visited {color:#0000FF;}  /* visited link */
-a:hover {color:#0000FF;}  /* mouse over link */
-a:active {color:#0000FF;}  /* selected link */
-
-a.button {
-  &:visited {
-    color: #0000ff !important;
-  }
 }

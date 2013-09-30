@@ -26,8 +26,3 @@ jQuery ->
           }
         ]
     }
-
-  $("#test").submit ->
-    sData = $("entities", oTable.fnGetNodes()).serialize()
-    alert "The following data would have been submitted to the server: \n\n" + sData
-    false
