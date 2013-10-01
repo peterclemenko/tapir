@@ -42,13 +42,31 @@ def run
 
     # Parse the cert
     cert = OpenSSL::X509::Certificate.new(ssl_client.peer_cert)
-    
+
+    # Check the subjectAltName property, and if we have names, here, parse them.
+    cert.extensions.each do |ext|
+      if ext.oid =~ /subjectAltName/
+
+        alt_names = ext.value.split(",").collect do |x|
+          x.gsub(/DNS:/,"").strip
+        end
+
+        alt_names.each do |alt_name|
+          create_entity Entities::DnsRecord, { :name => alt_name }
+        end
+
+      end
+    end
+
     # Close the sockets
     ssl_client.sysclose
     tcp_client.close
 
     # Create an SSL Certificate entity
-    create_entity Entities::SslCert, { :name => cert.subject, :text => cert.to_text } 
+    create_entity Entities::SslCert, { :name => cert.subject,
+                                       :text => cert.to_text }
+
+
   rescue OpenSSL::SSL::SSLError => e
     @task_logger.log "Caught an error: #{e}"
   rescue Errno::ECONNRESET => e 
