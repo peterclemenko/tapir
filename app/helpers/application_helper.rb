@@ -17,6 +17,8 @@ module ApplicationHelper
 
   def render_parents(entity, result = "", depth=0)
     
+    return if depth > 5
+
     if entity.parents.empty?
       # Base case - Close up the upper-lists
       depth.times do result << "</ul>" end
