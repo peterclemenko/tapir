@@ -1,6 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
   $('#task_run_sets').dataTable
     sDom: "<'row'<'span8'l><'span8'f>r>t<'row'<'span8'i><'span8'p>>"
@@ -12,8 +9,11 @@ jQuery ->
     bProcessing: true
     bServerSide: false
     iDisplayLength: 50
-    aaSorting: [ [0,'asc'] ],
+    aaSorting: [ [0,'desc'] ],
     aoColumns: [
-      { "sTitle": "Name", "sWidth": "100%" },
+      { "sTitle": "Name", "sWidth": "20%" },
+      { "sTitle": "Tasks", "sWidth": "70%" },
+      { "sTitle": "Completed", "sWidth": "10%" },
+
     ]
     sAjaxSource: $('#task_run_sets').data('source')

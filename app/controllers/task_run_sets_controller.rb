@@ -12,8 +12,11 @@ class TaskRunSetsController < ApplicationController
       "iTotalRecords" => @task_run_sets.count,
       "iTotalDisplayRecords" => @task_run_sets.count,
       "aaData" =>  @task_run_sets.map do |task_run_set|
-         ["<a href=\"/tasks/#{task_run_set}\">#{task_run_set}</a>"]
-        end
+         [
+          "<a href=\"/task_run_sets/#{task_run_set._id}\">#{task_run_set.id}</a>", 
+          "#{task_run_set.task_runs.map{|t|t.task_name}.join(" <br/>")}",
+          "#{task_run_set.task_runs.count}"]
+      end
     }
 
     respond_to do |format|
@@ -124,20 +127,23 @@ class TaskRunSetsController < ApplicationController
         #
         entity_type = key.split("#").first
         entity_id = key.split("#").last
+        task_run_set_id = task_run_set.id.to_s
 
-        type = eval(entity_type)
-        entities << type.find(entity_id)
+        tenant_id = Tenant.current.id.to_s
+        project_id = Project.current.id.to_s
+        # Run the task on each entity with the TaskRunner Worker
+        Resque.enqueue(TaskRunner, 
+          tenant_id,
+          project_id,
+          entity_id, 
+          entity_type, 
+          task_name, 
+          task_run_set_id, 
+          options)
     end
 
-    #
-    # Run the task on each entity
-    #
-    entities.each do |o|
-      # and run the task  
-      o.run_task(task_name, task_run_set.id, options)
-    end
     
-     redirect_to :action => "show", :id => task_run_set.id
+     redirect_to :action => "index", :id => task_run_set.id
   end
   
 end

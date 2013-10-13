@@ -1,5 +1,4 @@
 jQuery ->
-
   oTable = undefined
   oTable = $('#entities').dataTable
     bJQueryUI: true

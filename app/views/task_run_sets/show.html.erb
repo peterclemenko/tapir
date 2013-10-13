@@ -1,35 +1,36 @@
 <% @task_run_set.task_runs.each do |task_run| %>
-<table border="1" width="100%">
-  <tr>
-    <th>Task Name</th>
-    <td>&nbsp;</td>
-    <td><%= link_to task_run.task_name, task_path(Task.find_by_name(task_run.task_name).name) %></td>
-  </tr>
-  <tr>
-    <th>Task Entity</th>
-    <td>&nbsp;</td>
-    <td><%= link_to task_run.entity, entity_path(task_run.entity) %></td>
-  </tr>
-  <tr>
-    <th>Result:</th>
-    <td>&nbsp;</td>
-    <td>
-      <ul>
-      <% task_run.entity_mappings.each do |x| %>
-        <% child = x.get_child 
-          if child %>
-        <li><%= link_to(child,entity_path(child)) %> <%= link_to "[X]", entity_path(child), :method => :delete %></li>
-      <%  end 
-        end %>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <th>Task Log:</th>
-    <td>&nbsp;</td>
-    <td><%= simple_format task_run.task_log %></td>
-  </tr>
-</table><br/>
-  <% end %>
+  <table border="1" width="100%">
+    <tr>
+      <th>Task Name</th>
+      <td>&nbsp;</td>
+      <td><%= link_to task_run.task_name, task_path(Task.find_by_name(task_run.task_name).name) %></td>
+    </tr>
+    <tr>
+      <th>Task Entity</th>
+      <td>&nbsp;</td>
+      <td><%= link_to task_run.entity, entity_path(task_run.entity) %></td>
+    </tr>
+    <tr>
+      <th>Result:</th>
+      <td>&nbsp;</td>
+      <td>
+        <ul>
+        <% task_run.entity_mappings.each do |x| %>
+          <% child = x.get_child 
+            if child %>
+          <li><%= link_to(child,entity_path(child)) %> <%= link_to "[X]", entity_path(child), :method => :delete %></li>
+        <%  end 
+          end %>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <th>Task Log:</th>
+      <td>&nbsp;</td>
+      <td><%= simple_format task_run.task_log %></td>
+    </tr>
+  </table><br/>
 
-<%= link_to 'Back', entities_path %>
+<% end %>
+
+<%= link_to 'Entities', entities_path %>
