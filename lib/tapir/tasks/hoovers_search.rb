@@ -61,7 +61,7 @@ def run
 
     end
   rescue Exception => e
-    @task_logger.log_error "Caught Exception: #{e}"
+    @task_logger.error "Caught Exception: #{e}"
   end
 end
 

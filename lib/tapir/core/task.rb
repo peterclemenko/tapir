@@ -140,7 +140,7 @@ class Task
     # entity. This should prevent the entity mapping from getting created.
     #    
     if new_entity.save
-      @task_logger.log_good "Created new entity: #{new_entity}"
+      @task_logger.good "Created new entity: #{new_entity}"
     else
       @task_logger.log "Could not save entity, are you sure it's valid & doesn't already exist?"
       

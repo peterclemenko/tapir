@@ -16,15 +16,15 @@ class TapirLogger
   end
 
   ######
-  def log_debug(message) 
+  def debug(message) 
     _log "[D] Tapir: " << message
   end
 
-  def log_good(message)
+  def good(message)
     _log "[+] Tapir: " << message
   end
 
-  def log_error(message)
+  def error(message)
     _log "[-] Tapir: " << message
   end
   ######

@@ -44,7 +44,7 @@ def run
         pic_data = EXIFR::JPEG.new(photo.local_path) #/tmp/twitpic_file_35193:
 
         if pic_data.gps_latitude && pic_data.gps_longitude
-          @task_logger.log_good "Parsing exif data!"
+          @task_logger.good "Parsing exif data!"
           lat = pic_data.gps_latitude[0].to_f + (pic_data.gps_latitude[1].to_f / 60) + (pic_data.gps_latitude[2].to_f / 3600)
           long = pic_data.gps_longitude[0].to_f + (pic_data.gps_longitude[1].to_f / 60) + (pic_data.gps_longitude[2].to_f / 3600)
           if pic_data.gps_longitude_ref && pic_data.gps_latitude_ref
@@ -65,7 +65,7 @@ def run
           @task_logger.log "no gps_latitude / gps_longitude. no exif data to parse"
         end
       rescue EXIFR::MalformedJPEG => e
-        @task_logger.log_error "Unable to parse, malformed jpg"
+        @task_logger.error "Unable to parse, malformed jpg"
       end
 
       create_entity Entities::Image, 

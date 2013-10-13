@@ -32,7 +32,7 @@ def run
   begin
     myname = Socket.gethostname 
   rescue SocketError => err_msg
-    @task_logger.log_error "Couldn't get hostname: #{err_msg}"
+    @task_logger.error "Couldn't get hostname: #{err_msg}"
     return
   end
 

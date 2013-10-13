@@ -68,9 +68,9 @@ def run
 
 
   rescue OpenSSL::SSL::SSLError => e
-    @task_logger.log "Caught an error: #{e}"
+    @task_logger.error "Caught an error: #{e}"
   rescue Errno::ECONNRESET => e 
-    @task_logger.log "Caught an error: #{e}"
+    @task_logger.error "Caught an error: #{e}"
   end
 end
 

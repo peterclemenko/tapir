@@ -58,7 +58,7 @@ def run
     ]
   end
 
-  @task_logger.log_good "Using srv list: #{srv_list}"
+  @task_logger.good "Using srv list: #{srv_list}"
 
   srv_list.each do |srv|
     begin
@@ -75,11 +75,11 @@ def run
         weight = rec.weight
         priority = rec.priority
 
-        @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+        @task_logger.good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
 
         # If we resolved, create the right entities
         if resolved_address
-          @task_logger.log_good "Creating domain and host entities..."
+          @task_logger.good "Creating domain and host entities..."
 
           # Create a dns record
           d = create_entity(Entities::DnsRecord, {:name => domain })
@@ -101,7 +101,7 @@ def run
 
       end
     rescue Exception => e
-      @task_logger.log_error "Hit exception: #{e}"
+      @task_logger.error "Hit exception: #{e}"
     end
 
 

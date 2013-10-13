@@ -32,7 +32,7 @@ def run
     resolved_name = Resolv.new.getname(@entity.name).to_s
 
     if resolved_name
-      @task_logger.log_good "Creating domain #{name}"
+      @task_logger.good "Creating domain #{name}"
       
       # Create our new dns record entity with the resolved name
       d = create_entity(Entities::DnsRecord, {:name => resolved_name})
@@ -44,7 +44,7 @@ def run
     end
 
   rescue Exception => e
-    @task_logger.log_error "Hit exception: #{e}"
+    @task_logger.error "Hit exception: #{e}"
   end
 
 

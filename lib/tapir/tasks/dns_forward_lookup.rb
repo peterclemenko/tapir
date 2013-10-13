@@ -32,7 +32,7 @@ def run
       resolved_address = Resolv.new.getaddress(@entity.name)
       
       if resolved_address
-        @task_logger.log_good "Creating host entity for #{resolved_address}"
+        @task_logger.good "Creating host entity for #{resolved_address}"
         h = create_entity(Entities::Host, {:name => resolved_address})
         # Set the host for this dns record
         @entity.host = h
@@ -42,7 +42,7 @@ def run
       end
 
     rescue Exception => e
-      @task_logger.log_error "Hit exception: #{e}"
+      @task_logger.error "Hit exception: #{e}"
     end
 
 end

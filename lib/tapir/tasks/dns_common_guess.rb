@@ -41,7 +41,7 @@ def run
     begin
       res_answer = Resolv.new.getaddress(domain)
       if res_answer
-        @task_logger.log_good "DNS Guess succeeded for #{res_answer}"
+        @task_logger.good "DNS Guess succeeded for #{res_answer}"
 
         # We know the domain is ~valid, and the ip address too
         d = create_entity(Entities::DnsRecord, :name => domain)

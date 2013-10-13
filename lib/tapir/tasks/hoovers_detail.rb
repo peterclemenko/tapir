@@ -66,10 +66,10 @@ def run
 
         # Get Address & Clean up
         street_address = Nokogiri::XML((doc/"/html/body/div[2]/div[2]/table/tbody/tr/td/strong/span").to_xml).text
-        @task_logger.log_good "Got Street Address: #{street_address}"
+        @task_logger.good "Got Street Address: #{street_address}"
 
         city_state = Nokogiri::XML((doc/"/html/body/div[2]/div[2]/table/tbody/tr[2]/td/strong/span").to_xml).text
-        @task_logger.log_good "Got City & State: #{city_state}"
+        @task_logger.good "Got City & State: #{city_state}"
 
         # Set the City and State
         create_entity(Entities::PhysicalLocation, {
@@ -85,7 +85,7 @@ def run
           full_name = user_line.inner_text unless /E-mail/ =~ user_line.inner_text 
 
           # Create the user entitys
-          @task_logger.log_good "Adding user entity for: #{full_name}"
+          @task_logger.good "Adding user entity for: #{full_name}"
           create_entity(Entities::Person, { :name => full_name })
         end
 
@@ -93,11 +93,11 @@ def run
         description = Nokogiri::XML((doc/"/html/body/div[3]/div[2]/div[7]/p").to_xml).text
 
       rescue Exception => e
-        @task_logger.log_error "Caught Exception: #{e}"
+        @task_logger.error "Caught Exception: #{e}"
       end
     end    
   rescue Exception => e
-    @task_logger.log_error "Caught Exception: #{e}"
+    @task_logger.error "Caught Exception: #{e}"
   end
 end
 

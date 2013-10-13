@@ -82,7 +82,7 @@ def run
             end
 
             # Record keeping
-            @task_logger.log_good "Zone Tranfer Succeeded on #{@entity.name}"
+            @task_logger.good "Zone Tranfer Succeeded on #{@entity.name}"
             #@task_run.save_raw_result zone.to_s
 
           end

@@ -85,27 +85,27 @@ def setup(entity, options={})
     end
 
   rescue Timeout::Error => e
-    @task_logger.log "Timeout!"
+    @task_logger.error "Timeout!"
   rescue OpenSSL::SSL::SSLError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue OpenURI::HTTPError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue Net::HTTPBadResponse => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue EOFError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue SocketError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue RuntimeError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue SystemCallError => e
-    @task_logger.log "Unable to connect: #{e}"
+    @task_logger.error "Unable to connect: #{e}"
   rescue ArgumentError => e
-    @task_logger.log "Argument Error #{e}"
+    @task_logger.error "Argument Error #{e}"
   rescue Encoding::InvalidByteSequenceError => e
-    @task_logger.log "Encoding error: #{e}"
+    @task_logger.error "Encoding error: #{e}"
   rescue Encoding::UndefinedConversionError => e
-    @task_logger.log "Encoding error: #{e}"
+    @task_logger.error "Encoding error: #{e}"
   end
 
 end

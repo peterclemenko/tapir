@@ -21,15 +21,15 @@ class TaskLogger
   end
 
   ######
-  def log_debug(message) 
+  def debug(message) 
     _log "[D] #{@name}: " << message
   end
 
-  def log_good(message)
+  def good(message)
     _log "[+] #{@name}: " << message
   end
 
-  def log_error(message)
+  def lerror(message)
     _log "[-] #{@name}: " << message
   end 
   ######

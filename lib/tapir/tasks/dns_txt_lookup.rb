@@ -41,8 +41,8 @@ def run
 
     # If we got a success to the query.
     if res_answer
-      @task_logger.log_good "TXT lookup succeeded on #{@entity.name}:\n #{res_answer.answer}"
-      @task_logger.log_good "Answer: #{res_answer}"
+      @task_logger.good "TXT lookup succeeded on #{@entity.name}:\n #{res_answer.answer}"
+      @task_logger.good "Answer: #{res_answer}"
 
 
       # TODO - Parse for netbocks and hostnames

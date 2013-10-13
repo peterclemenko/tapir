@@ -95,11 +95,11 @@ def run
 
         # Try to resolve
         resolved_address = Resolv.new.getaddress(domain)
-        @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+        @task_logger.good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
 
         # If we resolved, create the right entitys
         if resolved_address
-          @task_logger.log_good "Creating domain and host entities..."
+          @task_logger.good "Creating domain and host entities..."
           d = create_entity(Entities::DnsRecord, {:name => domain})
           h = create_entity(Entities::Host, {:name => resolved_address})
         end
@@ -107,7 +107,7 @@ def run
         #@task_run.save_raw_result "#{domain}: resolved_address"
 
       rescue Exception => e
-        @task_logger.log_error "Hit exception: #{e}"
+        @task_logger.error "Hit exception: #{e}"
       end
 
    

@@ -46,7 +46,7 @@ end
         "search", "staging"]
     end
 
-    @task_logger.log_good "Using subdomain list: #{subdomain_list}"
+    @task_logger.good "Using subdomain list: #{subdomain_list}"
 
     result_list = []
     
@@ -56,10 +56,10 @@ end
       # when we know there's a new host associated)
       if Resolv.new.getaddress("noforkingway#{rand(100000)}.#{@entity.name}")
         wildcard_domain = true 
-        @task_logger.log_error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
+        @task_logger.error "WARNING! Wildcard domain detected, only saving validated domains/hosts."
       end
     rescue Resolv::ResolvError
-      @task_logger.log_good "Looks like no wildcard dns. Moving on."
+      @task_logger.good "Looks like no wildcard dns. Moving on."
     end
 
     subdomain_list.each do |sub|
@@ -76,12 +76,12 @@ end
 
         # Try to resolve
         resolved_address = Resolv.new.getaddress(domain)
-        @task_logger.log_good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
+        @task_logger.good "Resolved Address #{resolved_address} for #{domain}" if resolved_address
         
         # If we resolved, create the right entitys
         if resolved_address
           unless wildcard_domain
-            @task_logger.log_good "Creating domain and host entities..."
+            @task_logger.good "Creating domain and host entities..."
             # create new host and domain entitys
             d = create_entity(Entities::DnsRecord, {:name => domain })
             h = create_entity(Entities::Host, {:name => resolved_address})
@@ -95,7 +95,7 @@ end
           end
         end
       rescue Exception => e
-        @task_logger.log_error "Hit exception: #{e}"
+        @task_logger.error "Hit exception: #{e}"
       end
     end
   end
