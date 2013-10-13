@@ -7,7 +7,7 @@ jQuery ->
     sDom: "frtiS"
     bDeferRender: true
     bProcessing: true
-    bServerSide: true
+    bServerSide: false
     iDisplayLength: 50
     aaSorting: [ [3,'desc'] ],
     aoColumns: [

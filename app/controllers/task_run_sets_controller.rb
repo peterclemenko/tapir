@@ -12,10 +12,12 @@ class TaskRunSetsController < ApplicationController
       "iTotalRecords" => @task_run_sets.count,
       "iTotalDisplayRecords" => @task_run_sets.count,
       "aaData" =>  @task_run_sets.map do |task_run_set|
+         #[ "test", "test", "test","test"]
          [
-          "<a href=\"/task_run_sets/#{task_run_set._id}\">#{task_run_set.id}</a>", 
-          "#{task_run_set.task_runs.map{|t|t.task_name}.join(" <br/>")}",
-          "#{task_run_set.task_runs.count}"]
+          "<a href=\"/task_run_sets/#{task_run_set._id}\">#{task_run_set.task_runs.map{|t| t.task_name}.uniq}</a>",
+          "#{task_run_set.task_runs.count}",
+          "#{task_run_set.num_tasks}",
+          "#{task_run_set.updated_at}"]
       end
     }
 
@@ -103,7 +105,11 @@ class TaskRunSetsController < ApplicationController
     entity_set = params[:entities]
     task_name = params[:task_name]
     options = params[:options] || {}
-    task_run_set = TaskRunSet.create
+    
+    # Create the task run set
+    task_run_set = TaskRunSet.new
+    task_run_set.num_tasks = entity_set.count
+    task_run_set.save
     
     #
     # If we don't have reasonable input, return

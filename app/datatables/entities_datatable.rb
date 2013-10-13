@@ -23,7 +23,8 @@ private
       criteria.map do |entity|
       data << [
         entity.class.to_s,
-        link_to(entity.name, "/entities/#{entity._id}")
+        link_to(entity.name, "/entities/#{entity._id}"),
+        entity.updated_at
       ]
       end
     end

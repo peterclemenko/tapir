@@ -9,10 +9,11 @@ jQuery ->
     bProcessing: true
     bServerSide: true
     iDisplayLength: 50
-    aaSorting: [ [0,'asc'], [1,'asc'] ]
+    aaSorting: [ [2,'asc'] ]
     aoColumns: [
-      { "sTitle": "Type", "sWidth": "25%" },
-      { "sTitle": "Name", "sWidth": "75%" }]
+      { "sTitle": "Type", "sWidth": "20%" },
+      { "sTitle": "Name", "sWidth": "50%" },
+      { "sTitle": "Updated At", "sWidth": "30%" }]
     sAjaxSource: $('#entities').data('source')
     oTableTools: {
       sRowSelect: "multi",

@@ -1,46 +1,49 @@
 module ApplicationHelper
 
-  def render_children(entity, result = "")
+  def render_children(entity, result = "", depth=0)
     # Base case 
-    return result = "" if entity.children.empty?
-    
-    result << "<ul>"  
-    entity.children.each do |x|
-      result << print_result(x)
-      next if x.children.include? entity
-      render_children(x, result) 
+    if entity.children.empty?
+      # Base case - Close up the upper-lists
+      return result
+    else
+      depth = depth + 1
     end
-    result << "</ul>"
+    
+    entity.children.each do |x|
+      result << print_result(x, depth)
+      next if x.children.include? entity
+      render_children(x, result, depth) 
+    end
 
   result 
   end
 
   def render_parents(entity, result = "", depth=0)
-
-    if entity.parents.empty? or depth > 5
+    if entity.parents.empty?
       # Base case - Close up the upper-lists
-      depth.times do result << "</ul>" end
       return result
     else
       depth = depth + 1
     end
     
     entity.parents.each do |x|
+      # Prevent loops
       next if x.parents.include? entity
-      
-      # Print this parent at the beginning of the string
-      result.prepend print_result(x)
-      result.prepend "<ul>"
 
-      # Recurse on the child
+      # Print this parent at the beginning of the string
+      result.prepend "#{print_result(x, depth)}"      
+
+            # Recurse on the parent
       render_parents(x, result, depth)
+      
+
     end
     result
   end
 
-  def print_result(entity)
+  def print_result(entity, depth)
     # << " (#{item.task_runs.where(:task_entity_id => item.id).first}) " 
-    "<li>" << link_to(entity, entity_path(entity)) << "</li>"   
+    "<li>#{link_to(entity, entity_path(entity))} (Distance: #{depth})</li>"
   end
 
   # Return the valid entity types

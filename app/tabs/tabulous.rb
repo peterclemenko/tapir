@@ -59,7 +59,7 @@ Tabulous.setup do |config|
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       [    :entities_tab              ,    'Entities'              ,    entities_path                                      ,    true        ,    true        ],
       [    :tasks_tab                 ,    'Tasks'                 ,    tasks_path                                         ,    true        ,    true        ],
-      [    :task_runs_tab             ,    'Completed Tasks'       ,    task_runs_path                                     ,    true        ,    true        ],
+      [    :task_run_sets_tab         ,    'Completed Tasks'       ,    task_run_sets_path                                 ,    true        ,    true        ],
       [    :reports_tab               ,    'Reports'               ,    report_templates_path                              ,    true        ,    true        ],
       [    :settings_tab              ,    'Settings'              ,    settings_path                                      ,    true        ,    true        ],
       [    :projects_tab              ,    'Projects'              ,    projects_path                                      ,    true        ,    true        ],
@@ -90,7 +90,7 @@ Tabulous.setup do |config|
       #--------------------------------------------------------------------------------#
       [    :entitys               ,    :all_actions    ,    :entitys_tab               ],
       [    :tasks                 ,    :all_actions    ,    :tasks_tab                 ],
-      [    :task_runs             ,    :all_actions    ,    :task_runs_tab             ],
+      [    :task_run_sets         ,    :all_actions    ,    :task_run_sets_tab         ],
       [    :report_templates      ,    :all_actions    ,    :reports_tab               ],
       [    :settings              ,    :all_actions    ,    :settings_tab              ],
       [    :projects              ,    :all_actions    ,    :projects_tab              ],
