@@ -4,7 +4,7 @@
 
 rails_env   = ENV['RAILS_ENV']  || "development"
 rails_root  = ENV['RAILS_ROOT'] || Dir.pwd
-num_workers = rails_env == 'production' ? 5 : 2
+num_workers = rails_env == 'production' ? 20 : 10
 
 puts "Starting background processes..."
 puts "Rails Environment: #{rails_env}"
@@ -17,8 +17,8 @@ num_workers.times do |num|
     w.name     = "resque-#{num}"
     w.group    = 'resque'
     w.interval = 30.seconds
-    w.env      = {"QUEUE"=>"critical,high,low", "RAILS_ENV"=>rails_env}
-    w.start    = "bundle exec rake -f #{rails_root}/Rakefile resque:setup"
+    w.env      = {"QUEUE"=>"*", "RAILS_ENV"=>rails_env}
+    w.start    = "rake -f #{rails_root}/Rakefile resque:work"
 
     w.uid = 'root'
     w.gid = 'staff'
@@ -60,4 +60,4 @@ num_workers.times do |num|
       end
     end
   end
-end
+end 
