@@ -36,7 +36,11 @@ def run
   results = Client::Google::SearchService.new.search(@entity.name)
 
   results.each do |result|
+    # Create a domain
     create_entity Entities::DnsRecord, :name => result[:visible_url]
+
+    # Create the top-level domain
+    create_entity Entities::DnsRecord, :name => result[:visible_url].split(".").last(2).join(".")
 
     #Handle Twitter search results
     if result[:title_no_formatting] =~ /on Twitter/
