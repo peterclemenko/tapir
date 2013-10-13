@@ -7,13 +7,13 @@ jQuery ->
     sDom: "frtiS"
     bDeferRender: true
     bProcessing: true
-    bServerSide: false
+    bServerSide: true
     iDisplayLength: 50
-    aaSorting: [ [0,'desc'] ],
+    aaSorting: [ [3,'desc'] ],
     aoColumns: [
-      { "sTitle": "Name", "sWidth": "20%" },
-      { "sTitle": "Tasks", "sWidth": "70%" },
-      { "sTitle": "Completed", "sWidth": "10%" },
-
+      { "sTitle": "Task", "sWidth": "50%" },
+      { "sTitle": "Tasks Completed", "sWidth": "10%" },
+      { "sTitle": "Total Tasks", "sWidth": "10%" },
+      { "sTitle": "Updated At", "sWidth": "30%" },
     ]
     sAjaxSource: $('#task_run_sets').data('source')
