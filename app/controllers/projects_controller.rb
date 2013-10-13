@@ -49,8 +49,13 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        # Set a cookie so it's activated 
         cookies.permanent[:project] = @project.name
+        # Create an initial search string
+        create_entity(Entities::SearchString, {:name => @project })
+        # Let the user know
         flash[:notice] = "Project created and activated!"
+        # Response
         format.html { render action: "show", notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
