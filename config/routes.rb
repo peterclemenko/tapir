@@ -9,10 +9,6 @@ Application.routes.draw do
   resources :projects
   resources :report_templates
 
-  match '/projects/:id/activate', :controller => 'projects', :action => 'activate'
-
-  devise_for :users
-  
   ###
   ### Welcome page
   ###
@@ -23,6 +19,21 @@ Application.routes.draw do
   ### Task Runner
   ###
   match "/run_task" => "task_run_sets#run", :via => [:post, :get]
+
+  ###
+  ### Project Management
+  ###
+  match '/projects/:id/activate', :controller => 'projects', :action => 'activate'
+
+  ###
+  ### User Management
+  ###
+  devise_for :users
+  
+  ###
+  ### Resque
+  ###
+  mount Resque::Server, :at => "/resque"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -62,6 +62,9 @@ GEM
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bootstrap-sass (2.0.4.2)
+    bson (1.9.2)
+    bson_ext (1.9.2)
+      bson (~> 1.9.2)
     builder (3.0.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -116,6 +119,7 @@ GEM
       ruby-hmac
     formatador (0.2.4)
     geoip (1.3.0)
+    god (0.13.3)
     googleajax (1.0.1)
       json (>= 1.0.0)
     guard (1.8.3)
@@ -162,13 +166,18 @@ GEM
     method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.1)
+    mongo (1.9.2)
+      bson (~> 1.9.2)
+    mongo-resque (1.20.0)
+      mongo (~> 1.5)
+      multi_json (~> 1.0)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
     mongoid (3.0.23)
       activemodel (~> 3.1)
       moped (~> 1.2)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    mongoid-multitenancy (0.3.2)
-      mongoid (~> 3)
     moped (1.5.1)
     multi_json (1.8.0)
     net-http-digest_auth (1.4)
@@ -199,6 +208,8 @@ GEM
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
+    rack-protection (1.5.0)
+      rack
     rack-ssl (1.3.3)
       rack
     rack-test (0.6.2)
@@ -248,6 +259,10 @@ GEM
       multi_json (~> 1.0)
       rubyzip (< 1.0.0)
       websocket (~> 1.0.4)
+    sinatra (1.4.3)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slop (3.4.6)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -280,6 +295,8 @@ GEM
     unf (0.1.2)
       unf_ext
     unf_ext (0.0.6)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
     warden (1.2.3)
       rack (>= 1.0)
     webrobots (0.1.1)
@@ -295,6 +312,7 @@ PLATFORMS
 DEPENDENCIES
   anemone
   bootstrap-sass (~> 2.0.0)
+  bson_ext
   capybara
   capybara-webkit
   coffee-rails (~> 3.2.1)
@@ -307,6 +325,7 @@ DEPENDENCIES
   formtastic!
   formtastic-bootstrap!
   geoip
+  god
   googleajax
   guard
   jquery-datatables-rails!
@@ -316,8 +335,8 @@ DEPENDENCIES
   librex
   linkedin
   mechanize
+  mongo-resque
   mongoid (~> 3.0.0)
-  mongoid-multitenancy
   nmap-parser
   nokogiri
   open_uri_redirections
