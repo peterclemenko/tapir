@@ -10,6 +10,9 @@
 # Ignore bundler config
 .bundle
 
+# background worker config
+god_config
+
 # Ignore configuration files
 config/database.yml
 config/api_keys.yml
