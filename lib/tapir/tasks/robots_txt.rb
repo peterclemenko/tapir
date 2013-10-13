@@ -42,7 +42,7 @@ def setup(entity, options={})
     contents = open("#{url}").read.force_encoding('UTF-8')
 
     # TODO - parse & use the lines as seed paths
-    create_entity Entities::Finding, { :name => "Robots.txt File", :content => "#{url}" , :details => contents }
+    create_entity Entities::Finding, { :name => "Robots.txt - #{url}", :content => "#{url}" , :details => contents }
 
   rescue OpenURI::HTTPError => e
     @task_logger.log "Unable to connect: #{e}"
