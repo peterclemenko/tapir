@@ -29,7 +29,7 @@ class TaskLogger
     _log "[+] #{@name}: " << message
   end
 
-  def lerror(message)
+  def error(message)
     _log "[-] #{@name}: " << message
   end 
   ######
