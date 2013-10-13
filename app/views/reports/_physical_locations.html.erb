@@ -1,0 +1,34 @@
+<% @entities.each_with_index do |image, index|%>
+<table border=1 width=100%>
+     <% image.fields.each do |field,value|
+          next if field =~ /_id|created_at|updated_at|status/ %>
+        <tr>
+          <td><%= value.name %>:</td>      
+          <td>
+            <%= if value.name == "text" 
+                 simple_format "#{eval("image.#{value.name}")}" 
+                elsif value.name == "url"
+                  simple_format "<a href=\"#{eval("image.#{value.name}")}\">#{eval("image.#{value.name}")}</a>"
+                else
+                  "#{eval("image.#{value.name}")}" 
+                end
+            %>
+          </td>
+          <% end %>
+        </tr>
+        <tr>
+          <td>Image:</td>
+          <td><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=image.latitude%>,<%=image.longitude%>&zoom=11&size=150x150&sensor=false"></td>
+        </tr>
+        <tr>
+          <td>Street View:</td>
+          <td>
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=<%=image.latitude%>,<%=image.longitude%>&heading=0&sensor=true">
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=<%=image.latitude%>,<%=image.longitude%>&heading=90&sensor=true">
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=<%=image.latitude%>,<%=image.longitude%>&heading=180&sensor=true">
+            <img src="http://maps.googleapis.com/maps/api/streetview?size=150x150&location=<%=image.latitude%>,<%=image.longitude%>&heading=270&sensor=true">
+          </td>
+        </tr>
+    </table>
+<% end %>
+  
