@@ -2,6 +2,7 @@
   <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Entities</th>
   </tr>
 
 <% @projects.each do |project| %>
@@ -12,6 +13,8 @@
       <td><%= link_to project.name, project_path(project) %></td>
     <% end %>
     <td><%= project.description %></td>
+    <td><%= Entities::Base.where(:project_id => project.id).count %></td>
+
   </tr>
 <% end %>
 </table>
