@@ -75,13 +75,30 @@ def run
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
       @task_logger.log "Creating Service: #{port}"
-      create_entity(Entities::NetSvc, {
+      entity = create_entity(Entities::NetSvc, {
         :name => "#{host.addr}:#{port.num}/#{port.proto}",
         :host_id => @host_entity.id,
         :port_num => port.num,
         :proto => port.proto,
         :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
       end
+
+      # Go ahead and create webapps if this is a known webapp port 
+      if entity.proto == "tcp" && [80,443,8080,8081,8443].include?(entity.port_num)
+         # determine if this is an SSL application
+        ssl = true if [443,8443].include? @entity.port_num
+        
+        # construct uri
+        protocol = ssl ? "https://" : "http://"
+        uri = "#{protocol}#{@entity.host.name}:#{@entity.port_num}"
+
+        create_entity(Entities::WebApplication, {
+          :name => uri,
+          :host => entity.host,
+          :netsvc => entity
+        })
+      end
+
 
     end
   

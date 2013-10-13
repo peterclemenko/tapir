@@ -1,5 +1,3 @@
-require 'open-uri'
-
 def name
   "import_leadlander_list"
 end

@@ -30,7 +30,7 @@ def run
   super
 
   # determine if this is an SSL application
-  ssl = true if @entity.port_num == 443
+  ssl = true if [443,8443].include? @entity.port_num
   
   # construct uri
   protocol = ssl ? "https://" : "http://"

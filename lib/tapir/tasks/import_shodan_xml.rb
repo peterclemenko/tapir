@@ -1,5 +1,3 @@
-require 'open-uri'
-
 def name
   "import_shodan_xml"
 end
