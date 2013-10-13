@@ -49,6 +49,8 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        cookies.permanent[:project] = @project.name
+        flash[:notice] = "Project created and activated!"
         format.html { render action: "show", notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
@@ -77,7 +79,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     
     # Destroy all associated entites
-    cookies.permanent[:project] = @project.name 
+    cookies.permanent[:project] = @project.name
 
     respond_to do |format|
       format.html { redirect_to projects_url }

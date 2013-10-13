@@ -2,9 +2,9 @@
 ### This is a god configuration file. See: http://godrb.com/
 ###
 
-rails_env   = ENV['RAILS_ENV']  || "development"
+rails_env   = ENV['RAILS_ENV']  || "production"
 rails_root  = ENV['RAILS_ROOT'] || Dir.pwd
-num_workers = rails_env == 'production' ? 20 : 10
+num_workers = rails_env == "production" ? 20 : 10
 
 puts "Starting background processes..."
 puts "Rails Environment: #{rails_env}"
