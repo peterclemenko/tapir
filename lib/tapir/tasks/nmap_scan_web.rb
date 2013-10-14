@@ -86,11 +86,11 @@ def run
       # Go ahead and create webapps if this is a known webapp port 
       if entity.proto == "tcp" && [80,443,8080,8081,8443].include?(entity.port_num)
          # determine if this is an SSL application
-        ssl = true if [443,8443].include? @entity.port_num
+        ssl = true if [443,8443].include? entity.port_num
         
         # construct uri
         protocol = ssl ? "https://" : "http://"
-        uri = "#{protocol}#{@entity.host.name}:#{@entity.port_num}"
+        uri = "#{protocol}#{entity.host.name}:#{entity.port_num}"
 
         create_entity(Entities::WebApplication, {
           :name => uri,
