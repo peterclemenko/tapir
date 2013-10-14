@@ -57,9 +57,9 @@ Brew can be used to install prerequisites on OSX:
 
 Execute the bundle installer: 
 
-	$ gem install bundle        # from within the tapir application root
-	$ bundle install            # from within the tapir application root
-	$ bundle exec rake db:seed  # from within the tapir application root
+	$ gem install bundle                # from within the application root
+	$ bundle install                    # from within the application root
+	$ bundle exec rake secret > .secret # from within the application root
 
 ## Getting Started with Tapir
 
@@ -67,27 +67,37 @@ Execute the bundle installer:
 
 To start the server, in the root of the Tapir directory, run: 
 
-	$ bundle exec rackup
-	 
-Now browse to http://[server_name]:9292, and you're in the jungle baby!
+	$ bundle exec rackup                # to start the server
+
+	Now browse to http://[server_name]:9292 
+
+In order to log in, you'll need to generate a username and password. 
+
+	$ bundle exec rake db:seed           # to generate a username and password
+
+### Configure data sources
+		
+Most data sources are available with just an internet connection. Some require you to pull down data in advance. 
+
+The latest geolitecity (geolocation) data can be pulled by running: 
+
+	$ cd [tapir_root]/data
+	$ ./geolitecity/get_latest.sh 
 
 ### Using the Scriptable Console (Advanced)
 Once you have a database, simply run `$ bundle exec ./util/console.rb` - this will give you access to a shell from which you can create entities and run tasks against them. 
 
 Creating a host entity & running tasks: 
 
-		tapir> h = Tapir::Entities::Host.create(:ip_address => "8.8.8.8")
-		tapir> h.run_task("dns_reverse_lookup",{})
-		tapir> h.run_task("geolocate_host",{})
-		tapir> h.children
+	$ cd [tapir_root]/util
+	$ bundle exec ./console.rb
 
-## Advanced
-
-### Configuration files
-		
-The latest geolitecity (geolocation) data can be pulled by running: 
-
-	$ data/geolitecity/get_latest.sh 
+		tapir> Tenant.current = Tenant.first
+		tapir> Project.current = Project.first
+		tapir> host = Entities::Host.create(:name => "8.8.8.8")
+		tapir> host.run_task("dns_reverse_lookup",{})
+		tapir> host.run_task("geolocate_host",{})
+		tapir> host.children.map{ |c| puts "#{c.class}: #{c.name}" };
 
 ### Known Issues
 
