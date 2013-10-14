@@ -12,7 +12,7 @@ jQuery ->
     aaSorting: [ [3,'desc'] ],
     aoColumns: [
       { "sTitle": "Task", "sWidth": "50%" },
-      { "sTitle": "Tasks Completed", "sWidth": "10%" },
+      { "sTitle": "Tasks Started", "sWidth": "10%" },
       { "sTitle": "Total Tasks", "sWidth": "10%" },
       { "sTitle": "Updated At", "sWidth": "30%" },
     ]

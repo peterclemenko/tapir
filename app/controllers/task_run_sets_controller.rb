@@ -12,9 +12,16 @@ class TaskRunSetsController < ApplicationController
       "iTotalRecords" => @task_run_sets.count,
       "iTotalDisplayRecords" => @task_run_sets.count,
       "aaData" =>  @task_run_sets.map do |task_run_set|
-         #[ "test", "test", "test","test"]
+
+         # Calculate a name for the task run set 
+         if task_run_set.task_runs.count > 0
+           task_run_name = "#{task_run_set.task_runs.map{|t| t.task_name}.uniq.join(" ")}"
+         else
+           task_run_name = "*pending*"
+         end
+
          [
-          "<a href=\"/task_run_sets/#{task_run_set._id}\">#{task_run_set.task_runs.map{|t| t.task_name}.uniq}</a>",
+          "<a href=\"/task_run_sets/#{task_run_set._id}\">#{task_run_name}</a>",
           "#{task_run_set.task_runs.count}",
           "#{task_run_set.num_tasks}",
           "#{task_run_set.updated_at}"]

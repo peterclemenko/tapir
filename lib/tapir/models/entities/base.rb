@@ -37,6 +37,10 @@ module Entities
       TaskRun.where(:task_entity_id => id).all
     end
 
+    def parent_task_runs
+      EntityMapping.where(:child_id => id).map{ |e| TaskRun.find e.task_run_id }
+    end
+
     def model_name
       self.model_name
     end
