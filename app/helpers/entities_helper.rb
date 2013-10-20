@@ -67,6 +67,10 @@ module EntitiesHelper
     "/entities/#{id}"  
   end
 
+  def entities_phone_number(id=nil)
+    "/entities/#{id}"  
+  end
+
   def entities_physical_location_path(id=nil)
     "/entities/#{id}"  
   end
@@ -103,9 +107,12 @@ module EntitiesHelper
     "/entities/#{id}"  
   end
 
-  def entities_xls_file_path(id=nil)
+  def entities_web_reference_path(id=nil)
     "/entities/#{id}"  
   end
 
+  def entities_xls_file_path(id=nil)
+    "/entities/#{id}"  
+  end
 
 end

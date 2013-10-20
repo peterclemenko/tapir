@@ -25,9 +25,7 @@ end
 
 def setup(entity, options={})
   super(entity, options)
-  
     @resolver  = Dnsruby::DNS.new # uses system default
-  
   self
 end
 

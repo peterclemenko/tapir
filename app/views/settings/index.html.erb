@@ -9,8 +9,7 @@
     <th></th>
   </tr>
 
-<% @settings.each do |setting| 
-  next if setting.visibility == "system" %>
+<% @settings.each do |setting| %>
   <tr>
     <td><%= setting.name %></td>
     <td><%= setting.value %></td>

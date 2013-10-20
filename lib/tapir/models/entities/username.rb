@@ -1,4 +1,3 @@
-
 module Entities
   class Username < Base
     include TenantAndProjectScoped

@@ -144,15 +144,28 @@ class TaskRunSetsController < ApplicationController
 
         tenant_id = Tenant.current.id.to_s
         project_id = Project.current.id.to_s
+        
         # Run the task on each entity with the TaskRunner Worker
-        Resque.enqueue(TaskRunner, 
-          tenant_id,
-          project_id,
-          entity_id, 
-          entity_type, 
-          task_name, 
-          task_run_set_id, 
-          options)
+        if Rails.env == "production"
+          Resque.enqueue(TaskRunner, 
+            tenant_id,
+            project_id,
+            entity_id, 
+            entity_type, 
+            task_name, 
+            task_run_set_id, 
+            options)
+        else
+          # In development mode, don't use resque
+          TaskRunner.perform(
+            tenant_id,
+            project_id,
+            entity_id, 
+            entity_type, 
+            task_name, 
+            task_run_set_id, 
+            options)
+        end
     end
 
     

@@ -1,7 +1,7 @@
 module Client
 module Bing
   
-  # This class represents the bing API
+  # This class wraps the Bing API
   class SearchService
 
     # 
@@ -18,22 +18,21 @@ module Bing
       results = []
 
       api_path = "http://api.bing.net/xml.aspx"
-      search_data = #"?AppId=#{ApiKeys.instance.keys['bing_api_key']}" +
+      search_data = "?AppId=#{Setting.where({:name => 'bing_api_key'}).first.value}" +
         "?Query=#{search_string}&Sources=Web&Version=2.0&Market=en-us&" +
         "Adult=Moderate&Options=EnableHighlighting&Web.Count=50&Web.Offset=0" + 
         "&Web.Options=DisableQueryAlterations"
+      
       request_uri = "#{api_path}#{search_data}"
-      #binding.pry
+      
       # Open page & parse
-      request_options = {"User-Agent" => "Tapir","Referer" => "http://www.pentestify.com"}
+      request_options = {"User-Agent" => "Intrigue.io","Referer" => "http://www.intrigue.io"}
       doc = Nokogiri::XML(open(request_uri, request_options)) do |config|
           config.noblanks
       end
 
       # Check for successful result
       return false unless doc
-
-      #binding.pry
 
       #each result, create a SearchResult
       result_xml = doc.xpath("//web:Results", 

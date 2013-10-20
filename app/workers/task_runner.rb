@@ -7,16 +7,14 @@ class TaskRunner
     Tenant.current = Tenant.find tenant_id
     Project.current = Project.find project_id
 
-    entity = Entities::Base.find(entity_id) #eval(entity_type).where(:id => entity_id).first
+    entity = Entities::Base.find(entity_id)
     entity.run_task(task_name, task_run_set_id, options)
 
-    Tenant.current = nil
-    Project.current = nil
+    #Tenant.current = nil
+    #Project.current = nil
   end
 
   def term_timeout(timeout=600)
     @term_timeout=timeout
   end
-
-
 end

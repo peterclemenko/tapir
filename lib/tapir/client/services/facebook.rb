@@ -1,5 +1,6 @@
 module Client
 module Facebook
+  
   class WebClient
     include Client::Social
     
@@ -20,10 +21,6 @@ module Facebook
     end
     
   end
-  
-  
-  ## Search Service
-  # http://www.facebook.com/search.php?q=User+Name
   
 end
 end

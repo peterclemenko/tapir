@@ -4,7 +4,7 @@ module Entities
 
     field :account_name, type: String
     field :service_name, type: String
-    field :web_uri, type: String
+    field :uri, type: String
     field :check_uri, type: String
 
     def to_s

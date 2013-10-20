@@ -1,6 +1,5 @@
 module Entities
-  class KloutAccount < Base 
+  class PhoneNumber < Base
     include TenantAndProjectScoped
-    field :uri, type: String
   end
 end

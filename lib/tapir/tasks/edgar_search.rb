@@ -14,7 +14,8 @@ end
 
 # Returns an array of valid types for this task
 def allowed_types
-  [Entities::SearchString]
+  [ Entities::SearchString,
+    Entities::Organization ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -39,19 +40,16 @@ def run
     # Create a new organization entity & attach a record
     o = create_entity Entities::Organization, { 
       :name => corp.name, 
+      :data => corp.to_s
     }
     
     create_entity(Entities::PhysicalLocation, {
-      :address => corps.first.address, 
-      :state => corps.first.state,
-      :country => corps.first.country }
+      :name => corp.address,
+      :address => corp.address, 
+      :state => corp.state,
+      :country => corp.country }
       )
   end
-  
-  #@task_run.save_raw_result corps.to_s
-
-  # Queue a detailed search
-  TaskManager.instance.queue_task_run("hoovers_company_detail",o, {})
 end
 
 def cleanup

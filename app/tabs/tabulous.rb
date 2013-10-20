@@ -62,7 +62,6 @@ Tabulous.setup do |config|
       [    :task_run_sets_tab         ,    'Completed Tasks'       ,    task_run_sets_path                                 ,    true        ,    true        ],
       [    :reports_tab               ,    'Reports'               ,    report_templates_path                              ,    true        ,    true        ],
       [    :settings_tab              ,    'Settings'              ,    settings_path                                      ,    true        ,    true        ],
-      [    :projects_tab              ,    'Projects'              ,    projects_path                                      ,    true        ,    true        ],
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
       #    TAB NAME                   |    DISPLAY TEXT            |    PATH                                                     |    VISIBLE?    |    ENABLED?    #
       #------------------------------------------------------------------------------------------------------------------------------------------------------------#
@@ -93,7 +92,6 @@ Tabulous.setup do |config|
       [    :task_run_sets         ,    :all_actions    ,    :task_run_sets_tab         ],
       [    :report_templates      ,    :all_actions    ,    :reports_tab               ],
       [    :settings              ,    :all_actions    ,    :settings_tab              ],
-      [    :projects              ,    :all_actions    ,    :projects_tab              ],
       #--------------------------------------------------------------------------------#
       #    CONTROLLER             |    ACTION          |    TAB                        #
       #--------------------------------------------------------------------------------#

@@ -17,7 +17,8 @@ end
 
 ## Returns an array of types that are allowed to call this task
 def allowed_types
-  [ Entities::NetSvc ]
+  [ Entities::NetSvc, 
+    Entities::WebApplication ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -32,9 +33,25 @@ end
 def run
   super
 
+  # Determine which type of entity we're working with
+  if @entity.class == Entities::NetSvc
+    hostname = @entity.host.name
+    port = @entity.port_num
+  else
+    # if it's a web application
+    hostname = @entity.host.name
+    # Check to see if there's an associated service first
+    if @entity.netsvc
+      port = @entity.netsvc.port_num 
+    else
+      # default to 443
+      port = 443
+    end
+  end
+
   begin
     # Create a socket and connect
-    tcp_client = TCPSocket.new @entity.host.name, @entity.port_num
+    tcp_client = TCPSocket.new hostname, port
     ssl_client = OpenSSL::SSL::SSLSocket.new tcp_client
     
     # Grab the cert

@@ -57,10 +57,10 @@ class User
     setting_keys = [ 
      {:name => "linkedin_api_key"},
      {:name => "linkedin_secret_key"},
-     {:name => "linkedin_auth"},
      {:name => "bing_api"},
      {:name => "google_api"},
      {:name => "corpwatch_api"},
+     {:name => "pipl_api"},
     ]
 
     setting_keys.each do |setting|

@@ -1,7 +1,7 @@
 module Client
 module Corpwatch
 
-  # This class represents the corpwatch service
+  # This class wraps the corpwatch Api
   class CorpwatchService
 
     # 
@@ -11,20 +11,16 @@ module Corpwatch
     #
     def search(search_string)
       # Convert to a get-paramenter
-      search_string = CGI.escapeHTML search_string
-      search_string.gsub!(" ", "&nbsp;")
+      search_string = CGI.escapeHTML search_string.strip
+      search_string.gsub!(" ", "%20")
     
       # initialize an array of corps to return 
       corps = []
 
       begin
-        #@task_logger.log "Using Company URI: #{uri}"
         search_uri = get_service_endpoint(search_string)
-
         # Open page & parse
-        doc = Nokogiri::XML(open(search_uri, {"User-Agent" => USER_AGENT_STRING})) do |config|
-          config.noblanks
-        end
+        doc = Nokogiri::XML(open(search_uri, {"User-Agent" => "tapir"}))
         
         # Check the doc metadata
         metadata = {}
@@ -43,11 +39,12 @@ module Corpwatch
         end
         
       end
-      return corps
+    corps
     end
 
     def get_service_endpoint(company_name)
-      return "http://api.corpwatch.org/companies.xml?company_name=#{company_name}" #"&key=#{ApiKeys.instance.keys['corpwatch_api_key']}"
+      key = Setting.where(:name => "corpwatch_api").first.value
+    "http://api.corpwatch.org/companies.xml?company_name=#{company_name}&key=#{key}"
     end
   end
 
@@ -56,7 +53,7 @@ module Corpwatch
     attr_accessor :raw_xml
     attr_accessor :cw_id
     attr_accessor :cik
-    attr_accessor :company_name
+    attr_accessor :name
     attr_accessor :irs_number
     attr_accessor :sic_code
     attr_accessor :industry_name
@@ -83,7 +80,7 @@ module Corpwatch
       @raw_xml.xpath(".").map do |x|
         @cw_id = x.xpath("cw_id").text
         @cik = x.xpath("cik").text
-        @company_name = x.xpath("company_name").text
+        @name = x.xpath("company_name").text
         @irs_number = x.xpath("irs_number").text
         @sic_code = x.xpath("sic_code").text
         @industry = x.xpath("industry_name").text
