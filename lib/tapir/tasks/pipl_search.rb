@@ -16,7 +16,6 @@ end
 def allowed_types
   [ Entities::Account,
     Entities::Username, 
-    Entities::Person, 
     Entities::FacebookAccount, 
     Entities::KloutAccount,
     Entities::LinkedinAccount,
