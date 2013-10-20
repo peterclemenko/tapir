@@ -16,6 +16,10 @@ end
 def allowed_types
   [ Entities::Username, 
     Entities::Person, 
+    Entities::FacebookAccount, 
+    Entities::LinkedinAccount,
+    Entities::TwitterAccount,
+    Entities::FacebookAccount, 
     Entities::EmailAddress, 
     Entities::PhoneNumber ]
 end
@@ -32,7 +36,10 @@ def run
     response = @pipl_client.search :email, @entity.name
   elsif @entity.class == Entities::PhoneNumber
     response = @pipl_client.search :phone, @entity.name
-  elsif @entity.class == Entities::Username
+  elsif [ Entities::Username,
+          Entities::FacebookAccount,
+          Entities::TwitterAccount, 
+          Entities::LinkedinAccount ].include? @entity.class
     response = @pipl_client.search :username, @entity.name
   else 
     raise "Unknown Entity Type"
