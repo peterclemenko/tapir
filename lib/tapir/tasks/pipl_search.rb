@@ -2,7 +2,7 @@
 #module PiplApi
 
 def name
-  "pipl_api"
+  "pipl_search"
 end
 
 def pretty_name
@@ -14,9 +14,11 @@ def description
 end
 
 def allowed_types
-  [ Entities::Username, 
+  [ Entities::Account,
+    Entities::Username, 
     Entities::Person, 
     Entities::FacebookAccount, 
+    Entities::KloutAccount,
     Entities::LinkedinAccount,
     Entities::TwitterAccount,
     Entities::FacebookAccount, 
@@ -36,10 +38,12 @@ def run
     response = @pipl_client.search :email, @entity.name
   elsif @entity.class == Entities::PhoneNumber
     response = @pipl_client.search :phone, @entity.name
-  elsif [ Entities::Username,
+  elsif [ Entities::Account,
+          Entities::Username,
           Entities::FacebookAccount,
           Entities::TwitterAccount, 
-          Entities::LinkedinAccount ].include? @entity.class
+          Entities::LinkedinAccount,
+          Entities::KloutAccount ].include? @entity.class
     response = @pipl_client.search :username, @entity.name
   else 
     raise "Unknown Entity Type"
