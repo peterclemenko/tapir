@@ -29,21 +29,7 @@ Tapir is currently tested and working on:
 
 * OS X 10.5.x+
 * Ubuntu Linux 9.10+
-
-### Prerequisites Installation (Debian / Ubuntu) 
-
-These prerequisites can be installed via apt:
-
-	sudo apt-get install nmap qt4-qmake libnokogiri-ruby1.8 libxslt-dev libxml2-dev libqt4-dev libpcap-dev libpq-dev libsqlite3-dev 
-
-Mongo can be installed with the following: 
-
-	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-	echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
-	sudo apt-get update
-	sudo apt-get install mongodb-10gen
-
-See: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/ for more information
+* Kali Linux 1.0
 
 ### Prerequisites Installation (OSX using Brew)
 
@@ -52,6 +38,34 @@ Brew can be used to install prerequisites on OSX:
 	brew install qt
 	brew install nmap
 	brew install mongo
+
+### Prerequisites Installation (Ubuntu 9.10+) 
+
+These prerequisites can be installed via apt:
+
+	sudo apt-get install nmap qt4-qmake libnokogiri-ruby1.8 libxslt-dev libxml2-dev libqt4-dev libpcap-dev libpq-dev libsqlite3-dev 
+
+Mongo can be installed with the following: 
+
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+	echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list # if you're on ubuntu
+	sudo apt-get update
+	sudo apt-get install mongodb-10gen
+
+See: http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/ for more information
+
+### Prerequisites Installation (Kali Linux 1.0+) 
+
+These prerequisites can be installed via apt:
+
+	sudo apt-get install nmap qt4-qmake libnokogiri-ruby1.8 libxslt-dev libxml2-dev libqt4-dev libpcap-dev libpq-dev libsqlite3-dev 
+
+Mongo can be installed with the following: 
+
+	sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
+	echo 'deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
+	sudo apt-get update
+	sudo apt-get install mongodb-10gen
 
 ### Initial Tapir setup (platform independent): 
 
@@ -69,7 +83,7 @@ To start the server, in the root of the Tapir directory, run:
 
 	$ bundle exec rackup                # to start the server
 
-	Now browse to http://[server_name]:9292 
+Now browse to http://[server_name]:9292 
 
 In order to log in, you'll need to generate a username and password. 
 
