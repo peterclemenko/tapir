@@ -71,6 +71,7 @@ gem 'whois'
 # Web Services
 gem 'linkedin'
 gem 'flickr'
+gem 'shodan'
 
 # Debugging 
 gem 'pry'
@@ -78,7 +79,7 @@ gem 'pry-rails'
 gem 'pry-nav'
 gem 'pry-stack_explorer'
 
-# Network Spider
+# Web Spider
 gem 'anemone'
 
 # Scraping

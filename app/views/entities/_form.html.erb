@@ -19,7 +19,7 @@ form_for(@entity, :url => "/entities/#{@entity.id}") do |f| %>
     <!-- Iterate through fields here --> 
     <table>
     <% @entity.fields.each do |field,value|
-        next if field =~ /_type|_id|created_at|updated_at|confidence|status/ %>
+        next if field =~ /_type|_id|age|created_at|updated_at|confidence|status/ %>
         <tr>
           <td><%= label_tag value.name %></td>
           <td><%= text_field_tag value.name, eval("@entity.#{value.name}") %> </td>

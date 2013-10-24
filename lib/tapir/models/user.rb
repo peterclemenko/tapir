@@ -61,6 +61,7 @@ class User
      {:name => "google_api"},
      {:name => "corpwatch_api"},
      {:name => "pipl_api"},
+     {:name => "shodan_api"}
     ]
 
     setting_keys.each do |setting|

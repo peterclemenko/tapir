@@ -11,6 +11,7 @@ module Entities
     field :name, type: String
     field :status, type: String
     field :confidence, type: Integer
+    field :age, type: Date
     field :data, type: String # Catch-all unstructured data field
 
     validates_uniqueness_of :name, :scope => [:tenant_id,:project_id,:_type]
