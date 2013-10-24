@@ -81,11 +81,12 @@ Execute the bundle installer:
 
 To start the server, in the root of the Tapir directory, run: 
 
+	$ export RAILS_ENV=development      # to set development mode (no background tasks)
 	$ bundle exec rackup                # to start the server
 
 Now browse to http://[server_name]:9292 
 
-In order to log in, you'll need to generate a username and password. 
+In order to log in, you'll need to generate a username and password - Make sure you do this AFTER browsing to the web interface for the first time.  
 
 	$ bundle exec rake db:seed           # to generate a username and password
 

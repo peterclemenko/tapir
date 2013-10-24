@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "TAPIR" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : AppConfig::APP_NAME %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "TAPIR" %>">
     <%= stylesheet_link_tag "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
@@ -12,7 +12,7 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/">TAPIR</a>
+          <a class="brand" href="/"><%= AppConfig::APP_NAME %> </a>
           <div class="nav-collapse">
             <%= tabs if user_signed_in? %>
             <%= render 'layouts/user_mgmt' %>
