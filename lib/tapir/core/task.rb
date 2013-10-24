@@ -6,11 +6,11 @@ class Task
   end
 
   def self.find(name)
-    TaskManager.instance.create_by_name name
+    TaskManager.instance.create_task_by_name name
   end
 
   def self.find_by_name(name)
-    TaskManager.instance.create_by_name name
+    TaskManager.instance.create_task_by_name name
   end
   
   def self.model_name

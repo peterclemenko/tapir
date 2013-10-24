@@ -8,19 +8,22 @@ class TaskManager
   def initialize(path=nil)
     @tasks_dir = path || File.join(File.dirname(__FILE__), "..", "tasks")
     @task_files = []
-    @tasks = []
+    @task_objects = []
   end
 
   def create_all_tasks
     to_return = []
-    @tasks.each {|t| to_return << t.clone}
+    @task_objects.each {|t| to_return << t.clone}
   to_return
   end
 
-  def create_by_name(task_name)
-    return _create_task_by_name(task_name)
+  # Called when we need an instance of the task. Used by the task.
+  def create_task_by_name(task_name)
+    @task_objects.each do |t|
+      return t.clone if t.name == task_name
+    end
+    raise "Unknown Task!"  # couldn't find it. boo.
   end
-
   # 
   # This method allows us to reload our tasks
   #
@@ -65,7 +68,7 @@ class TaskManager
       #
       # Add it to our task listing
       #
-      @tasks << t
+      @task_objects << t
     end
   end
   
@@ -75,7 +78,7 @@ class TaskManager
   def get_tasks_for(entity)
     tasks_for_type = []
 
-    @tasks.each do |task|
+    @task_objects.each do |task|
       if task.allowed_types.include?(entity.class)
         tasks_for_type << task.clone
       end
@@ -91,19 +94,12 @@ class TaskManager
     TapirLogger.instance.log "Task manager queueing task: #{task_name} for entity #{entity} with options #{options}"
     
     # Create the task 
-    task = _create_task_by_name(task_name)
+    task = create_task_by_name(task_name)
     
     # CURRENTLY NOT THREADED!
     task.execute(entity, options, task_run_set_id)
     
   end
 
-private
-  # This method is used to translate task names into task entities
-  def _create_task_by_name(task_name)
-    @tasks.each do |t|
-      return t.clone if t.name == task_name
-    end
-    raise "Unknown Task!"  # couldn't find it. boo.
-  end
+
 end
