@@ -93,31 +93,6 @@ class TaskManager
     # Create the task 
     task = _create_task_by_name(task_name)
     
-    ## TODO - THREADING!
-=begin
-    max_threads = 16
-    cur_threads = []
-
-    queue   = [*(1 .. 1000)]
-    results = []
-
-    while(queue.length > 0)
-
-      while(cur_threads.length > max_threads)
-        item = queue.shift
-        break if not item
-        t = Thread.new do
-          task.execute(entity, options, task_run_set_id)
-        end
-        cur_threads << t
-      end
-
-      dead_threads = cur_threads.reject{|x| x.alive? }
-      cur_threads.delete(dead_threads)
-       ::IO.select(nil, nil, nil, 0.25)  
-    end
-=end
-    
     # CURRENTLY NOT THREADED!
     task.execute(entity, options, task_run_set_id)
     
