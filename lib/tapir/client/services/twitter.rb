@@ -23,7 +23,7 @@ module Twitter
   class ApiClient
 
     def query(username)
-      make_web_request "http://api.twitter.com/1/users/show/#{username}.json"
+      get_request "http://api.twitter.com/1/users/show/#{username}.json"
     end
 
   end

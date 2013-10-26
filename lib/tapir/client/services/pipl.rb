@@ -10,7 +10,7 @@ module Pipl
     end
 
     def search(search_type, email)
-      response = make_web_request(_get_uri(search_type, email))
+      response = get_request(_get_uri(search_type, email))
       JSON.parse response if response
     end
 
