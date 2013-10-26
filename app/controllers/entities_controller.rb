@@ -9,7 +9,9 @@ class EntitiesController < ApplicationController
     session["view_types"] = params["type"] if params["type"]
     entities = []
     session["view_types"].each do |type|
-      entities << eval("Entities::#{type}").all if defined? "Entities::#{type}"
+      if "Entities::#{type}".is_a_defined_class?
+        entities << eval("Entities::#{type}").all 
+      end
     end
 
     # Gather all tasks for our task runner
