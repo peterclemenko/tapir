@@ -19,8 +19,12 @@
     </tr>
   <% end %>
 
-  <% if @entity.kind_of?(Entities::Image) %>
-      <tr><td>Image:</td><td><img src="/images/<%=@entity.local_path.split("/").last%>"/></td><tr>
+  <% if @entity.kind_of?(Entities::LocalImage) %>
+      <tr><td>Image:</td><td><img src="/images/<%=@entity.name.split("/").last%>"/></td><tr>
+  <% end %>
+
+  <% if @entity.kind_of?(Entities::RemoteImage) %>
+      <tr><td>Image:</td><td><img src="<%=@entity.name%>"/></td><tr>
   <% end %>
 
   <% if @entity.kind_of?(Entities::PhysicalLocation) %>

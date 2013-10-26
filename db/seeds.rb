@@ -31,11 +31,11 @@ ReportTemplate.create(
   :template => "show_parents",
   :setup => "@entities = Entities::Base.all")
 
-ReportTemplate.create( 
-  :name => "peeping_tom", 
-  :pretty_name => "Peeping Tom", 
-  :template => "peeping_tom",
-  :setup => "@entities = Entities::Image.all")
+#ReportTemplate.create( 
+#  :name => "peeping_tom", 
+#  :pretty_name => "Peeping Tom", 
+#  :template => "peeping_tom",
+#  :setup => "@entities = Entities::LocalImage.all")
 
 ReportTemplate.create( 
   :name => "physical_locations",

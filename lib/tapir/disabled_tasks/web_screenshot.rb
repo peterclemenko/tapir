@@ -69,7 +69,7 @@ def run
       driver.navigate.to browse_location
       driver.save_screenshot save_location
 
-      create_entity Entities::Image,
+      create_entity Entities::LocalImage,
         :name => browse_location, 
         :local_path => save_location,
         :remote_path => browse_location        

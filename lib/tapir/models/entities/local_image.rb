@@ -1,5 +1,5 @@
 module Entities
-  class RemoteImage < Base
+  class LocalImage < Base
     include TenantAndProjectScoped
   end
 end

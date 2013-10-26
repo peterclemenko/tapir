@@ -68,9 +68,8 @@ def run
         @task_logger.error "Unable to parse, malformed jpg"
       end
 
-      create_entity Entities::Image, 
-        :local_path => photo.local_path,
-        :remote_path => photo.remote_path, 
+      create_entity Entities::RemoteImage, 
+        :name => photo.remote_path, 
         :description => "twitpic image"
     end
   end
