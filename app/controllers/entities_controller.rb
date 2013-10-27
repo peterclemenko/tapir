@@ -9,7 +9,8 @@ class EntitiesController < ApplicationController
     session["view_types"] = params["type"] if params["type"]
     entities = []
     session["view_types"].each do |type|
-      if "Entities::#{type}".is_a_defined_class?
+
+      if Entities.const_defined? type
         entities << eval("Entities::#{type}").all 
       end
     end
