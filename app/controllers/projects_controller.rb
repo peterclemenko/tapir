@@ -62,7 +62,7 @@ class ProjectsController < ApplicationController
         flash[:notice] = "Project created and activated!"
        
         # Respond
-        format.html { render action: "show", notice: 'Project was successfully created.' }
+        format.html { redirect_to entities_path, notice: 'Project was successfully created.' }
         format.json { render json: @project, status: :created, location: @project }
       else
         format.html { render action: "new", notice: "Unable to save project." }
