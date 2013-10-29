@@ -112,7 +112,7 @@ class Task
   #
   def safe_system(command)
   
-    if command =~ /(\||\;)/
+    if command =~ /(\||\;|\'|\`)/
       raise "Illegal character"
     end
 
