@@ -22,6 +22,14 @@ module Entities
     validates_presence_of :name, :scope => [:tenant_id,:project_id]
     validates_uniqueness_of :name, :scope => [:tenant_id,:project_id]
 
+    validates :name, 
+      :presence => true, 
+      :uniqueness => true,
+      :format => { 
+        :with => Regexp.new(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}$/),
+        :message => "Not a valid hostname"
+      }
+
     belongs_to :host, :class_name => "Entities::Host"
 
   end

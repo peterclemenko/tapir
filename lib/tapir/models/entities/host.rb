@@ -6,5 +6,13 @@ module Entities
     has_many :net_svcs
     has_many :dns_records
     
+    validates :name, 
+      :presence => true, 
+      :uniqueness => true,
+      :format => { 
+        :with => Regexp.union(Resolv::IPv4::Regex, Resolv::IPv6::Regex),
+        :message => "Not an valid IPv4 or IPv6 format"
+      }
+
   end
 end

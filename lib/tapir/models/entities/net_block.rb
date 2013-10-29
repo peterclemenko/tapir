@@ -12,6 +12,27 @@ module Entities
     field :org_ref, type: String
     field :parent_ref, type: String
 
+    validates :start_address, 
+      :presence => true, 
+      :format => { 
+        :with => Regexp.union(Resolv::IPv4::Regex, Resolv::IPv6::Regex),
+        :message => "Not an valid IPv4 or IPv6 range"
+      }
+
+    validates :end_address, 
+      :presence => true, 
+      :format => { 
+        :with => Regexp.union(Resolv::IPv4::Regex, Resolv::IPv6::Regex),
+        :message => "Not an valid IPv4 or IPv6 range"
+      }
+
+    validates :cidr, 
+      :presence => true, 
+      :format => { 
+        :with => Regexp.new(/\d{1,2}/),
+        :message => "Not an valid IPv4 or IPv6 range"
+      }
+
     def range
       "#{start_address}/#{cidr}"
     end
