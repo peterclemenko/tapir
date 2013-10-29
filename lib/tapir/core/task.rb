@@ -130,10 +130,15 @@ class Task
   #
   def create_entity(type, params, current_entity=@entity)
 
+    # Let's sanity check the type first. 
+    unless Entities::Base.descendants.include?(type)
+      raise RuntimeError, "Invalid entity type"
+    end
+
     #
     # Call the create method for this type
     #
-    new_entity = type.send(:create, params)
+    new_entity = type.send(:create, params) 
 
     #
     # Check for dupes & return right away if this doesn't save a new
@@ -147,7 +152,7 @@ class Task
       # Attempt to find the entity
       new_entity = find_entity(type, params)
     
-      raise RuntimeError, "Unable to find a supposedly valid entity: #{type}, #{params}" unless new_entity
+      raise RuntimeError, "Unable to find a valid entity: #{type}, #{params}" unless new_entity
     end
 
     #
@@ -156,7 +161,7 @@ class Task
     #
     
     # TODO - this currently uses an "unsafe" method, that doesn't check to see if a child actually
-    # EXISTS. This can be dangerous, as the child may have already been deleted. in this case, we'll 
+    # EXISTS. This can be dangerous, as the child may have already been deleted. 
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else

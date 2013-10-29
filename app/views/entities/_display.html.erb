@@ -5,17 +5,20 @@
   <% @entity.fields.each do |field,value|
       next if field =~ /_id|created_at|updated_at|status|age|confidence/ %>
     <tr>
-      <td><%= value.name %>:</td>      
-      <td>
-        <%= if value.name == "text" 
-             simple_format "#{eval("@entity.#{value.name}")}" 
-            elsif value.name == "url" or value.name == "uri"
-              simple_format "<a href=\"#{eval("@entity.#{value.name}")}\" target=\"_blank\">#{eval("@entity.#{value.name}")}</a>"
-            else
-              "#{eval("@entity.#{value.name}")}" 
-            end
-        %>
-      </td>
+      <% # Check to make sure it's not an empty value first
+         unless eval("@entity.#{value.name}") == "" %>
+        <td><%= value.name %>:</td>      
+        <td>
+          <%= if value.name == "text"
+               simple_format "#{eval("@entity.#{value.name}")}" unless eval("@entity.#{value.name}") == ""
+              elsif value.name == "uri"
+                simple_format "<a href=\"#{eval("@entity.#{value.name}")}\" target=\"_blank\">#{eval("@entity.#{value.name}")}</a>"
+              else
+                "#{eval("@entity.#{value.name}")}" unless eval("@entity.#{value.name}") == "" 
+              end
+          %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 

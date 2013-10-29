@@ -8,16 +8,22 @@ module Entities
 
     include EntityHelper
 
+    field :age, type: Date
+    field :confidence, type: Integer
+    
     field :name, type: String
     field :status, type: String
-    field :confidence, type: Integer
-    field :age, type: Date
-    field :data, type: String # Catch-all unstructured data field
+  
+    field :associated_data, type: String # Catch-all unstructured data field
 
     validates_uniqueness_of :name, :scope => [:tenant_id,:project_id,:_type]
     
     def to_s
       "#{entity_type.capitalize}: #{name}"
+    end
+
+    def self.descendants
+      ObjectSpace.each_object(Class).select { |klass| klass < self }
     end
 
     # Class method to convert to a path

@@ -61,14 +61,15 @@ def run
     response['records'].each do |record|
       @task_logger.log "Record: #{record.to_s}\n"
       
-      create_entity Entities::WebReference, { 
+      create_entity Entities::WebPage, { 
         :confidence => record['@query_person_match'],
         :uri => record['source']['url'],
-        :domain => record['source']['domain'],
+        #:domain => record['source']['domain'],
         :name => record['source']['name'],
-        :category => record['source']['category'],
-        :content => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : "" ,
-        :source => "pipl record" }
+        #:category => record['source']['category'],
+        :associated_data => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : "" ,
+        #:source => "pipl record" }
+      }
 
       if record['usernames']
         record['usernames'].each do |username|
@@ -82,13 +83,14 @@ def run
     # Parse up the response sources
     response['person']['sources'].each do |source| 
       
-      create_entity Entities::WebReference, { 
-        :sponsored => source['@is_sponsored'],
+      create_entity Entities::WebPage, { 
+        #:sponsored => source['@is_sponsored'],
         :uri => source['url'],
-        :domain => source['domain'],
+        #:domain => source['domain'],
         :name => source['name'],
-        :category => source['category'],
-        :source => "pipl source" }
+        #:category => source['category'],
+        #:source => "pipl source" 
+      }
 
       @task_logger.log "Source: #{source}\n"
     end

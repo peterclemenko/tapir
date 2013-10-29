@@ -62,9 +62,9 @@ def run
       :uri => "http//www.linkedin.com/in/#{account_name}" })
     # Otherwise, just create a generic search result
     else
-      create_entity(Entities::SearchResult, {
+      create_entity(Entities::WebPage, {
         :name => result[:title_no_formatting],
-        :url => result[:unescaped_url],
+        :uri => result[:unescaped_url],
         :content => result[:content]
       })
     end

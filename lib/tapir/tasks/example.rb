@@ -31,7 +31,6 @@ def allowed_types
     Entities::PdfFile,
     Entities::Person,
     Entities::PhysicalLocation, 
-    Entities::SearchResult,
     Entities::SearchString, 
     Entities::TwitterAccount,
     Entities::Username,

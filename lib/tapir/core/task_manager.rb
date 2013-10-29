@@ -100,6 +100,4 @@ class TaskManager
     task.execute(entity, options, task_run_set_id)
     
   end
-
-
 end
