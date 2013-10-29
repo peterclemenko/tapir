@@ -14,7 +14,7 @@ module Entities
     field :name, type: String
     field :status, type: String
   
-    field :associated_data, type: String # Catch-all unstructured data field
+    field :comments, type: String # Catch-all unstructured data field
 
     validates_uniqueness_of :name, :scope => [:tenant_id,:project_id,:_type]
     

@@ -64,10 +64,10 @@ def run
       create_entity Entities::WebPage, { 
         :confidence => record['@query_person_match'],
         :uri => record['source']['url'],
-        #:domain => record['source']['domain'],
         :name => record['source']['name'],
+        :comments => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : "" ,
+        #:domain => record['source']['domain'],
         #:category => record['source']['category'],
-        :associated_data => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : "" ,
         #:source => "pipl record" }
       }
 
@@ -84,12 +84,11 @@ def run
     response['person']['sources'].each do |source| 
       
       create_entity Entities::WebPage, { 
-        #:sponsored => source['@is_sponsored'],
         :uri => source['url'],
-        #:domain => source['domain'],
         :name => source['name'],
+        #:sponsored => source['@is_sponsored'],
+        #:domain => source['domain'],
         #:category => source['category'],
-        #:source => "pipl source" 
       }
 
       @task_logger.log "Source: #{source}\n"

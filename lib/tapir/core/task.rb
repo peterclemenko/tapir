@@ -83,7 +83,7 @@ class Task
     @task_logger = TaskLogger.new(@task_run.id, self.name, true)
      
     #
-    # Do a little logging. do it for the kids.
+    # Do a little logging. Do it for the kids.
     #
     @task_logger.log "Setup called."
     @task_logger.log "Task entity: #{@entity}"
@@ -94,10 +94,11 @@ class Task
   # Override me
   #
   def run
+    @task_logger.log "Run called." 
   end
   
   #
-  # Override me baby
+  # Override me
   #
   def cleanup
     @task_logger.log "Cleanup called." 
@@ -108,7 +109,9 @@ class Task
   end
 
   #
-  # Convenience Method to execute a system command safely
+  # Convenience Method to execute a system command semi-safely
+  #
+  #  !!!! Don't send anything to this without first whitelisting user input!!! 
   #
   def safe_system(command)
   
