@@ -10,8 +10,13 @@ module Pipl
     end
 
     def search(search_type, email)
-      response = get_request(_get_uri(search_type, email))
-      JSON.parse response if response
+      begin
+        search_uri = _get_uri(search_type, email)
+        response = get_request(search_uri)
+        JSON.parse response if response
+      rescue URI::InvalidURIError
+        return response['error'] => "Error using search uri: #{search_uri}"
+      end
     end
 
     private

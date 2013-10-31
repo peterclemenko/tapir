@@ -56,6 +56,11 @@ def run
     return 
   end
 
+  if response['error']
+    @task_logger.error "Got error from pipl client: #{response['error']}"
+    return
+  end
+
   if response['records']
     # Parse up the response records
     response['records'].each do |record|
