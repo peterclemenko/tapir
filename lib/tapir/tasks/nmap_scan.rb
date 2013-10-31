@@ -15,7 +15,7 @@ end
 def allowed_types
   [ Entities::DnsRecord, 
     Entities::Host, 
-    Entities::NetBlock]
+    Entities::NetBlock ]
 end
 
 ## Returns an array of valid options and their description/type for this task
@@ -35,10 +35,11 @@ def run
   
   if @entity.kind_of? Entities::Host
     to_scan = @entity.name
+    return "Invalid input" #unless check_valid_ipv4(to_scan)
   elsif @entity.kind_of? Entities::NetBlock
-    to_scan = @entity.range
+    to_scan = @entity.range #unless check_valid_ipv4_range(to_scan)
   elsif @entity.kind_of? Entities::DnsRecord
-    to_scan = @entity.name
+    to_scan = @entity.name #unless check_valid_hostname(to_scan)
   else
     raise ArgumentError, "Unknown entity type"
   end
@@ -49,7 +50,7 @@ def run
   @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  nmap_string = "nmap #{to_scan} #{nmap_options} -P0 --top-ports 1000 --min-parallelism 25 -oX #{@rand_file_path}"
+  nmap_string = "nmap #{to_scan} -P0 --top-ports 1000 --min-parallelism 25 -oX #{@rand_file_path}"
   @task_logger.log "calling nmap: #{nmap_string}"
   safe_system(nmap_string)
     
@@ -112,4 +113,18 @@ end
 def cleanup
   super
   File.delete(@rand_file_path)
+end
+
+
+def check_valid_ipv4(string)
+  return true if string =~ /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/
+false
+end
+
+def check_valid_ipv4_range(string)
+
+end
+
+def check_valid_hostname(string)
+
 end

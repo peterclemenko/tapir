@@ -49,7 +49,7 @@ def run
   @task_logger.log "scanning #{to_scan} and storing in #{@rand_file_path}"
   @task_logger.log "nmap options: #{nmap_options}"
   
-  nmap_string = "nmap #{to_scan} #{nmap_options} -P0 -p 80,443,8080,8081 -oX #{@rand_file_path}"
+  nmap_string = "nmap #{to_scan} -P0 -p 80,443,8080,8081 -oX #{@rand_file_path}"
   @task_logger.log "calling nmap: #{nmap_string}"
   safe_system(nmap_string)
   
@@ -74,35 +74,34 @@ def run
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
-      @task_logger.log "Creating Service: #{port}"
-      entity = create_entity(Entities::NetSvc, {
-        :name => "#{host.addr}:#{port.num}/#{port.proto}",
-        :host_id => @host_entity.id,
-        :port_num => port.num,
-        :proto => port.proto,
-        :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
-      end
+        @task_logger.log "Creating Service: #{port}"
+        entity = create_entity(Entities::NetSvc, {
+          :name => "#{host.addr}:#{port.num}/#{port.proto}",
+          :host_id => @host_entity.id,
+          :port_num => port.num,
+          :proto => port.proto,
+          :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
+        end
 
-      # Go ahead and create webapps if this is a known webapp port 
-      if entity.proto == "tcp" && [80,443,8080,8081,8443].include?(entity.port_num)
-         # determine if this is an SSL application
-        ssl = true if [443,8443].include? entity.port_num
-        
-        # construct uri
-        protocol = ssl ? "https://" : "http://"
-        uri = "#{protocol}#{entity.host.name}:#{entity.port_num}"
+        # Go ahead and create webapps if this is a known webapp port 
+        if entity.proto == "tcp" && [80,443,8080,8081,8443].include?(entity.port_num)
+           
+          # determine if this is an SSL application
+          ssl = true if [443,8443].include? entity.port_num
+          
+          # construct uri
+          protocol = ssl ? "https://" : "http://"
+          uri = "#{protocol}#{entity.host.name}:#{entity.port_num}"
 
-        create_entity(Entities::WebApplication, {
-          :name => uri,
-          :host => entity.host,
-          :netsvc => entity
-        })
-      end
-
-
-    end
-  
-  end
+          create_entity(Entities::WebApplication, {
+            :name => uri,
+            :host => entity.host,
+            :netsvc => entity
+          })
+        end # end if 
+      end # end host.getports
+    end # end tcp/udp 
+  end # end parser
 end
 
 def cleanup

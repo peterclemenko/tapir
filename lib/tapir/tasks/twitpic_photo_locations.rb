@@ -60,7 +60,7 @@ def run
         # Don't create them if they're useless
         #
         unless lat == 0 and long == 0
-          @task_logger "Creating Physical location: #{lat} #{long}"
+          @task_logger.log "Creating Physical location: #{lat} #{long}"
           create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
         end
         
