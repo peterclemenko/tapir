@@ -96,11 +96,23 @@ def run
           protocol = ssl ? "https://" : "http://"
           uri = "#{protocol}#{entity.host.name}:#{entity.port_num}"
 
+          # create an entity
           create_entity(Entities::WebApplication, {
             :name => uri,
             :host => entity.host,
             :netsvc => entity
           })
+
+          # and associated entities if we have dns records
+          entity.host.dns_records.each do |dns_record|
+            uri = "#{protocol}#{dns_record.name}:#{entity.port_num}"
+            create_entity(Entities::WebApplication, {
+              :name => uri,
+              :host => dns_record.name,
+              :netsvc => entity
+            })
+          end
+
         end # end if 
 
       end # end host.getports

@@ -74,7 +74,7 @@ def run
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
-        
+
         @task_logger.log "Creating Service: #{port}"
         entity = create_entity(Entities::NetSvc, {
           :name => "#{host.addr}:#{port.num}/#{port.proto}",
@@ -98,6 +98,17 @@ def run
             :host => entity.host,
             :netsvc => entity
           })
+
+          # and associated entities if we have dns records
+          entity.host.dns_records.each do |dns_record|
+            uri = "#{protocol}#{dns_record.name}:#{entity.port_num}"
+            create_entity(Entities::WebApplication, {
+              :name => uri,
+              :host => dns_record.name,
+              :netsvc => entity
+            })
+          end
+
         end # end if 
       end # end host.getports
     end # end tcp/udp 
