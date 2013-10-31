@@ -36,10 +36,11 @@ def run
   x = Client::TwitPic::TwitPicScraper.new
   username = @entity.name
 
+  @task_logger.log "searching for username: #{username}"
   photos = x.search_by_user "#{username}"
     
   photos.each do |photo|
-
+    @task_logger.log "got photo #{photo}"
     begin
       # Analyze the photo
       pic_data = EXIFR::JPEG.new(photo.local_path) #/tmp/twitpic_file_35193:
@@ -59,6 +60,7 @@ def run
         # Don't create them if they're useless
         #
         unless lat == 0 and long == 0
+          @task_logger "Creating Physical location: #{lat} #{long}"
           create_entity(PhysicalLocation, {:latitude => "#{lat}",  :longitude => "#{long}"})
         end
         

@@ -73,7 +73,7 @@ def run
 
       if record['usernames']
         record['usernames'].each do |username|
-          create_entity Entities::Username, {:name => username['content'].downcase }
+          create_entity Entities::Username, { :name => username['content'].downcase }
         end
       end
     end

@@ -30,10 +30,11 @@ def run
   super
 
   client = Client::Twitter::ApiClient.new
+
+  @task_logger.log "Searching for #{@entity.name}"
   details = client.query(@entity.name)
 
   @task_logger.log "Got result: #{details.inspect.to_s.html_safe}"
-
   create_entity(Entities::DnsRecord, {:name => "#{details['url']}"})
 end
 
