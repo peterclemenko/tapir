@@ -115,7 +115,7 @@ class Task
   #
   def safe_system(command)
   
-    if command =~ /(\||\;|\'|\`)/
+    if command =~ /(\||\;|\`)/
       raise "Illegal character"
     end
 
@@ -123,9 +123,8 @@ class Task
   end
 
   #
-  # Convenience method that makes it easy to create
-  # entitys from within a task. designed to simplify the 
-  # task api. do not override.
+  # Convenience method that makes it easy to create entities from within a task. 
+  # Designed to simplify the task api. Do not override.
   #
   # current_entity keeps track of the current entity which we're associating with
   # params are params for creating the new entity
@@ -162,9 +161,6 @@ class Task
     # If we have a new entity, then we should keep track of the information
     # that created this entity
     #
-    
-    # TODO - this currently uses an "unsafe" method, that doesn't check to see if a child actually
-    # EXISTS. This can be dangerous, as the child may have already been deleted. 
     if current_entity.children.include? new_entity
       @task_logger.log "Skipping association of #{current_entity} and #{new_entity}. It's already a child."
     else
