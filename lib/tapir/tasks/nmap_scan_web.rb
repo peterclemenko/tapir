@@ -74,6 +74,7 @@ def run
 
     [:tcp, :udp].each do |proto_type|
       host.getports(proto_type, "open") do |port|
+        
         @task_logger.log "Creating Service: #{port}"
         entity = create_entity(Entities::NetSvc, {
           :name => "#{host.addr}:#{port.num}/#{port.proto}",
@@ -81,7 +82,6 @@ def run
           :port_num => port.num,
           :proto => port.proto,
           :fingerprint => "#{port.service.name} #{port.service.product} #{port.service.version}"})
-        end
 
         # Go ahead and create webapps if this is a known webapp port 
         if entity.proto == "tcp" && [80,443,8080,8081,8443].include?(entity.port_num)

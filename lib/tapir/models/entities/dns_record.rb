@@ -19,14 +19,14 @@ module Entities
     
     field :full_text, type: String
 
-    validates_presence_of :name, :scope => [:tenant_id,:project_id]
-    validates_uniqueness_of :name, :scope => [:tenant_id,:project_id]
+    #validates_presence_of :name, :scope => [:tenant_id,:project_id]
+    #validates_uniqueness_of :name, :scope => [:tenant_id,:project_id]
 
     validates :name, 
       :presence => true, 
-      :uniqueness => true,
+      :uniqueness => {:scope => [:tenant_id,:project_id]},
       :format => { 
-        :with => Regexp.new(/^[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}$/),
+        :with => Regexp.new(/^[A-Za-z0-9\.]+$/),
         :message => "Not a valid hostname"
       }
 
