@@ -3,7 +3,8 @@
   <br/>
   <br/>
   Show types:
-  <%= form_tag(entities_path, method: "get") do %>
+  <%= form_tag(entities_path, method: "get", :name => 'entity_selector') do %>
+    <input type="checkbox" name="Toggle" value="Toggle" onClick="check(document.entity_selector)"><br/>
     <% get_valid_type_class_names.each do |x|
         entity_count = eval("Entities::#{x}").count%>
         <% if entity_count > 0 %>

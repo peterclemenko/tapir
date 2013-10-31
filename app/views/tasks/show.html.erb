@@ -1,15 +1,4 @@
 <p id="notice"><%= notice %></p>
-<script>
-function check(field) {
-  for (i = 0; i < field.length; i++) {
-    if(field[i].checked == true)
-      field[i].checked = false;
-    else
-      field[i].checked = true;
-  }
-}
-</script>
-
 <p>
   <b>Name:</b>
   <%= @task.name %>

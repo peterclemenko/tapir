@@ -12,6 +12,16 @@
 //= require dataTables/extras/ZeroClipboard
 //= require_tree .
 
+/* Function to toggle checkboxes */
+function check(field) {
+  for (i = 0; i < field.length; i++) {
+    if(field[i].checked == true)
+      field[i].checked = false;
+    else
+      field[i].checked = true;
+  }
+}
+
 /* API method to get paging information */
 $.fn.dataTableExt.oApi.fnPagingInfo = function ( oSettings )
 {
