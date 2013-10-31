@@ -167,12 +167,8 @@ class TaskRunSetsController < ApplicationController
             options)
         end
     end
-
-    #if entity_set.count > 1
-      redirect_to task_run_set_path task_run_set.id
-    #else
-    #  redirect_to 
-    #end
+    
+    redirect_to task_run_set_path task_run_set.id
   end
   
 end
