@@ -16,6 +16,8 @@ module Pipl
         JSON.parse response if response
       rescue URI::InvalidURIError
         return response['error'] => "Error using search uri: #{search_uri}"
+      rescue JSON::ParserError
+        return response['error'] => "Invalid JSON returned: #{response}"
       end
     end
 
