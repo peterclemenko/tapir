@@ -37,6 +37,10 @@ def run
     answer = whois.lookup @entity.name 
   rescue Whois::Error => e
     @task_logger.log "Unable to query whois: #{e}"
+  rescue Whois::ResponseIsThrottled => e
+    @task_logger.log "Got a response throttled message: #{e}"
+    sleep 10
+    return run # retry
   rescue StandardError => e
     @task_logger.log "Unable to query whois: #{e}"
   rescue Exception => e
