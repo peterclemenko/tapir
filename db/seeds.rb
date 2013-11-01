@@ -20,6 +20,12 @@ ReportTemplate.create(
   :setup => "@entities = Entities::Base.all")
 
 ReportTemplate.create( 
+  :name => "findings", 
+  :pretty_name => "Findings List",
+  :template => "list",
+  :setup => "@entities = Entities::Finding.all")
+
+ReportTemplate.create( 
   :name => "children",
   :pretty_name => "Children", 
   :template => "show_children",
