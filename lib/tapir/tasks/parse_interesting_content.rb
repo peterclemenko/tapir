@@ -1,14 +1,14 @@
 def name
-  "parse_entities"
+  "parse_interesting_content"
 end
 
 def pretty_name
-  "Parse Entities"
+  "Parse For Interesting Content"
 end
 
 ## Returns a string which describes what this task does
 def description
-  "This task parses the incoming entity's content for more entities."
+  "This task parses the incoming entity's content for interesting content and create findings."
 end
 
 ## Returns an array of types that are allowed to call this task
@@ -72,17 +72,6 @@ def run
       create_entity(Entities::Finding, {:name => "Content - Form String - #{@entity.name}",
         :content => @entity.content})
     end
-
-
-
-    # Scan for links - This requires more work, we don't want relative links here.
-    #
-    #parsed_data = Nokogiri::HTML.parse @entity.content
-    #anchor_tags = parsed_data.xpath("//a[@href]")
-    #
-    #anchor_tags.each do |link|
-    #  create_entity(Entities::WebPage, {:name => link[:href]})
-    #end
 
   end
 
