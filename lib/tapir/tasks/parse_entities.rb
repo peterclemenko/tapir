@@ -45,36 +45,6 @@ def run
       create_entity(Entities::DnsRecord, {:name => addr})
     end
 
-    # Scan for interesting content
-    list = @entity.content.scan(/upload/im)
-    list.each do |item|
-      create_entity(Entities::Finding, {:name => "Content - File Upload String - #{@entity.name}",
-        :content => @entity.content})
-    end
-
-    # Scan for interesting content
-    list = @entity.content.scan(/administrator/im)
-    list.each do |item|
-      create_entity(Entities::Finding, {:name => "Content - Administrator String - #{@entity.name}",
-        :content => @entity.content})
-    end
-
-    # Scan for interesting content
-    list = @entity.content.scan(/password/im)
-    list.each do |item|
-      create_entity(Entities::Finding, {:name => "Content - Password String - #{@entity.name}",
-        :content => @entity.content})
-    end
-
-    # Scan for interesting content
-    list = @entity.content.scan(/<form/im)
-    list.each do |item|
-      create_entity(Entities::Finding, {:name => "Content - Form String - #{@entity.name}",
-        :content => @entity.content})
-    end
-
-
-
     # Scan for links - This requires more work, we don't want relative links here.
     #
     #parsed_data = Nokogiri::HTML.parse @entity.content
