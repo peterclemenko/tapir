@@ -1,6 +1,30 @@
 module Client
 module Bing
   
+  class SearchScraper
+
+    def search(search_string,pages=5)
+      first_item = 1
+      responses = []
+
+      pages.times do |x|
+        bing_uri = URI.parse("http://www.bing.com/search?q=#{search_string}&first=#{first_item}")
+        begin
+          response = Net::HTTP.get_response(bing_uri)
+          responses << response.body
+        rescue Exception => e
+          # Just silently catch them for now
+        end
+        # iterate through results
+        first_item += 10
+      end
+    responses
+    end
+
+  end
+
+
+
   # This class wraps the Bing API
   class SearchService
 
@@ -26,7 +50,7 @@ module Bing
       request_uri = "#{api_path}#{search_data}"
       
       # Open page & parse
-      request_options = {"User-Agent" => "Intrigue.io","Referer" => "http://www.intrigue.io"}
+      request_options = {"User-Agent" => "Intrigue.io", "Referer" => "http://www.intrigue.io"}
       doc = Nokogiri::XML(open(request_uri, request_options)) do |config|
           config.noblanks
       end

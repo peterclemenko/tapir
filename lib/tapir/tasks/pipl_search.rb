@@ -70,10 +70,7 @@ def run
         :confidence => record['@query_person_match'],
         :uri => record['source']['url'],
         :name => record['source']['name'],
-        :comments => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : "" ,
-        #:domain => record['source']['domain'],
-        #:category => record['source']['category'],
-        #:source => "pipl record" }
+        :comments => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : ""
       }
 
       if record['usernames']
@@ -90,10 +87,7 @@ def run
       
       create_entity Entities::WebPage, { 
         :uri => source['url'],
-        :name => source['name'],
-        #:sponsored => source['@is_sponsored'],
-        #:domain => source['domain'],
-        #:category => source['category'],
+        :name => source['name']
       }
 
       @task_logger.log "Source: #{source}\n"
