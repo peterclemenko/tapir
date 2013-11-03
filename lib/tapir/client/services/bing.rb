@@ -8,9 +8,9 @@ module Bing
       responses = []
 
       pages.times do |x|
-        bing_uri = URI.parse("http://www.bing.com/search?q=#{search_string}&first=#{first_item}")
+        uri = URI.parse("http://www.bing.com/search?q=#{search_string}&first=#{first_item}")
         begin
-          response = Net::HTTP.get_response(bing_uri)
+          response = Net::HTTP.get_response(uri)
           responses << response.body
         rescue Exception => e
           # Just silently catch them for now
@@ -22,7 +22,6 @@ module Bing
     end
 
   end
-
 
 
   # This class wraps the Bing API

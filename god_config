@@ -20,8 +20,8 @@ num_workers.times do |num|
     w.env      = {"QUEUE"=>"*", "RAILS_ENV"=>rails_env}
     w.start    = "rake -f #{rails_root}/Rakefile resque:work"
 
-    w.uid = 'nobody'
-    w.gid = 'nobody'
+    w.uid = 'root'
+    w.gid = 'staff'
 
     # restart if memory gets too high
     w.transition(:up, :restart) do |on|

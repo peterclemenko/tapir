@@ -70,7 +70,7 @@ def run
         :confidence => record['@query_person_match'],
         :uri => record['source']['url'],
         :name => record['source']['name'],
-        :comments => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : ""
+        :comment => record['content'] ? record['content'].map{|x| x.to_s.join(" ")} : ""
       }
 
       if record['usernames']

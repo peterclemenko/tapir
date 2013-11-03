@@ -28,6 +28,28 @@ module Google
   end
 
 
+  class SearchScraper
+
+    def search(search_string,pages=5)
+      count = 100
+      responses = []
+
+      pages.times do |x|
+        uri = URI.parse("http://www.google.com/search??hl=en&lr=&ie=UTF-8&q=#{search_string}&filter=0&sa=N&start=#{pages*count}&num=100")
+        begin
+          response = Net::HTTP.get_response(uri)
+          responses << response.body
+        rescue Exception => e
+          # Just silently catch them for now
+        end
+      end
+    responses
+    end
+
+  end
+
+
+
   ############################  
   # DEPENDENCIES:  
   #  
@@ -39,7 +61,7 @@ module Google
   # $ sudo apt-get install libqt4-dev
   # $ gem install capybara-webkit
   ############################  
-
+=begin
   class SearchScraper
     include Capybara::DSL  
     
@@ -74,6 +96,7 @@ module Google
       uris
       end
   end
+=end
 
   # This class represents the google AJAX API
   # 
