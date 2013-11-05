@@ -31,7 +31,7 @@ def run
       create_entity(Entities::FacebookAccount, :name => m['username'],
         :uri => "http://www.facebook.com/#{m['username']}") if m['display_name'] == "Facebook"
       create_entity(Entities::LinkedinAccount, :name => m['username'],
-        :uri => "http//www.linkedin.com/in/#{m['username']}") if m['display_name'] == "LinkedIn"
+        :uri => "http://www.linkedin.com/in/#{m['username']}") if m['display_name'] == "LinkedIn"
       
       # These entity types don't exist yet - what else can rapportive provide?
       #create_entity(Entities::FlickrAccount, :name => m['username']) if m['display_name'] == "Flickr"
