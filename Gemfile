@@ -80,20 +80,20 @@ gem 'pry-nav'
 gem 'pry-stack_explorer'
 
 # Web Spider
-gem 'anemone'
+gem 'anemone', '>= 0.7.2'
 
 # Scraping
-gem 'mechanize'
-gem 'nokogiri'
+gem 'mechanize', '>= 2.7.2'
+gem 'nokogiri', '>= 1.11.0'
 gem 'googleajax'
 gem 'open_uri_redirections'
 
 # Heavy-duty javascript scraping
 gem 'selenium-webdriver' # browser based scraping with capybara
-gem 'capybara'
+gem 'capybara', '>= 2.1.0'
 
 # Infrastructure
-gem 'fog'
+gem 'fog', '>= 1.15.0'
 
 group :pain do
   
@@ -111,7 +111,7 @@ group :pain do
   #   brew update
   #   brew install qt
 
-  gem 'capybara-webkit'
+  gem 'capybara-webkit', '>= 1.0.0'
 end
 
 group :test do
