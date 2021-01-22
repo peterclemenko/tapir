@@ -69,7 +69,7 @@ gem 'whois'
 #gem 'pcaprub'
 
 # Web Services
-gem 'linkedin'
+gem 'linkedin', '>= 0.4.2'
 gem 'flickr'
 gem 'shodan'
 
