@@ -83,7 +83,7 @@ gem 'pry-stack_explorer'
 gem 'anemone'
 
 # Scraping
-gem 'mechanize'
+gem 'mechanize', '>= 2.7.7'
 gem 'nokogiri'
 gem 'googleajax'
 gem 'open_uri_redirections'
