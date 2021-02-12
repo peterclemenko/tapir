@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Require recent Rails:
-gem 'rails' # Latest gem
+gem 'rails' , '>= 6.0.3.5' # Latest gem
 # Use edge Rails instead:
 #gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
