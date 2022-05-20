@@ -84,7 +84,7 @@ gem 'anemone'
 
 # Scraping
 gem 'mechanize'
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.13.6'
 gem 'googleajax'
 gem 'open_uri_redirections'
 
