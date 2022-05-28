@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 # Require recent Rails:
-gem 'rails' # Latest gem
+gem 'rails' , '>= 5.0.0' # Latest gem
 # Use edge Rails instead:
 #gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -9,7 +9,7 @@ gem 'rails' # Latest gem
 gem 'therubyracer'
 gem 'formtastic', :git => 'git://github.com/justinfrench/formtastic.git', :branch => '2.1-stable'
 gem 'formtastic-bootstrap', :git => 'https://github.com/cgunther/formtastic-bootstrap.git', :branch => 'bootstrap2-rails3-2-formtastic-2-1'
-gem 'tabulous', "~> 1.3.2" 
+gem 'tabulous', '~> 2.1.4'
 
 # Mongo Database
 gem "mongoid", "~> 3.0.0"
@@ -22,13 +22,13 @@ gem 'god'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails', '~> 5.0.5'
+  gem 'coffee-rails', '~> 4.1.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.0.0'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails', '>= 4.0.1'
 gem 'jquery-ui-rails'
 gem 'jquery-datatables-rails', :git => 'https://github.com/pentestify/jquery-datatables-rails'
 #gem 'will_paginate'
@@ -42,7 +42,7 @@ gem 'guard'
 gem 'thin'
 
 # Use devise for authentication
-gem 'devise'
+gem 'devise', '>= 4.0.0'
 
 # Deploy with Capistrano
 # gem 'capistrano'
